@@ -1,0 +1,38 @@
+{
+  "name": "lanchonete_angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --port 8081 --open --config webpack.config.js",
+    "watch": "webpack --watch",
+    "build": "webpack --config webpack.config.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "wesley xavier",
+  "license": "ISC",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.27",
+    "angular": "1.6.8",
+    "global": "^4.4.0",
+    "jest": "^26.3.0",
+    "lodash": "^4.17.19",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@types/angular": "^1.7.2",
+    "@types/lodash": "^4.14.158",
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^26.3.0",
+    "babel-loader": "^8.0.5",
+    "copy-webpack-plugin": "^6.0.3",
+    "html-loader": "^1.1.0",
+    "ts-loader": "^8.0.2",
+    "typescript": "^3.9.7",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

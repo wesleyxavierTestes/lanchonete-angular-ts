@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+       "allowJs": true,
+       "module": "commonjs",
+       "experimentalDecorators": true,
+       "esModuleInterop": true,
+       "target": "ES5",
+       "sourceMap": true,
+       "noImplicitAny": false,
+       "outDir": "./dist"
+    }
+}
