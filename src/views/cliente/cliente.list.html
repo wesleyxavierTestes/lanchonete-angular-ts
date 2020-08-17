@@ -1,4 +1,35 @@
-<div ng-controller="ClienteListController as vm">
-    <div>{{vm.nome}}</div>
-    <menulist></menulist>
+<div class="lanc-list" ng-controller="ClienteListController as vm">
+    <div class="row lanc-list-break">
+        <div class="col-3">
+            <button type="button" class="btn btn-primary">
+                <a>Novo {{nome}}</a>
+            </button>
+        </div>
+    </div>
+    <br>
+    <div class="row lanc-list-table">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in vm.list">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-2">
+                            <label>{{item.id}}</label>
+                        </div>
+                        <div class="col-4">
+                            <label>{{item.nome}}</label>
+                        </div>
+                        <div class="col-3">
+                            <label>{{item.cpf}}</label>
+                        </div>
+                        <div class="col-3">
+                            <acoes out-alterar="vm.viewAlterar(item.id)" out-excluir="vm.viewExcluir(item.id)"></acoes>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div ng-if="!!vm.list" class="row lanc-list-pagination">
+        <paginacao config="vm.paginacaoConfig" out-change="vm.viewPaginacaoChange()"></paginacao>
+    </div>
 </div>

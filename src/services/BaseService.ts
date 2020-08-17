@@ -6,13 +6,13 @@ export abstract class BaseService {
         
     }
 
-    findAll() {
+    findAll(page: number) {
         var CONFIG = {
             headers: {
                 "content-type": "application/json",
                 "accept": "application/json"
             }
         }
-        return this.$http.get(rotaConfig(this.routeName));
+        return this.$http.get(rotaConfig(this.routeName, page));
     }
 }

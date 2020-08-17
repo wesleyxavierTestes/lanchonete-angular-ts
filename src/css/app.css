@@ -1,3 +1,53 @@
 a {
     color: rgba(0,0,0,.5);;
 }
+
+approot > main:nth-child(1).row {
+    height: calc(100vh - 80px);
+}
+
+approot > main .lanc-menu   {
+    background-color: #474787 !important;
+    color: white;
+}
+
+approot > main .lanc-menu .nav-item .nav-link {
+    color: white !important;
+}
+approot > main .lanc-menu .nav-item:hover .nav-link {
+    color: #ccc !important;
+}
+
+approot > main .lanc-menu .nav-item.active .nav-link {
+    color: #ffb142 !important;
+    font-weight: bold;
+}
+
+approot > main .container-fluid {
+    padding: 10px;
+}
+
+.btn.btn-primary > a {
+    color: white;
+}
+.list-group {
+    width: 100%;
+}
+
+.lanc-list {
+
+}
+
+
+.lanc-list-break {
+    height: calc(30px);
+}
+
+.lanc-list-table {
+    height: calc(100vh - calc(270px));   
+    overflow-x: auto;
+}
+
+.lanc-list-pagination {
+    height: calc(20px);
+}
