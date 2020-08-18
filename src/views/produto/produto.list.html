@@ -8,8 +8,11 @@
                         <div class="col-2">
                             <label>{{item.id}}</label>
                         </div>
-                        <div class="col-8">
+                        <div class="col-6">
                             <label>{{item.nome}}</label>
+                        </div>
+                        <div class="col-2">
+                            <label>R$ {{item.valor}}</label>
                         </div>
                         <div class="col-2">
                             <acoes out-alterar="vm.viewAlterar(item.id)" out-excluir="vm.viewExcluir(item.id)"></acoes>

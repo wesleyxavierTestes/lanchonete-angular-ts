@@ -27,8 +27,10 @@ export const appRootConfigure = function () {
             }, true);
 
             $scope.viewSetActive = (rota: string) => {
-                $scope.list.forEach(iterator => iterator.ativo = rota == iterator.nome ?'active' : '');
+                $scope.list.forEach(iterator => iterator.ativo = rota.includes(iterator.nome) ? 'active' : '');
             }
+
+            $scope.viewSetActive(location.hash);
         }
     };
 };
