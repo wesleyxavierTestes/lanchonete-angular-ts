@@ -18,7 +18,6 @@ export const appRootConfigure = function () {
             ];
 
             $scope.$on('loading', function(event: any, data: any) {
-                // document.getElementById('event-loading').click();
                 $scope.loading = data;
             });
 
@@ -27,7 +26,7 @@ export const appRootConfigure = function () {
             }, true);
 
             $scope.viewSetActive = (rota: string) => {
-                $scope.list.forEach(iterator => iterator.ativo = rota.includes(iterator.nome) ? 'active' : '');
+                $scope.list.forEach((iterator: any ) => iterator.ativo = rota.includes(iterator.nome) ? 'active' : '');
             }
 
             $scope.viewSetActive(location.hash);

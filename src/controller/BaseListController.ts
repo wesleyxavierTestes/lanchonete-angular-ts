@@ -1,11 +1,12 @@
 import { IpaginateConfigure, Paginacao } from '../components/paginacao/paginacao';
-export abstract class BaseListController<T> {
+import { BaseService } from '../services/BaseService';
+export abstract class BaseListController<T, Y extends BaseService> {
 
     public nome: string = "teste";
     public list: T[];
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
     
-    constructor(protected service, protected $rootScope) {  
+    constructor(protected service: Y, protected $rootScope) {  
         this.findAll();
     }
 
@@ -21,7 +22,7 @@ export abstract class BaseListController<T> {
             .then((resultado: any) => this.findAllTry(resultado));
     }
 
-    private findAllTry(resultado: {
+    protected findAllTry(resultado: {
         data: {
             content: Array<any>;
             totalElements: number; totalPages: number;

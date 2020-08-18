@@ -1,7 +1,8 @@
+import { CategoriaService } from './../../services/categoria/CategoriaService';
 import sglanchoneteApp from "../../app";
 import { BaseListController } from '../BaseListController';
 
-class CategoriaListController  extends BaseListController<any> {
+class CategoriaListController  extends BaseListController<any, CategoriaService> {
     static $inject = ['CategoriaService', '$rootScope'];
 
     constructor(protected categoriaService, protected $rootScope) {

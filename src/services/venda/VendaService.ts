@@ -1,5 +1,5 @@
 import sglanchoneteApp from "../../app";
-import { rotaConfig } from "../../utils/HttpConfig";
+import { rotaFindAll } from "../../utils/HttpConfig";
 import { BaseService } from "../BaseService";
 
 export class VendaService extends BaseService {

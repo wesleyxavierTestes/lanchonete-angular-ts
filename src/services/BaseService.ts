@@ -1,6 +1,7 @@
-import { rotaConfig } from "../utils/HttpConfig";
+import { rotaFindAll } from "../utils/HttpConfig";
 
 export abstract class BaseService {
+   
     static $inject = ['$http'];
     constructor(protected $http, protected routeName: string) {
         
@@ -13,6 +14,6 @@ export abstract class BaseService {
                 "accept": "application/json"
             }
         }
-        return this.$http.get(rotaConfig(this.routeName, page));
+        return this.$http.get(rotaFindAll(this.routeName, page));
     }
 }

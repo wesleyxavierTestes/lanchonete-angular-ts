@@ -5,7 +5,7 @@ export class BaseCadastro {
     constructor($scope: any) {
      }
 }
-export const appRootConfigure = function () {
+const appRootConfigure = function () {
     return {
         template: `
         <div class="row lanc-list-break">
@@ -14,9 +14,13 @@ export const appRootConfigure = function () {
                     <a href="#!{{ nome | lowercase }}/cadastro">Novo</a>
                 </button>
             </div>
+            <div class="col-9">
+                <ng-transclude></ng-transclude>
+            </div>
         </div>
         <br>
         `,
+        transclude: true,
         controller: BaseCadastro,
         scope: {
             nome: '='

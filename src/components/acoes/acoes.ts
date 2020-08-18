@@ -1,10 +1,20 @@
 import sglanchoneteApp from "../../app";
 
-
-export class Acoes {
+class Acoes {
     constructor($scope: any) {
-        $scope.alterarAtivo =  $scope.alterarAtivo == undefined ? true :  $scope.alterarAtivo;
+        $scope.ativoAtivo = $scope.ativoAtivo == undefined ? false : $scope.ativoAtivo;
+        $scope.desativoAtivo = $scope.desativoAtivo == undefined ? false : $scope.desativoAtivo;
+
+        $scope.alterarAtivo = $scope.alterarAtivo == undefined ? true : $scope.alterarAtivo;
         $scope.excluirAtivo = $scope.excluirAtivo == undefined ? true : $scope.excluirAtivo;
+
+        $scope.viewAtivo = () => {
+            $scope.outAtivo();
+        }
+
+        $scope.viewDesativo = () => {
+            $scope.outDesativo();
+        }
 
         $scope.viewAlterar = () => {
             $scope.outAlterar();
@@ -21,9 +31,14 @@ export const appRootConfigure = function () {
             <div class="col-12" style="">
                 <div class="row">
                     <div class="col-3">
-                        <!-- <button alt="Alterar" type="button" ng-click="viewAlterar()" class="btn btn-primary">
-                        //     <i class="fas fa-edit"></i>
-                        // </button> -->
+                        <button ng-if="ativoAtivo" alt="Ativo" type="button" ng-click="viewAtivo()" class="btn btn-success">
+                            <i class="fas fa-eye"></i>
+                        </button> 
+                    </div>
+                    <div class="col-3">
+                        <button ng-if="desativoAtivo" alt="Desativo" type="button" ng-click="viewDesativo()" class="btn btn-secondary">
+                            <i class="fas fa-eye-slash"></i>
+                        </button> 
                     </div>
                     <div class="col-3">
                         <button ng-if="alterarAtivo" alt="Alterar" type="button" ng-click="viewAlterar()" class="btn btn-primary">
@@ -40,8 +55,15 @@ export const appRootConfigure = function () {
         `,
         controller: Acoes,
         scope: {
-            excluirAtivo: '@',
-            alterarAtivo: '@',
+            ativoAtivo: '=',
+            desativoAtivo: '=',
+
+            excluirAtivo: '=',
+            alterarAtivo: '=',
+            
+            outAtivo: '&',
+            outDesativo: '&',
+
             outAlterar: '&',
             outExcluir: '&'
         }

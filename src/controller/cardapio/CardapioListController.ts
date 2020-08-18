@@ -1,7 +1,8 @@
+import { CardapioService } from './../../services/cardapio/CardapioService';
 import sglanchoneteApp from "../../app";
 import { BaseListController } from '../BaseListController';
 
-class CardapioListController extends BaseListController<any> {
+class CardapioListController extends BaseListController<any, CardapioService> {
     static $inject = ['CardapioService', '$rootScope'];
     
     constructor(protected cardapioService, protected $rootScope) {

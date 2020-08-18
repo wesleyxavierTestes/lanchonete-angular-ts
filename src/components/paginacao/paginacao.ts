@@ -8,7 +8,6 @@ interface IPaginacao {
     viewPageNavigation: Function;
 }
 
-
 export interface IpaginateConfigure {
     pageAtual: number;
     page: number;
@@ -58,7 +57,7 @@ export class Paginacao {
         }
     }
 }
-export const appRootConfigure = function () {
+const appRootConfigure = function () {
     return {
         template: `
             <nav aria-label="...">
