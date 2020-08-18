@@ -8,11 +8,17 @@
                         <div class="col-2">
                             <label>{{item.id}}</label>
                         </div>
-                        <div class="col-8">
-                            <label>{{item.nome}}</label>
+                        <div class="col-6">
+                            <label>{{item.produtoNome}}</label>
                         </div>
                         <div class="col-2">
-                            <acoes out-alterar="vm.viewAlterar(item.id)" out-excluir="vm.viewExcluir(item.id)"></acoes>
+                            <label>{{item.quantidade}}</label>
+                        </div>
+                        <div class="col-2">
+                            <acoes rota="vm.nome"
+                            config="{ ativo: false, usarAtivacao: false, alterarAtivo: true, excluirAtivo: true }" 
+                            out-alterar="vm.viewAlterar(item.id)" 
+                            out-excluir="vm.viewExcluir(item.id)"></acoes>
                         </div>
                     </div>
                 </div>

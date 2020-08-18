@@ -1,5 +1,5 @@
 <div ng-controller="LancheListController as vm">
-     <cadastro nome="vm.nome"></cadastro>
+    <cadastro nome="vm.nome"></cadastro>
     <div ng-if="!!vm.list && vm.list.length > 0" class="row lanc-list-table">
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="item in vm.list">
@@ -12,7 +12,10 @@
                             <label>{{item.nome}}</label>
                         </div>
                         <div class="col-2">
-                            <acoes out-alterar="vm.viewAlterar(item.id)" out-excluir="vm.viewExcluir(item.id)"></acoes>
+                            <acoes rota="vm.nome"
+                            config="{ ativo: false, usarAtivacao: false, alterarAtivo: true, excluirAtivo: true }" 
+                            out-alterar="vm.viewAlterar(item.id)" 
+                            out-excluir="vm.viewExcluir(item.id)"></acoes>
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,23 @@ class ClienteListController extends BaseListController<any, ClienteService> {
         this.nome = 'Cliente';
     }
 
+    public viewAtivacao(event: boolean, id: number) {
+        this.$rootScope.$emit('loading', true);
+        if (event) {
+            this.service.active(id)
+                .then((resultado: any) => setTimeout(() => {
+                    this.viewFindAll()
+                }, 100))
+                .finally(() => this.$rootScope.$emit('loading', false));
+        } else { 
+            this.service.desactive(id)
+            .then((resultado: any) => setTimeout(() => {
+                this.viewFindAll()
+            }, 100))
+            .finally(() => this.$rootScope.$emit('loading', false));
+        }
+    }
+
     public viewPesquisarNome(pesquisa) {
         this.pesquisaModel = pesquisa;
         this.$rootScope.$emit('loading', true);

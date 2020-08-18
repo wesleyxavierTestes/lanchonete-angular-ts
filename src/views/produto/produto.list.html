@@ -15,7 +15,10 @@
                             <label>R$ {{item.valor}}</label>
                         </div>
                         <div class="col-2">
-                            <acoes out-alterar="vm.viewAlterar(item.id)" out-excluir="vm.viewExcluir(item.id)"></acoes>
+                            <acoes rota="vm.nome"
+                            config="{ ativo: false, usarAtivacao: false, alterarAtivo: true, excluirAtivo: true }" 
+                            out-alterar="vm.viewAlterar(item.id)" 
+                            out-excluir="vm.viewExcluir(item.id)"></acoes>
                         </div>
                     </div>
                 </div>

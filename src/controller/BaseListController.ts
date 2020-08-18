@@ -2,24 +2,30 @@ import { IpaginateConfigure, Paginacao } from '../components/paginacao/paginacao
 import { BaseService } from '../services/BaseService';
 export abstract class BaseListController<T, Y extends BaseService> {
 
+    public usarAtivar = true;
     public nome: string = "teste";
     public list: T[];
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
     
     constructor(protected service: Y, protected $rootScope) {  
-        this.findAll();
+        this.paginacaoFindAll();
     }
 
     public viewPaginacaoChange(even: IpaginateConfigure) {
         this.paginacaoConfig = even;
-        this.findAll();
+        this.paginacaoFindAll();
     }
 
-    public findAll() {
-        this.$rootScope.$emit('loading', true);
+    private paginacaoFindAll() {
         if (!Paginacao.valido(this.paginacaoConfig)) return;
+        this.viewFindAll();
+    }
+
+    public viewFindAll() {
+        this.$rootScope.$emit('loading', true);
         this.service.findAll(this.paginacaoConfig.pageAtual)
-            .then((resultado: any) => this.findAllTry(resultado));
+            .then((resultado: any) => this.findAllTry(resultado))
+            .catch(error => this.$rootScope.$emit('loading', false));
     }
 
     protected findAllTry(resultado: {
@@ -35,10 +41,12 @@ export abstract class BaseListController<T, Y extends BaseService> {
     }
 
     viewAlterar(id: number) {
-        alert(id);
+        this.$rootScope.$emit('identificacao', id);
     }
 
     viewExcluir(id: number) {
-        alert(id);
+        this.service.delete(id)
+        .then((resultado: any) => this.findAllTry(resultado))
+        .catch(error => this.$rootScope.$emit('loading', false));
     }
 }

@@ -4,8 +4,8 @@ import { BaseCadastroController } from '../BaseCadastroController';
 class VendaCadastroController extends BaseCadastroController<any> {
     static $inject = ['VendaService', '$scope'];
 
-    constructor(protected vendaService, protected $rootScope) {
-        super(vendaService, $rootScope);
+    constructor(protected vendaService, protected $scope) {
+        super(vendaService, $scope);
         this.nome = 'Venda';
     }
 

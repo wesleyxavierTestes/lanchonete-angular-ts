@@ -8,7 +8,7 @@ export class ClienteService extends BaseService {
         super($http, 'cliente');
     }
 
-    findAllFilter(page: number, objeto: object) {
+    findAllFilter(page: number, objeto: object): Promise<any> {
         return this.$http.post(rotaFindAllFilter(this.routeName, page), JSON.stringify(objeto));
     }
 }
