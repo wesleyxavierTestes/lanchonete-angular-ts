@@ -44,7 +44,7 @@ approot > main .container-fluid {
 }
 
 .lanc-list-table {
-    height: calc(100vh - calc(270px));   
+    height: calc(100vh - calc(250px));   
     overflow-x: auto;
 }
 

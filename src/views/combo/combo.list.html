@@ -1,3 +1,25 @@
 <div ng-controller="ComboListController as vm">
-    <div>{{vm.nome}}</div>
+    <cadastro nome="vm.nome"></cadastro>
+    <div class="row lanc-list-table">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in vm.list">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-2">
+                            <label>{{item.id}}</label>
+                        </div>
+                        <div class="col-8">
+                            <label>{{item.nome}}</label>
+                        </div>
+                        <div class="col-2">
+                            <acoes out-alterar="vm.viewAlterar(item.id)" out-excluir="vm.viewExcluir(item.id)"></acoes>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div ng-if="!!vm.list" class="row lanc-list-pagination">
+        <paginacao config="vm.paginacaoConfig" out-change="vm.viewPaginacaoChange($event)"></paginacao>
+    </div>
 </div>

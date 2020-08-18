@@ -2,7 +2,6 @@ import sglanchoneteApp from "../../app";
 
 
 export class Acoes {
-    public static default = { page: 0, pageAtual: 1 };
     constructor($scope: any) {
        $scope.viewAlterar = () => {
             $scope.outAlterar();
