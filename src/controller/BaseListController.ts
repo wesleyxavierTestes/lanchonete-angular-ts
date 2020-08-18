@@ -5,7 +5,7 @@ export abstract class BaseListController<T> {
     public list: T[];
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
     
-    constructor(protected service) {  
+    constructor(protected service, protected $rootScope) {  
         this.findAll();
     }
 
@@ -15,6 +15,7 @@ export abstract class BaseListController<T> {
     }
 
     public findAll() {
+        this.$rootScope.$emit('loading', true);
         if (!Paginacao.valido(this.paginacaoConfig)) return;
         this.service.findAll(this.paginacaoConfig.pageAtual)
             .then((resultado: any) => this.findAllTry(resultado));
@@ -29,6 +30,7 @@ export abstract class BaseListController<T> {
     }) {
         this.list = resultado.data.content;
         this.paginacaoConfig = Paginacao.configure(resultado.data, this.paginacaoConfig.pageAtual);
+        this.$rootScope.$emit('loading', false);
     }
 
     viewAlterar(id: number) {

@@ -48,6 +48,23 @@ approot > main .container-fluid {
     overflow-x: auto;
 }
 
+.lanc-list-table-empty {
+    height: calc(100vh - calc(270px));   
+    overflow-x: auto;
+}
+
 .lanc-list-pagination {
     height: calc(20px);
+}
+
+.loading {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.2;
+    padding: 40vh 40vw;
+
 }

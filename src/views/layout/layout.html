@@ -6,14 +6,19 @@
 <main class="row">
     <section class="lanc-menu col-xl-12 col-lg-12 col-md-12 col-sm-2 navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav">
-            <li ng-repeat="item in list track by $index" class="nav-item {{item.ativo}}" >
+            <li ng-repeat="item in list track by $index" class="nav-item {{item.ativo}}">
                 <a class="nav-link" ng-click="viewSetActive(item.nome)" href="#!{{item.nome}}/list">{{item.apelido}}</a>
             </li>
         </ul>
     </section>
-    <section class="col-xl-12 col-lg-12 col-md-12 col-sm-10">
+    <section ng-show="!loading" class="col-xl-12 col-lg-12 col-md-12 col-sm-10">
         <div class="container-fluid">
             <ng-view></ng-view>
         </div>
     </section>
 </main>
+<div ng-show="loading" class="loading">
+    <div class="spinner-border" role="status">
+        <i class="fas fa-spinner" aria-hidden="true"></i>
+    </div>
+</div>

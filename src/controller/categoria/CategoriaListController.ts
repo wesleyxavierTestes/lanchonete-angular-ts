@@ -2,10 +2,10 @@ import sglanchoneteApp from "../../app";
 import { BaseListController } from '../BaseListController';
 
 class CategoriaListController  extends BaseListController<any> {
-    static $inject = ['CategoriaService'];
+    static $inject = ['CategoriaService', '$rootScope'];
 
-    constructor(protected categoriaService) {
-        super(categoriaService);
+    constructor(protected categoriaService, protected $rootScope) {
+        super(categoriaService, $rootScope);
         this.nome = 'Categoria';
     }
 

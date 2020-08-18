@@ -1,6 +1,6 @@
 <div class="lanc-list" ng-controller="ClienteListController as vm">
-   <cadastro nome="vm.nome"></cadastro>
-    <div class="row lanc-list-table">
+    <cadastro nome="vm.nome"></cadastro>
+    <div ng-if="!!vm.list && vm.list.length > 0" class="row lanc-list-table">
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="item in vm.list">
                 <div class="col-12">
@@ -18,6 +18,11 @@
                 </div>
             </li>
         </ul>
+    </div>
+    <div ng-if="!vm.list || vm.list.length <= 0" class="row lanc-list-table-empty">
+        <div style="margin: 10px;">
+            Não há itens na lista
+        </div>
     </div>
     <div ng-if="!!vm.list" class="row lanc-list-pagination">
         <paginacao config="vm.paginacaoConfig" out-change="vm.viewPaginacaoChange($event)"></paginacao>

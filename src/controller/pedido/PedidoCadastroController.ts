@@ -2,10 +2,10 @@ import sglanchoneteApp from "../../app";
 import { BaseCadastroController } from '../BaseCadastroController';
 
 class PedidoCadastroController extends BaseCadastroController<any> {
-    static $inject = ['PedidoService'];
+    static $inject = ['PedidoService', '$rootScope'];
 
-    constructor(protected pedidoService) {
-        super(pedidoService);
+    constructor(protected pedidoService, protected $rootScope) {
+        super(pedidoService, $rootScope);
         this.nome = 'Pedido';
     }
 

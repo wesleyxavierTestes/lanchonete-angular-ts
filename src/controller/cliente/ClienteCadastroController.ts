@@ -3,12 +3,12 @@ import { IpaginateConfigure, Paginacao } from "../../components/paginacao/pagina
 import { BaseCadastroController } from '../BaseCadastroController';
 
 class ClienteCadastroController extends BaseCadastroController<any> {
-    static $inject = ['ClienteService'];
+    static $inject = ['ClienteService', '$rootScope'];
 
     rota = 'Cliente';
 
-    constructor(protected clienteService) {
-        super(clienteService);
+    constructor(protected clienteService, protected $rootScope) {
+        super(clienteService, $rootScope);
         this.nome = 'Cliente';
     }
 }

@@ -2,10 +2,10 @@ import sglanchoneteApp from "../../app";
 import { BaseListController } from '../BaseListController';
 
 class CardapioListController extends BaseListController<any> {
-    static $inject = ['CardapioService'];
+    static $inject = ['CardapioService', '$rootScope'];
     
-    constructor(protected cardapioService) {
-        super(cardapioService);
+    constructor(protected cardapioService, protected $rootScope) {
+        super(cardapioService, $rootScope);
         this.nome = 'Cardapio';
     }
 

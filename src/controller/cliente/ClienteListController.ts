@@ -1,14 +1,13 @@
 import sglanchoneteApp from "../../app";
-import { IpaginateConfigure, Paginacao } from "../../components/paginacao/paginacao";
 import { BaseListController } from '../BaseListController';
 
 class ClienteListController extends BaseListController<any> {
-    static $inject = ['ClienteService'];
+    static $inject = ['ClienteService', '$rootScope'];
 
     rota = 'Cliente';
 
-    constructor(protected clienteService) {
-        super(clienteService);
+    constructor(protected clienteService, protected $rootScope) {
+        super(clienteService, $rootScope);
         this.nome = 'Cliente';
     }
 }

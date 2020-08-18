@@ -4,6 +4,7 @@ export const appRootConfigure = function () {
     return {
         templateUrl: './views/layout/layout.html',
         controller: function ($scope) {
+            $scope.loading = false;
             $scope.list = <Array<{ nome: string, apelido: string, ativo: string }>>[
                 { ativo: 'active', nome: 'cliente', apelido: 'Cliente'},
                 { ativo: '', nome: 'categoria', apelido: 'Categoria' },            
@@ -14,7 +15,16 @@ export const appRootConfigure = function () {
                 { ativo: '', nome: 'cardapio', apelido: 'Cardapio' },
                 { ativo: '', nome: 'pedido', apelido: 'Pedido' },
                 { ativo: '', nome: 'venda', apelido: 'Venda' },
-            ]
+            ];
+
+            $scope.$on('loading', function(event: any, data: any) {
+                // document.getElementById('event-loading').click();
+                $scope.loading = data;
+            });
+
+            $scope.$watch('loading', function () {
+                console.log($scope.loading);
+            }, true);
 
             $scope.viewSetActive = (rota: string) => {
                 $scope.list.forEach(iterator => iterator.ativo = rota == iterator.nome ?'active' : '');

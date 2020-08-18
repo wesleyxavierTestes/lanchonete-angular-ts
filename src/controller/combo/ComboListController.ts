@@ -2,10 +2,10 @@ import sglanchoneteApp from "../../app";
 import { BaseListController } from '../BaseListController';
 
 class ComboListController extends BaseListController<any> {
-    static $inject = ['ComboService'];
+    static $inject = ['ComboService', '$rootScope'];
 
-    constructor(protected comboService) {
-        super(comboService);
+    constructor(protected comboService, protected $rootScope) {
+        super(comboService, $rootScope);
         this.nome = 'Combo';
     }
 
