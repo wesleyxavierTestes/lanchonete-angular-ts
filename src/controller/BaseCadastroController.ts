@@ -10,6 +10,10 @@ export abstract class BaseCadastroController<T> {
     }
 
     public viewSalvar() {
-      alert(this.editar)
+      alert('Salvar')
+    }
+
+    public viewEditar() {
+      alert('editar')
     }
 }

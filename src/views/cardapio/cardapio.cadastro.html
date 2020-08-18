@@ -1,4 +1,32 @@
 <div ng-controller="CardapioCadastroController as vm">
-    <div>Cadastro de {{vm.nome}} {{ vm.entity.id }}</div>
-    <form ng-submit="vm.viewSalvar()" novalidate> <button type="submit" class="btn btn-primary">Salvar</button> </form>
+    <h3>Cadastro</h3>
+    <br>
+    <form ng-submit="vm.editar ? vm.viewEditar() : vm.viewSalvar()" novalidate>
+        <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <label for="id">Id</label>
+                    <input readonly disabled type="text" class="form-control" id="id" ng-value="vm.entity.id">
+                </div>
+                
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="id_nome">Nome</label>
+                    <input type="text" class="form-control" id="id_nome" aria-describedby="textHelp" placeholder="">
+                    <small id="textHelp" class="form-text text-muted"></small>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
 </div>
