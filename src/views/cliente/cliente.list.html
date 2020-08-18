@@ -2,7 +2,7 @@
     <div class="row lanc-list-break">
         <div class="col-3">
             <button type="button" class="btn btn-primary">
-                <a>Novo {{nome}}</a>
+                <a href="#!{{rota}}/cadastro">Novo {{nome}}</a>
             </button>
         </div>
     </div>
@@ -30,6 +30,6 @@
         </ul>
     </div>
     <div ng-if="!!vm.list" class="row lanc-list-pagination">
-        <paginacao config="vm.paginacaoConfig" out-change="vm.viewPaginacaoChange()"></paginacao>
+        <paginacao config="vm.paginacaoConfig" out-change="vm.viewPaginacaoChange($event)"></paginacao>
     </div>
 </div>

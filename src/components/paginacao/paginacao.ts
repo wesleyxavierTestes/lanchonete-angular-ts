@@ -19,20 +19,20 @@ export interface IpaginateConfigure {
 
 export class Paginacao {
     public static default = { page: 0, pageAtual: 1 };
-    constructor($scope: IPaginacao) {
+    constructor($scope) {
        $scope.viewPageNavigationAnterior = () => {
             $scope.config.pageAtual -= 1;
-            $scope.outChange($scope.config);
+            $scope.outChange({ $event: $scope.config});
         }
 
         $scope.viewPageNavigationProxima = () => {
             $scope.config.pageAtual += 1;
-            $scope.outChange($scope.config);
+            $scope.outChange({ $event: $scope.config});
         }
 
         $scope.viewPageNavigation = (page) => {
             $scope.config.pageAtual = page;
-            $scope.outChange($scope.config);
+            $scope.outChange({ $event: $scope.config});
         }
     }
     public static valido(paginacaoConfig: any) {

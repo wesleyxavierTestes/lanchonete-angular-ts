@@ -4,6 +4,7 @@ import { IpaginateConfigure, Paginacao } from "../../components/paginacao/pagina
 class ClienteListController {
     static $inject = ['ClienteService'];
 
+    rota = 'Cliente';
     public nome: string;
     public list: any;
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
@@ -11,9 +12,12 @@ class ClienteListController {
     constructor(private clienteService) {
         this.nome = 'Cliente';
         this.findAll();
+
+      
     }
 
-    public viewPaginacaoChange() {
+    public viewPaginacaoChange(even: IpaginateConfigure) {
+        this.paginacaoConfig = even;
         this.findAll();
     }
 
@@ -26,11 +30,18 @@ class ClienteListController {
                     content: Array<any>; totalElements: number; totalPages: number;
                     first: boolean, last: boolean
                 };
-            }) => {
-                this.list = resultado.data.content;
+            }) => this.findAllTry(resultado));
+    }
 
-                this.paginacaoConfig = Paginacao.configure(resultado.data, this.paginacaoConfig.pageAtual);
-            });
+    private findAllTry(resultado: {
+        data: {
+            content: Array<any>;
+            totalElements: number; totalPages: number;
+            first: boolean; last: boolean;
+        };
+    }) {
+        this.list = resultado.data.content;
+        this.paginacaoConfig = Paginacao.configure(resultado.data, this.paginacaoConfig.pageAtual);
     }
 
     viewAlterar(id: number) {
