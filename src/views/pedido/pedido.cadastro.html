@@ -1,3 +1,4 @@
 <div ng-controller="PedidoCadastroController as vm">
     <div>Cadastro de {{vm.nome}} {{ vm.entity.id }}</div>
+    <form ng-submit="vm.viewSalvar()" novalidate> <button type="submit" class="btn btn-primary">Salvar</button> </form>
 </div>

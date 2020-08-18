@@ -21,6 +21,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/cliente/cadastro", {
             templateUrl: './../views/cliente/cliente.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (ClienteService) {
                     return ClienteService.novo();
                 }
@@ -29,6 +30,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/cliente/editacao", {
             templateUrl: './../views/cliente/cliente.cadastro.html',
             resolve: {
+                editar: () => true,
                 entity: function (ClienteService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data)
@@ -44,6 +46,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/categoria/cadastro", {
             templateUrl: './../views/categoria/categoria.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (CategoriaService) {
                     return CategoriaService.novo();
                 }
@@ -52,6 +55,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/categoria/editacao", {
             templateUrl: './../views/categoria/categoria.cadastro.html',
             resolve: {
+                editar: () => true,
                 entity: function (CategoriaService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
@@ -67,6 +71,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/produto/cadastro", {
             templateUrl: './../views/produto/produto.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (ProdutoService) {
                     return ProdutoService.novo();
                 }
@@ -75,6 +80,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/produto/editacao", {
             templateUrl: './../views/produto/produto.cadastro.html',
             resolve: {
+                editar: () => true,
                 entity: function (ProdutoService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
@@ -90,6 +96,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/cardapio/cadastro", {
             templateUrl: './../views/cardapio/cardapio.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (CardapioService) {
                     return CardapioService.novo();
                 }
@@ -98,6 +105,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/cardapio/editacao", {
             templateUrl: './../views/cardapio/cardapio.cadastro.html',
             resolve: {
+                editar: () => true,
                 entity: function (CardapioService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
@@ -113,6 +121,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/combo/cadastro", {
             templateUrl: './../views/combo/combo.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (ComboService) {
                     return ComboService.novo();
                 }
@@ -121,6 +130,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/combo/editacao", {
             templateUrl: './../views/combo/combo.cadastro.html',
             resolve: {
+                editar: () => true,
                 entity: function (ComboService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
@@ -136,6 +146,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/estoque/cadastro", {
             templateUrl: './../views/estoque/estoque.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (EstoqueService) {
                     return EstoqueService.novo();
                 }
@@ -144,6 +155,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/estoque/editacao", {
             templateUrl: './../views/estoque/estoque.cadastro.html',
             resolve: {
+                editar: () => true,
                 entity: function (EstoqueService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
@@ -159,6 +171,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/lanche/cadastro", {
             templateUrl: './../views/lanche/lanche.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (LancheService) {
                     return LancheService.novo();
                 }
@@ -167,6 +180,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/lanche/editacao", {
             templateUrl: './../views/lanche/lanche.cadastro.html',
             resolve: {
+                editar: () => true,
                 entity: function (LancheService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
@@ -182,6 +196,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/pedido/cadastro", {
             templateUrl: './../views/pedido/pedido.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (PedidoService) {
                     return PedidoService.novo();
                 }
@@ -190,6 +205,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/pedido/editacao", {
             templateUrl: './../views/pedido/pedido.cadastro.html',
             resolve: {
+                editar: () => true,
                 entity: function (PedidoService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
@@ -205,6 +221,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/venda/cadastro", {
             templateUrl: './../views/venda/venda.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (VendaService) {
                     return VendaService.novo();
                 }
@@ -213,6 +230,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         .when("/venda/editacao", {
             templateUrl: './../views/venda/venda.cadastro.html',
             resolve: {
+                editar: () => false,
                 entity: function (VendaService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
