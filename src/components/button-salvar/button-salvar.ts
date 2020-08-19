@@ -1,19 +1,16 @@
 import sglanchoneteApp from "../../app";
 
 export class ButtonSalvarModal {
-    //public editar: boolean;
-    constructor(private $scope) {
-        
-    }
+    editar: boolean;
+    constructor() {    }
 
     $onInit() {
-        this.$scope.ctrl.editar;
+        this.editar;
     }
-   // 'ngInject';
 }
 const appRootConfigure = function () {
     return {
-        template: `<button type="submit" class="btn btn-primary">{{ ctrl.editar ? 'Atualizar' : 'Salvar'}}</button>`,
+        template: `<button type="submit" class="btn btn-primary">{{ $ctrl.editar ? 'Atualizar' : 'Salvar'}}</button>`,
         controller: ButtonSalvarModal,
         bindings: {
             editar: '='
