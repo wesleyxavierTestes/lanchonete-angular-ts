@@ -8,7 +8,7 @@ function meuListController($scope) {
 
 sglanchoneteApp.directive('menulist', function () {
     return {
-        templateUrl: './views/menu-list/menuList.html',
+        templateUrl: './components/menu-list/menuList.html',
         controller: meuListController
     };
 });

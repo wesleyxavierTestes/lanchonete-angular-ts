@@ -57,6 +57,13 @@ module.exports = {
           }
         },
         {
+          from: 'src/components', to: 'components', globOptions: {
+            ignore: [
+              '**/*.ts'
+            ]
+          }
+        },
+        {
           from: 'src/css', to: 'css', globOptions: {
             ignore: [
               '**/*.ts'

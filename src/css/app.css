@@ -1,70 +1,85 @@
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 a {
-    color: rgba(0,0,0,.5);;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 approot > main:nth-child(1).row {
-    height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
 }
 
-approot > main .lanc-menu   {
-    background-color: #474787 !important;
-    color: white;
+.lanc-tab {
+    padding: 10px;;
+  height: 50vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+approot > main .lanc-menu {
+  background-color: #474787 !important;
+  color: white;
 }
 
 approot > main .lanc-menu .nav-item .nav-link {
-    color: white !important;
+  color: white !important;
 }
 approot > main .lanc-menu .nav-item:hover .nav-link {
-    color: #ccc !important;
+  color: #ccc !important;
 }
 
 approot > main .lanc-menu .nav-item.active .nav-link {
-    color: #ffb142 !important;
-    font-weight: bold;
+  color: #ffb142 !important;
+  font-weight: bold;
 }
 
 approot > main .container-fluid {
-    padding: 10px;
+  padding: 10px;
 }
 
 .btn.btn-primary > a {
-    color: white;
+  color: white;
 }
 .list-group {
-    width: 100%;
+  width: 100%;
 }
 
 .lanc-list {
-
 }
 
-
 .lanc-list-break {
-    height: calc(30px);
+  height: calc(30px);
 }
 
 .lanc-list-table {
-    height: calc(100vh - calc(250px));   
-    overflow-x: auto;
+  height: calc(100vh - calc(250px));
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .lanc-list-table-empty {
-    height: calc(100vh - calc(270px));   
-    overflow-x: auto;
+  height: calc(100vh - calc(270px));
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .lanc-list-pagination {
-    height: calc(20px);
+  height: calc(20px);
 }
 
 .loading {
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    bottom: 0;
-    background-color: #000;
-    opacity: 0.2;
-    padding: 40vh 40vw;
-
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.2;
+  padding: 40vh 40vw;
 }

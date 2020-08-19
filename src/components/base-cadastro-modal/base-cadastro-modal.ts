@@ -1,18 +1,18 @@
 import sglanchoneteApp from "../../app";
 
-export class BaseCadastro {
+export class BaseCadastroModal {
 
     constructor($scope: any) {
      }
 }
 const appRootConfigure = function () {
     return {
-        templateUrl: './components/base-cadastro/base-cadastro.html',
+        templateUrl: './components/base-cadastro-modal/base-cadastro-modal.html',
         transclude: true,
-        controller: BaseCadastro,
+        controller: BaseCadastroModal,
         scope: {
             nome: '='
         }
     };
 };
-sglanchoneteApp.directive('cadastro', appRootConfigure);
+sglanchoneteApp.directive('cadastroModal', appRootConfigure);

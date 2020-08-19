@@ -11,6 +11,9 @@ interface IPaginacao {
 export interface IpaginateConfigure {
     pageAtual: number;
     page: number;
+    totalPages?: number;
+    numberOfElements?: number;
+    totalElements?: number;
     paginationFirst?: boolean;
     paginationLast?: boolean;
     pagination?: number[];
@@ -18,6 +21,7 @@ export interface IpaginateConfigure {
 
 export class Paginacao {
     public static default = { page: 0, pageAtual: 1 };
+
     constructor($scope) {
         $scope.viewPageNavigationAnterior = () => {
             $scope.config.pageAtual -= 1;
@@ -49,6 +53,9 @@ export class Paginacao {
         return {
             page: pageAtual,
             pageAtual: pageAtual,
+            totalPages: data.totalPages,
+            numberOfElements: data.numberOfElements,
+            totalElements: data.totalElements,
             paginationFirst: data.first,
             paginationLast: data.last,
             pagination: pagination.slice(
@@ -59,24 +66,7 @@ export class Paginacao {
 }
 const appRootConfigure = function () {
     return {
-        template: `
-            <nav aria-label="...">
-                <ul class="pagination">
-                    <li ng-class="{ 'disabled': config.paginationFirst}" class="page-item">
-                        <button type="button" ng-disabled="config.paginationFirst" 
-                        ng-click="viewPageNavigationAnterior()"
-                            class="page-link">Anterior</button>
-                    </li>
-                    <li ng-repeat="page in config.pagination" ng-class="{'active': config.page == page}" class="page-item">
-                        <a class="page-link" ng-click="viewPageNavigation(page)">{{page}}</a>
-                    </li>
-                    <li ng-class="{ 'disabled': config.paginationLast}" class="page-item">
-                        <button type="button" ng-disabled="config.paginationLast" ng-click="viewPageNavigationProxima()"
-                            class="page-link">Próxima</button>
-                    </li>
-                </ul>
-            </nav>
-        `,
+        templateUrl: './components/paginacao/paginacao.html',
         controller: Paginacao,
         scope: {
             config: '=',
