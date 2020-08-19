@@ -24,3 +24,11 @@ export function rotaFind(rota: string, id: string) {
 export function rotaNovo(rota: string) {
     return rotaBase+'/'+rota+'/novo';
 }
+
+export function rotaSave(rota: string) {
+    return rotaBase+'/'+rota+'/save';
+}
+
+export function rotaUpdate(rota: string) {
+    return rotaBase+'/'+rota+'/update';
+}

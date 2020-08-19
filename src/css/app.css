@@ -5,6 +5,7 @@ body {
   width: 100vw;
   overflow-x: hidden;
   overflow-y: auto;
+  color: #3b3b3b;
 }
 
 a {
@@ -20,6 +21,14 @@ approot > main:nth-child(1).row {
   height: 50vh;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+small.form-text.text-muted {
+  color: rgb(230, 78, 109) !important;
+}
+
+.ng-invalid.ng-invalid-required  {
+  border-color: rgb(230, 78, 109) !important;
 }
 
 approot > main .lanc-menu {

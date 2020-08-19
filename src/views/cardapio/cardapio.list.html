@@ -5,13 +5,13 @@
             <li class="list-group-item" ng-repeat="item in view.list">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-lg-2">
                             <label>{{item.id}}</label>
                         </div>
-                        <div class="col-8">
+                        <div class="col-lg-8 col-md-6">
                             <label>{{item.nome}}</label>
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-2 col-md-4">
                             <acoes 
                             rota="view.nome"
                             config="{ ativo: false, usarAtivacao: false, alterarAtivo: true, excluirAtivo: true }" 

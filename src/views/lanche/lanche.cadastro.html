@@ -1,7 +1,7 @@
 <div class="LancheCadastroController">
     <h3>Cadastro</h3>
     <br>
-    <form ng-submit="view.editar ? view.viewEditar() : view.viewSalvar()" novalidate>
+    <form ng-submit="view.formSubmit()" novalidate>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 1 }" id="nav-home-tab"
@@ -20,7 +20,7 @@
                     <div class="col-2">
                         <div class="form-group">
                             <label for="id">Id</label>
-                            <input readonly disabled type="text" class="form-control" id="id" ng-value="view.entity.id">
+                            <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id" ng-required="false" ng-value="view.entity.id">
                         </div>
 
                     </div>
@@ -49,6 +49,6 @@
 
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="submit" class="btn btn-primary">{{ view.editar ? 'Atualizar' : 'Salvar'}}</button>
     </form>
 </div>
