@@ -29,7 +29,7 @@ class Acoes {
 }
 export const appRootConfigure = function () {
     return {
-        templateUrl: './components/acoes/acoes.html',
+        template: require('./../../components/acoes/acoes.html'),
         controller: Acoes,
         scope: {
             config: '=',

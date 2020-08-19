@@ -7,7 +7,7 @@ export class BaseCadastro {
 }
 const appRootConfigure = function () {
     return {
-        templateUrl: './components/base-cadastro/base-cadastro.html',
+        template: require('./../../components/base-cadastro/base-cadastro.html'),
         transclude: true,
         controller: BaseCadastro,
         scope: {

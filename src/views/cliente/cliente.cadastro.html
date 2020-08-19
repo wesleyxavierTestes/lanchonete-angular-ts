@@ -1,32 +1,32 @@
-<div ng-controller="ClienteCadastroController as vm">
+<div class="ClienteCadastroController">
     <h3>Cadastro</h3>
     <br>
-    <form ng-submit="vm.editar ? vm.viewEditar() : vm.viewSalvar()" novalidate>
+    <form ng-submit="view.editar ? view.viewEditar() : view.viewSalvar()" novalidate>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link" ng-class="{ active: vm.viewIndexTab == 1 }" id="nav-home-tab"
-                    data-toggle="tab" ng-click="vm.viewSetTab(1)" role="tab" aria-controls="nav-home"
+                <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 1 }" id="nav-home-tab"
+                    data-toggle="tab" ng-click="view.viewSetTab(1)" role="tab" aria-controls="nav-home"
                     aria-selected="true">Dados</a>
-                <a class="nav-item nav-link" ng-class="{ active: vm.viewIndexTab == 2 }" id="nav-profile-tab"
-                    data-toggle="tab" ng-click="vm.viewSetTab(2)" role="tab" aria-controls="nav-profile"
+                <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 2 }" id="nav-profile-tab"
+                    data-toggle="tab" ng-click="view.viewSetTab(2)" role="tab" aria-controls="nav-profile"
                     aria-selected="false">Endereço</a>
             </div>
         </nav>
         <div class="tab-content lanc-tab" id="nav-tabContent">
-            <div class="tab-pane fade" ng-class="{ 'show active': vm.viewIndexTab == 1 }" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 1 }" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                  <!-- TAB DADOS -->
                 <div class="row">
                     <div class="col-2">
                         <div class="form-group">
                             <label for="id">Id</label>
-                            <input readonly disabled type="text" class="form-control" id="id" ng-value="vm.entity.id">
+                            <input readonly disabled type="text" class="form-control" id="id" ng-value="view.entity.id">
                         </div>
 
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="id_nome">Nome</label>
-                            <input type="text" class="form-control" id="id_nome" aria-describedby="textHelp"
+                            <input type="text" class="form-control" id="id_nome" ng-model="view.entity.nome" aria-describedby="textHelp"
                                 placeholder="">
                             <small id="textHelp" class="form-text text-muted"></small>
                         </div>
@@ -42,7 +42,7 @@
                 </div>
 
             </div>
-            <div class="tab-pane fade" ng-class="{ 'show active': vm.viewIndexTab == 2 }" id="nav-profile" role="tabpanel" 
+            <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 2 }" id="nav-profile" role="tabpanel" 
             aria-labelledby="nav-profile-tab">
              <!-- TAB ENDEREÇO -->
 

@@ -66,8 +66,9 @@ export class Paginacao {
 }
 const appRootConfigure = function () {
     return {
-        templateUrl: './components/paginacao/paginacao.html',
+        template: require('./../../components/paginacao/paginacao.html'),
         controller: Paginacao,
+        controllerAs: 'view',
         scope: {
             config: '=',
             outChange: '&'

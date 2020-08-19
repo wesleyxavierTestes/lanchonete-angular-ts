@@ -2,7 +2,7 @@ import sglanchoneteApp from "../../app";
 
 export const appRootConfigure = function () {
     return {
-        templateUrl: './components/layout/layout.html',
+        template: require('./../../components/layout/layout.html'),
         controller: function ($scope) {
             $scope.loading = false;
             $scope.list = <Array<{ nome: string, apelido: string, ativo: string }>>[

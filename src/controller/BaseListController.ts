@@ -1,5 +1,6 @@
 import { IpaginateConfigure, Paginacao } from '../components/paginacao/paginacao';
 import { BaseService } from '../services/BaseService';
+
 export abstract class BaseListController<T, Y extends BaseService> {
 
     public usarAtivar = true;
@@ -7,7 +8,7 @@ export abstract class BaseListController<T, Y extends BaseService> {
     public list: T[];
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
     
-    constructor(protected service: Y, protected $rootScope) {  
+    constructor(protected service: Y, protected $scope) {  
         this.paginacaoFindAll();
     }
 
@@ -22,10 +23,10 @@ export abstract class BaseListController<T, Y extends BaseService> {
     }
 
     public viewFindAll() {
-        this.$rootScope.$emit('loading', true);
+        this.$scope.$emit('loading', true);
         this.service.findAll(this.paginacaoConfig.pageAtual)
             .then((resultado: any) => this.findAllTry(resultado))
-            .catch(error => this.$rootScope.$emit('loading', false));
+            .catch(error => this.$scope.$emit('loading', false));
     }
 
     protected findAllTry(resultado: {
@@ -37,16 +38,17 @@ export abstract class BaseListController<T, Y extends BaseService> {
     }) {
         this.list = resultado.data.content;
         this.paginacaoConfig = Paginacao.configure(resultado.data, this.paginacaoConfig.pageAtual);
-        this.$rootScope.$emit('loading', false);
+        this.$scope.$emit('loading', false);
     }
 
     viewAlterar(id: number) {
-        this.$rootScope.$emit('identificacao', id);
+        sessionStorage.setItem('id', id.toString());
+        this.$scope.$emit('identificacao', id);
     }
 
     viewExcluir(id: number) {
         this.service.delete(id)
         .then((resultado: any) => this.findAllTry(resultado))
-        .catch(error => this.$rootScope.$emit('loading', false));
+        .catch(error => this.$scope.$emit('loading', false));
     }
 }

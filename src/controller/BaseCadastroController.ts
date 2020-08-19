@@ -5,9 +5,9 @@ export abstract class BaseCadastroController<T> {
     public viewIndexTab: number = 1;
     protected editar = false;
 
-    constructor(protected service, protected $scope) {
-      this.entity = $scope.$resolve.entity.data;
-      this.editar = $scope.$resolve.editar;
+    constructor(protected service, protected $scope, protected $route) {
+      this.entity = $route.current.locals.find.data;
+      this.editar = $route.current.locals.editar;
     }
 
     public viewSetTab(index: number) {

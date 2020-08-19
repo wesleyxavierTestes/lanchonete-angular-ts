@@ -1,8 +1,8 @@
-<div ng-controller="ComboListController as vm">
-     <cadastro nome="vm.nome"></cadastro>
-    <div ng-if="!!vm.list && vm.list.length > 0" class="row lanc-list-table">
+<div class="ComboListController">
+     <cadastro nome="view.nome"></cadastro>
+    <div ng-if="!!view.list && view.list.length > 0" class="row lanc-list-table">
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="item in vm.list">
+            <li class="list-group-item" ng-repeat="item in view.list">
                 <div class="col-12">
                     <div class="row">
                         <div class="col-2">
@@ -12,22 +12,22 @@
                             <label>{{item.nome}}</label>
                         </div>
                         <div class="col-2">
-                            <acoes rota="vm.nome"
+                            <acoes rota="view.nome"
                             config="{ ativo: false, usarAtivacao: false, alterarAtivo: true, excluirAtivo: true }" 
-                            out-alterar="vm.viewAlterar(item.id)" 
-                            out-excluir="vm.viewExcluir(item.id)"></acoes>
+                            out-alterar="view.viewAlterar(item.id)" 
+                            out-excluir="view.viewExcluir(item.id)"></acoes>
                         </div>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
-    <div ng-if="!vm.list || vm.list.length <= 0" class="row lanc-list-table-empty">
+    <div ng-if="!view.list || view.list.length <= 0" class="row lanc-list-table-empty">
         <div style="margin: 10px;">
             Não há itens na lista
         </div>
     </div>
-    <div ng-if="!!vm.list" class="row lanc-list-pagination">
-        <paginacao config="vm.paginacaoConfig" out-change="vm.viewPaginacaoChange($event)"></paginacao>
+    <div ng-if="!!view.list" class="row lanc-list-pagination">
+        <paginacao config="view.paginacaoConfig" out-change="view.viewPaginacaoChange($event)"></paginacao>
     </div>
 </div>

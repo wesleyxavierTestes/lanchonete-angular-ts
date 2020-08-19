@@ -1,3 +1,21 @@
+import { VendaCadastroController } from './../controller/venda/VendaCadastroController';
+import { VendaListController } from './../controller/venda/VendaListController';
+import { PedidoCadastroController } from './../controller/pedido/PedidoCadastroController';
+import { PedidoListController } from './../controller/pedido/PedidoListController';
+import { LancheCadastroController } from './../controller/lanche/LancheCadastroController';
+import { LancheListController } from './../controller/lanche/LancheListController';
+import { EstoqueCadastroController } from './../controller/estoque/EstoqueCadastroController';
+import { EstoqueListController } from './../controller/estoque/EstoqueListController';
+import { ComboCadastroController } from './../controller/combo/ComboCadastroController';
+import { ComboListController } from './../controller/combo/ComboListController';
+import { CardapioCadastroController } from './../controller/cardapio/CardapioCadastroController';
+import { CardapioListController } from './../controller/cardapio/CardapioListController';
+import { ProdutoCadastroController } from './../controller/produto/ProdutoCadastroController';
+import { ProdutoListController } from './../controller/produto/ProdutoListController';
+import { ClienteCadastroController } from './../controller/cliente/ClienteCadastroController';
+import { ClienteListController } from './../controller/cliente/ClienteListController';
+import { CategoriaListController } from './../controller/categoria/CategoriaListController';
+import { CategoriaCadastroController } from './../controller/categoria/CategoriaCadastroController';
 import { VendaService } from './../services/venda/VendaService';
 import { PedidoService } from './../services/pedido/PedidoService';
 import { LancheService } from './../services/lanche/LancheService';
@@ -12,26 +30,32 @@ import sglanchoneteApp from "../app";
 sglanchoneteApp.config(function ($routeProvider) {
     $routeProvider
         .when("/home", {
-            templateUrl: './../views/home.html'
+            template: require('./../views/home.html')
         })
 
         .when("/cliente/list", {
-            templateUrl: './../views/cliente/cliente.list.html'
+            template: require('./../views/cliente/cliente.list.html'),
+            controllerAs: 'view',
+            controller: ClienteListController.prototype.constructor.name,
         })
         .when("/cliente/cadastro", {
-            templateUrl: './../views/cliente/cliente.cadastro.html',
+            template: require('./../views/cliente/cliente.cadastro.html'),
+            controllerAs: 'view',
+            controller: ClienteCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (ClienteService) {
+                find: function (ClienteService) {
                     return ClienteService.novo();
                 }
             }
         })
         .when("/cliente/editacao", {
-            templateUrl: './../views/cliente/cliente.cadastro.html',
+            template: require('./../views/cliente/cliente.cadastro.html'),
+            controllerAs: 'view',
+            controller: ClienteCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => true,
-                entity: function (ClienteService, $rootScope) {
+                find: function (ClienteService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data)
                     });
@@ -41,22 +65,28 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/categoria/list", {
-            templateUrl: './../views/categoria/categoria.list.html'
+            template: require('./../views/categoria/categoria.list.html'),
+            controllerAs: 'view',
+            controller: CategoriaListController.prototype.constructor.name,
         })
         .when("/categoria/cadastro", {
-            templateUrl: './../views/categoria/categoria.cadastro.html',
+            template: require('./../views/categoria/categoria.cadastro.html'),
+            controllerAs: 'view',
+            controller: CategoriaCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (CategoriaService) {
+                find: function (CategoriaService) {
                     return CategoriaService.novo();
                 }
             }
         })
         .when("/categoria/editacao", {
-            templateUrl: './../views/categoria/categoria.cadastro.html',
+            template: require('./../views/categoria/categoria.cadastro.html'),
+            controllerAs: 'view',
+            controller: CategoriaCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => true,
-                entity: function (CategoriaService, $rootScope) {
+                find: function (CategoriaService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
                     });
@@ -66,22 +96,28 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/produto/list", {
-            templateUrl: './../views/produto/produto.list.html'
+            template: require('./../views/produto/produto.list.html'),
+            controllerAs: 'view',
+            controller: ProdutoListController.prototype.constructor.name,
         })
         .when("/produto/cadastro", {
-            templateUrl: './../views/produto/produto.cadastro.html',
+            template: require('./../views/produto/produto.cadastro.html'),
+            controllerAs: 'view',
+            controller: ProdutoCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (ProdutoService) {
+                find: function (ProdutoService) {
                     return ProdutoService.novo();
                 }
             }
         })
         .when("/produto/editacao", {
-            templateUrl: './../views/produto/produto.cadastro.html',
+            template: require('./../views/produto/produto.cadastro.html'),
+            controllerAs: 'view',
+            controller: ProdutoCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => true,
-                entity: function (ProdutoService, $rootScope) {
+                find: function (ProdutoService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
                     });
@@ -91,22 +127,28 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/cardapio/list", {
-            templateUrl: './../views/cardapio/cardapio.list.html'
+            template: require('./../views/cardapio/cardapio.list.html'),
+            controllerAs: 'view',
+            controller: CardapioListController.prototype.constructor.name,
         })
         .when("/cardapio/cadastro", {
-            templateUrl: './../views/cardapio/cardapio.cadastro.html',
+            template: require('./../views/cardapio/cardapio.cadastro.html'),
+            controllerAs: 'view',
+            controller: CardapioCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (CardapioService) {
+                find: function (CardapioService) {
                     return CardapioService.novo();
                 }
             }
         })
         .when("/cardapio/editacao", {
-            templateUrl: './../views/cardapio/cardapio.cadastro.html',
+            template: require('./../views/cardapio/cardapio.cadastro.html'),
+            controllerAs: 'view',
+            controller: CardapioCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => true,
-                entity: function (CardapioService, $rootScope) {
+                find: function (CardapioService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
                     });
@@ -116,22 +158,28 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/combo/list", {
-            templateUrl: './../views/combo/combo.list.html'
+            template: require('./../views/combo/combo.list.html'),
+            controllerAs: 'view',
+            controller: ComboListController.prototype.constructor.name,
         })
         .when("/combo/cadastro", {
-            templateUrl: './../views/combo/combo.cadastro.html',
+            template: require('./../views/combo/combo.cadastro.html'),
+            controllerAs: 'view',
+            controller: ComboCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (ComboService) {
+                find: function (ComboService) {
                     return ComboService.novo();
                 }
             }
         })
         .when("/combo/editacao", {
-            templateUrl: './../views/combo/combo.cadastro.html',
+            template: require('./../views/combo/combo.cadastro.html'),
+            controllerAs: 'view',
+            controller: ComboCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => true,
-                entity: function (ComboService, $rootScope) {
+                find: function (ComboService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
                     });
@@ -141,22 +189,28 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/estoque/list", {
-            templateUrl: './../views/estoque/estoque.list.html'
+            template: require('./../views/estoque/estoque.list.html'),
+            controllerAs: 'view',
+            controller: EstoqueListController.prototype.constructor.name,
         })
         .when("/estoque/cadastro", {
-            templateUrl: './../views/estoque/estoque.cadastro.html',
+            template: require('./../views/estoque/estoque.cadastro.html'),
+            controllerAs: 'view',
+            controller: EstoqueCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (EstoqueService) {
+                find: function (EstoqueService) {
                     return EstoqueService.novo();
                 }
             }
         })
         .when("/estoque/editacao", {
-            templateUrl: './../views/estoque/estoque.cadastro.html',
+            template: require('./../views/estoque/estoque.cadastro.html'),
+            controllerAs: 'view',
+            controller: EstoqueCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => true,
-                entity: function (EstoqueService, $rootScope) {
+                find: function (EstoqueService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
                     });
@@ -166,22 +220,28 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/lanche/list", {
-            templateUrl: './../views/lanche/lanche.list.html'
+            template: require('./../views/lanche/lanche.list.html'),
+            controllerAs: 'view',
+            controller: LancheListController.prototype.constructor.name,
         })
         .when("/lanche/cadastro", {
-            templateUrl: './../views/lanche/lanche.cadastro.html',
+            template: require('./../views/lanche/lanche.cadastro.html'),
+            controllerAs: 'view',
+            controller: LancheCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (LancheService) {
+                find: function (LancheService) {
                     return LancheService.novo();
                 }
             }
         })
         .when("/lanche/editacao", {
-            templateUrl: './../views/lanche/lanche.cadastro.html',
+            template: require('./../views/lanche/lanche.cadastro.html'),
+            controllerAs: 'view',
+            controller: LancheCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => true,
-                entity: function (LancheService, $rootScope) {
+                find: function (LancheService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
                     });
@@ -191,22 +251,28 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/pedido/list", {
-            templateUrl: './../views/pedido/pedido.list.html'
+            template: require('./../views/pedido/pedido.list.html'),
+            controllerAs: 'view',
+            controller: PedidoListController.prototype.constructor.name,
         })
         .when("/pedido/cadastro", {
-            templateUrl: './../views/pedido/pedido.cadastro.html',
+            template: require('./../views/pedido/pedido.cadastro.html'),
+            controllerAs: 'view',
+            controller: PedidoCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (PedidoService) {
+                find: function (PedidoService) {
                     return PedidoService.novo();
                 }
             }
         })
         .when("/pedido/editacao", {
-            templateUrl: './../views/pedido/pedido.cadastro.html',
+            template: require('./../views/pedido/pedido.cadastro.html'),
+            controllerAs: 'view',
+            controller: PedidoCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => true,
-                entity: function (PedidoService, $rootScope) {
+                find: function (PedidoService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
                     });
@@ -216,22 +282,28 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/venda/list", {
-            templateUrl: './../views/venda/venda.list.html'
+            template: require('./../views/venda/venda.list.html'),
+            controllerAs: 'view',
+            controller: VendaListController.prototype.constructor.name,
         })
         .when("/venda/cadastro", {
-            templateUrl: './../views/venda/venda.cadastro.html',
+            template: require('./../views/venda/venda.cadastro.html'),
+            controllerAs: 'view',
+            controller: VendaCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (VendaService) {
+                find: function (VendaService) {
                     return VendaService.novo();
                 }
             }
         })
         .when("/venda/editacao", {
-            templateUrl: './../views/venda/venda.cadastro.html',
+            template: require('./../views/venda/venda.cadastro.html'),
+            controllerAs: 'view',
+            controller: VendaCadastroController.prototype.constructor.name,
             resolve: {
                 editar: () => false,
-                entity: function (VendaService, $rootScope) {
+                find: function (VendaService, $rootScope) {
                     $rootScope.$on('identificacao', (event: any, data: any) => {
                         sessionStorage.setItem('id', data);
                     });
@@ -239,5 +311,5 @@ sglanchoneteApp.config(function ($routeProvider) {
                 }
             }
         })
-        .otherwise("/");
+        .otherwise("/home");
 });

@@ -1,11 +1,11 @@
 import sglanchoneteApp from "../../app";
 import { BaseCadastroController } from '../BaseCadastroController';
 
-class LancheCadastroController extends BaseCadastroController<any> {
-    static $inject = ['LancheService', '$scope'];
+export class LancheCadastroController extends BaseCadastroController<any> {
+    static $inject = ['LancheService', '$scope', '$route'];
     
-    constructor(protected lancheService, protected $scope) {
-        super(lancheService, $scope);
+    constructor(protected lancheService, protected $scope, protected $route) {
+        super(lancheService, $scope, $route);
         this.nome = 'Lanche';
     }
 

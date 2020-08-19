@@ -1,16 +1,16 @@
-<div class="lanc-list" ng-controller="ClienteListController as vm">
-    <cadastro nome="vm.nome">
-        <form novalidate style="width: 100%;" ng-submit="vm.viewPesquisarNome(vm.pesquisaModel)">
+<div class="lanc-list" ng-controller="ClienteListController">
+    <cadastro nome="view.nome">
+        <form novalidate style="width: 100%;" ng-submit="view.viewPesquisarNome(view.pesquisaModel)">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <button ng-click="vm.viewPesquisarNome(null)" type="button" class="input-group-text"
+                    <button ng-click="view.viewPesquisarNome(null)" type="button" class="input-group-text"
                         id="basic-addon2">
                         <i class="fas fa-retweet"></i>
                     </button>
                 </div>
-                <input type="text" placeholder="Nome..." class="form-control" ng-model="vm.pesquisaModel">
+                <input type="text" placeholder="Nome..." class="form-control" ng-model="view.pesquisaModel">
                 <div class="input-group-append">
-                    <button ng-click="vm.viewPesquisarNome(vm.pesquisaModel)" type="button" class="input-group-text"
+                    <button ng-click="view.viewPesquisarNome(view.pesquisaModel)" type="button" class="input-group-text"
                         id="basic-addon2">
                         <i class="fas fa-search"></i>
                     </button>
@@ -18,9 +18,9 @@
             </div>
         </form>
     </cadastro>
-    <div ng-if="!!vm.list && vm.list.length > 0" class="row lanc-list-table">
+    <div ng-if="!!view.list && view.list.length > 0" class="row lanc-list-table">
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="item in vm.list">
+            <li class="list-group-item" ng-repeat="item in view.list">
                 <div class="col-12">
                     <div class="row">
                         <div class="col-2">
@@ -30,23 +30,23 @@
                             <label>{{item.nome}}{{item.ativo}}</label>
                         </div>
                         <div class="col-2">
-                            <acoes rota="vm.nome"
+                            <acoes rota="view.nome"
                             config="{ ativo: item.ativo, usarAtivacao: true, alterarAtivo: true }"
-                            out-aticao="vm.viewAtivacao($event, item.id);"
-                            out-alterar="vm.viewAlterar(item.id)" 
-                            out-excluir="vm.viewExcluir(item.id)"></acoes>
+                            out-aticao="view.viewAtivacao($event, item.id);"
+                            out-alterar="view.viewAlterar(item.id)" 
+                            out-excluir="view.viewExcluir(item.id)"></acoes>
                         </div>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
-    <div ng-if="!vm.list || vm.list.length <= 0" class="row lanc-list-table-empty">
+    <div ng-if="!view.list || view.list.length <= 0" class="row lanc-list-table-empty">
         <div style="margin: 10px;">
             Não há itens na lista
         </div>
     </div>
-    <div ng-if="!!vm.list" class="row lanc-list-pagination">
-        <paginacao config="vm.paginacaoConfig" out-change="vm.viewPaginacaoChange($event)"></paginacao>
+    <div ng-if="!!view.list" class="row lanc-list-pagination">
+        <paginacao config="view.paginacaoConfig" out-change="view.viewPaginacaoChange($event)"></paginacao>
     </div>
 </div>

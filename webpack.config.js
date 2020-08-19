@@ -49,20 +49,20 @@ module.exports = {
             ]
           }
         },
-        {
-          from: 'src/views', to: 'views', globOptions: {
-            ignore: [
-              '**/*.ts'
-            ]
-          }
-        },
-        {
-          from: 'src/components', to: 'components', globOptions: {
-            ignore: [
-              '**/*.ts'
-            ]
-          }
-        },
+        // {
+        //   from: 'src/views', to: 'views', globOptions: {
+        //     ignore: [
+        //       '**/*.ts'
+        //     ]
+        //   }
+        // },
+        // {
+        //   from: 'src/components', to: 'components', globOptions: {
+        //     ignore: [
+        //       '**/*.ts'
+        //     ]
+        //   }
+        // },
         {
           from: 'src/css', to: 'css', globOptions: {
             ignore: [

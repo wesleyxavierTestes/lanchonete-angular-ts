@@ -2,11 +2,11 @@ import { VendaService } from './../../services/venda/VendaService';
 import sglanchoneteApp from "../../app";
 import { BaseListController } from '../BaseListController';
 
-class VendaListController extends BaseListController<any, VendaService> {
-    static $inject = ['VendaService', '$rootScope'];
+export class VendaListController extends BaseListController<any, VendaService> {
+    static $inject = ['VendaService', '$scope'];
 
-    constructor(protected vendaService, protected $rootScope) {
-        super(vendaService, $rootScope);
+    constructor(protected vendaService, protected $scope) {
+        super(vendaService, $scope);
         this.nome = 'Venda';
     }
 

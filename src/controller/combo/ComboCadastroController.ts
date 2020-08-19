@@ -1,11 +1,11 @@
 import sglanchoneteApp from "../../app";
 import { BaseCadastroController } from '../BaseCadastroController';
 
-class ComboCadastroController extends BaseCadastroController<any> {
-    static $inject = ['ComboService', '$scope'];
+export class ComboCadastroController extends BaseCadastroController<any> {
+    static $inject = ['ComboService', '$scope', '$route'];
 
-    constructor(protected comboService, protected $scope) {
-        super(comboService, $scope);
+    constructor(protected comboService, protected $scope, protected $route) {
+        super(comboService, $scope, $route);
         this.nome = 'Combo';
     }
 
