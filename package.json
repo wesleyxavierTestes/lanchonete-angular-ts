@@ -17,6 +17,7 @@
     "angular": "1.6.8",
     "global": "^4.4.0",
     "jest": "^26.3.0",
+    "lit-element": "^2.4.0",
     "lodash": "^4.17.19",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
@@ -35,6 +36,7 @@
     "html-loader": "^1.1.0",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
+    "typescript-lit-html-plugin": "^0.9.0",
     "webpack-dev-server": "^3.11.0"
   }
 }

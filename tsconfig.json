@@ -1,12 +1,17 @@
 {
     "compilerOptions": {
-       "allowJs": true,
-       "module": "commonjs",
-       "experimentalDecorators": true,
-       "esModuleInterop": true,
-       "target": "ES5",
-       "sourceMap": true,
-       "noImplicitAny": false,
-       "outDir": "./dist"
+        "allowJs": true,
+        "module": "es6",
+        "target": "es6",
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "outDir": "./dist",
+        "plugins": [
+            {
+                "name": "typescript-lit-html-plugin"
+            }
+        ]
     }
 }

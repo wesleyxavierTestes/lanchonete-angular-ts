@@ -30,5 +30,10 @@ export class ClienteCadastroController extends BaseCadastroController<any, Clien
         MascaraSet.cpf();
         MascaraSet.cnpj();
     }
+
+    viewEvento(event) {
+        this.rota = event;
+        this.$scope.$apply();
+    }
 }
 sglanchoneteApp.controller('ClienteCadastroController', ClienteCadastroController);
