@@ -3,10 +3,10 @@ import sglanchoneteApp from "../../app";
 import { BaseCadastroController } from '../BaseCadastroController';
 
 export class PedidoCadastroController extends BaseCadastroController<any, PedidoService> {
-    static $inject = ['PedidoService', '$scope', '$route'];
+    static $inject = ['PedidoService', '$scope', '$route', '$location'];
 
-    constructor(protected pedidoService: PedidoService, protected $scope, protected $route) {
-        super(pedidoService, $scope, $route);
+    constructor(protected pedidoService: PedidoService, protected $scope, protected $route, protected $location) {
+        super(pedidoService, $scope, $route, $location);
         this.nome = 'Pedido';
      }
     protected updateComponent() {}

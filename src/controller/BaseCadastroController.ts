@@ -7,8 +7,7 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
   public viewIndexTab: number = 1;
   protected editar = false;
   public erros = {};
-
-  constructor(protected service: Y, protected $scope, protected $route) {
+  constructor(protected service: Y, protected $scope, protected $route, protected $location) {
     this.onChange($route);
     this.onInit();
     $scope.$watch('form', function (v) {
@@ -52,8 +51,13 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
 
   private errorMessage(errorResponse: any): any {
     this.erros = {};
-    for (let erro of (<{ property: string; message: string }[]>errorResponse.data)) {
-      this.erros[erro.property] = erro.message;
+    this.$scope.$emit('erroMessage', null);
+    if (errorResponse.data) {
+      for (let erro of (<{ property: string; message: string }[]>errorResponse.data)) {
+        this.erros[erro.property] = erro.message;
+      }
+    } else {
+      this.$scope.$emit('erroMessage', errorResponse.message);
     }
     this.$scope.$emit('loading', false);
   }
@@ -65,9 +69,12 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
       .catch(error => this.errorMessage(error));
   }
 
-  saveTry(resultado: Response) {
+  saveTry(resultado) {
     if (resultado.status == 200) {
       this.erros = undefined;
+      this.$scope.$emit('identificacao', resultado.data.id);
+      this.$scope.$emit('erroMessage', null);
+      this.$location.path(this.$location.path().replace("cadastro", "editacao"));
     }
     this.$scope.$emit('loading', false)
   }
