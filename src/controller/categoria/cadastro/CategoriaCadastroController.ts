@@ -1,6 +1,6 @@
-import { CategoriaService } from './../../services/categoria/CategoriaService';
-import sglanchoneteApp from "../../app";
-import { BaseCadastroController } from '../BaseCadastroController';
+import { CategoriaService } from './../../../services/categoria/CategoriaService';
+import sglanchoneteApp from "../../../app";
+import { BaseCadastroController } from '../../BaseCadastroController';
 
 export class CategoriaCadastroController extends BaseCadastroController<any, CategoriaService> {
     static $inject = ['CategoriaService', '$scope', '$route', '$location'];
@@ -12,4 +12,8 @@ export class CategoriaCadastroController extends BaseCadastroController<any, Cat
     }
     protected updateComponent() { }
 }
-sglanchoneteApp.controller('CategoriaCadastroController', CategoriaCadastroController);
+sglanchoneteApp.component('categoriacadastro', {
+    controller: CategoriaCadastroController,
+    controllerAs: 'view',
+    template: require('./categoria.cadastro.html')
+});

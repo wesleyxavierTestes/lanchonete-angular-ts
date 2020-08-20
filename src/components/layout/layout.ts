@@ -6,6 +6,7 @@ export const appRootConfigure = function () {
         controller: function ($scope) {
             $scope.loading = false;
             $scope.erroMessage = null;
+            $scope.erros = null;
             $scope.list = <Array<{ nome: string, apelido: string, ativo: string }>>[
                 { ativo: 'active', nome: 'cliente', apelido: 'Cliente'},
                 { ativo: '', nome: 'categoria', apelido: 'Categoria' },            
@@ -17,6 +18,10 @@ export const appRootConfigure = function () {
                 { ativo: '', nome: 'pedido', apelido: 'Pedido' },
                 { ativo: '', nome: 'venda', apelido: 'Venda' },
             ];
+
+            $scope.$on('erros', function(event: any, data: any) {
+                $scope.erros = data;
+            });
 
             $scope.$on('loading', function(event: any, data: any) {
                 $scope.loading = data;

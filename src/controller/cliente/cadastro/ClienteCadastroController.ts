@@ -1,7 +1,7 @@
-import { ClienteService } from './../../services/cliente/ClienteService';
-import sglanchoneteApp from "../../app";
-import { BaseCadastroController } from '../BaseCadastroController';
-import { MascaraSet } from '../../utils/Mascaras';
+import { ClienteService } from './../../../services/cliente/ClienteService';
+import sglanchoneteApp from "../../../app";
+import { BaseCadastroController } from '../../BaseCadastroController';
+import { MascaraSet } from '../../../utils/Mascaras';
 
 export class ClienteCadastroController extends BaseCadastroController<any, ClienteService> {
 
@@ -36,4 +36,9 @@ export class ClienteCadastroController extends BaseCadastroController<any, Clien
         this.$scope.$apply();
     }
 }
-sglanchoneteApp.controller('ClienteCadastroController', ClienteCadastroController);
+sglanchoneteApp.component('clientecadastro', 
+{
+    controller: ClienteCadastroController,
+    controllerAs: 'view',
+    template: require('./cliente.cadastro.html')
+});

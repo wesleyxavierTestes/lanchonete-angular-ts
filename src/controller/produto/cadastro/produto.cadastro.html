@@ -1,0 +1,86 @@
+<div class="ProdutoCadastroController">
+    <h3>Cadastro</h3>
+    <br>
+    <form ng-submit="view.formSubmit()" novalidate>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 1 }" id="nav-home-tab"
+                    data-toggle="tab" ng-click="view.viewSetTab(1)" role="tab" aria-controls="nav-home"
+                    aria-selected="true">Dados</a>
+            </div>
+        </nav>
+        <div class="tab-content lanc-tab" id="nav-tabContent">
+            <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 1 }" id="nav-home"
+                role="tabpanel" aria-labelledby="nav-home-tab">
+                <!-- TAB DADOS -->
+                <div class="row">
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="id">Id</label>
+                            <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id"
+                                ng-required="false" ng-value="view.entity.id">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_nome">Nome</label>
+                            <input type="text" class="form-control" id="id_nome" ng-required="!!view.erros.nome"
+                                ng-model="view.entity.nome" aria-describedby="Nome do cliente">
+                            <small id="textHelp" class="form-text text-muted">{{view.erros.nome}}</small>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="id_tipoProduto">Tipo Produto</label>
+                            <select type="text" class="form-control" id="id_tipoProduto"
+                                ng-options="item.value as item.key for item in view.tiposProduto track by item.value" 
+                                ng-required="view.erros.tipoProduto"
+                                ng-value="view.entity.tipoProduto"
+                                ng-model="view.entity.tipoProduto"
+                                ng-change="view.updateViewBase()">
+                                <option selected>Selecione</option>
+                            </select>
+                            <small id="textHelp" class="form-text text-muted">{{view.erros.tipoProduto}}</small>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="id_categoria">Categoria</label>
+                            <input ng-if="!view.Categorias" ng-readonly="true" ng-required="view.erros.categoria" type="text" class="form-control"
+                                placeholder="Selecione" ng-click="view.viewInitCategorias()"
+                                ng-model="view.entity.categoria.nome">
+                            <select ng-if="view.Categorias" type="text" class="form-control" id="id_categoria"
+                                ng-options="item.nome for item in view.Categorias track by item.id" ng-required="true"
+                                ng-model="view.entity.categoria"
+                                ng-change="view.updateViewBase()">
+                                <option selected>Selecione</option>
+                            </select>
+                            <small id="textHelp" class="form-text text-muted">{{view.erros.categoria}}</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleInputCusto1">Custo</label>
+                            <input type="custo" class="form-control money" id="exampleInputCusto1"
+                                ng-required="!!view.erros.custo" aria-describedby="custoHelp">
+                            <small id="textHelp" class="form-text text-muted">{{view.erros.custo}}</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleInputValor1">Valor</label>
+                            <input type="valor" class="form-control money" id="exampleInputValor1"
+                                ng-required="!!view.erros.valor" aria-describedby="valorHelp">
+                            <small id="textHelp" class="form-text text-muted">{{view.erros.valor}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ view.editar ? 'Atualizar' : 'Salvar'}}</button>
+    </form>
+</div>

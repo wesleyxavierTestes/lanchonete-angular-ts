@@ -24,9 +24,9 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="id_nome">Nome</label>
-                            <input type="text" class="form-control" id="id_nome" ng-model="view.entity.nome" aria-describedby="textHelp"
-                                placeholder="">
-                            <small id="textHelp" class="form-text text-muted"></small>
+                            <input type="text" class="form-control" id="id_nome" ng-required="!!view.erros.nome"
+                                ng-model="view.entity.nome" aria-describedby="Nome do cliente" placeholder="">
+                            <small id="textHelp" class="form-text text-muted">{{view.erros.nome}}</small>
                         </div>
                     </div>
                 </div>

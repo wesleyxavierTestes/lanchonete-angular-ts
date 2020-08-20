@@ -16,6 +16,9 @@
             <div class="alert alert-danger" ng-if="erroMessage">
                 {{ erroMessage }}
             </div>
+            <div ng-show="erros.succes" class="alert alert-success" role="alert">
+                Ação efetuada com sucesso
+            </div>   
             <ng-view></ng-view>
         </div>
     </section>

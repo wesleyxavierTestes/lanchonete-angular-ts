@@ -26,7 +26,8 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
   public updateViewBase() {
     setTimeout(() => {
       this.updateComponent();
-      this.erros = {};
+      this.erros = null;
+      this.$scope.$emit('erros', null);
     }, 25);
   }
 
@@ -52,11 +53,14 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
   private errorMessage(errorResponse: any): any {
     this.erros = {};
     this.$scope.$emit('erroMessage', null);
-    if (errorResponse.data) {
+    if (errorResponse.data && Array.isArray(errorResponse.data)) {
       for (let erro of (<{ property: string; message: string }[]>errorResponse.data)) {
         this.erros[erro.property] = erro.message;
       }
-    } else {
+      this.$scope.$emit('erros', this.erros);
+    } else  if (errorResponse.data && !Array.isArray(errorResponse.data)) {
+      this.$scope.$emit('erroMessage', errorResponse.data);
+    }else {
       this.$scope.$emit('erroMessage', errorResponse.message);
     }
     this.$scope.$emit('loading', false);
@@ -69,10 +73,15 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
       .catch(error => this.errorMessage(error));
   }
 
+  $doCheck() {
+    
+  }
+
   saveTry(resultado) {
     if (resultado.status == 200) {
-      this.erros = undefined;
+      this.erros = null;
       this.$scope.$emit('identificacao', resultado.data.id);
+      this.$scope.$emit('erros', { succes: true });
       this.$scope.$emit('erroMessage', null);
       this.$location.path(this.$location.path().replace("cadastro", "editacao"));
     }
