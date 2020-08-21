@@ -24,10 +24,13 @@ export class ProdutoCadastroController extends BaseCadastroController<any, Produ
     }
 
     public viewInitCategorias() {
+        this.updateLoading(true);
         this.categoriaService.findAll(1)
-            .then(resultado => this.Categorias = resultado.data.content)
+            .then(resultado => {
+                this.Categorias = resultado.data.content;
+            })
             .catch(error => this.$scope.$emit('erroMessage', error.message))
-            .finally(() => this.$scope.$emit('loading', false))
+            .finally(() => this.updateLoading(false))
     }
 
     protected updateComponent() {

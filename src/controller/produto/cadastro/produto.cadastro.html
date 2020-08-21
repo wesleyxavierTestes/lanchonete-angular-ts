@@ -29,7 +29,7 @@
                             <small id="textHelp" class="form-text text-muted">{{view.erros.nome}}</small>
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="row">
@@ -37,11 +37,9 @@
                         <div class="form-group">
                             <label for="id_tipoProduto">Tipo Produto</label>
                             <select type="text" class="form-control" id="id_tipoProduto"
-                                ng-options="item.value as item.key for item in view.tiposProduto track by item.value" 
-                                ng-required="view.erros.tipoProduto"
-                                ng-value="view.entity.tipoProduto"
-                                ng-model="view.entity.tipoProduto"
-                                ng-change="view.updateViewBase()">
+                                ng-options="item.value as item.key for item in view.tiposProduto track by item.value"
+                                ng-required="view.erros.tipoProduto" ng-value="view.entity.tipoProduto"
+                                ng-model="view.entity.tipoProduto" ng-change="view.updateViewBase()">
                                 <option selected>Selecione</option>
                             </select>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.tipoProduto}}</small>
@@ -50,13 +48,13 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label for="id_categoria">Categoria</label>
-                            <input ng-if="!view.Categorias" ng-readonly="true" ng-required="view.erros.categoria" type="text" class="form-control"
-                                placeholder="Selecione" ng-click="view.viewInitCategorias()"
-                                ng-model="view.entity.categoria.nome">
-                            <select ng-if="view.Categorias" type="text" class="form-control" id="id_categoria"
+                            <input ng-if="!view.Categorias" ng-readonly="true" ng-required="view.erros.categoria"
+                                type="text" class="form-control" placeholder="Selecione"
+                                ng-click="view.viewInitCategorias()" ng-model="view.entity.categoria.nome">
+                            <select ng-if="view.Categorias" type="text" 
+                                    class="form-control" id="id_categoria"
                                 ng-options="item.nome for item in view.Categorias track by item.id" ng-required="true"
-                                ng-model="view.entity.categoria"
-                                ng-change="view.updateViewBase()">
+                                ng-model="view.entity.categoria" ng-change="view.updateViewBase()">
                                 <option selected>Selecione</option>
                             </select>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.categoria}}</small>
@@ -66,9 +64,15 @@
                         <div class="form-group">
                             <label for="exampleInputCusto1">Custo</label>
                             <div class="input-group">
-                                
+                                <div class="input-group-prepend">
+                                    <button type="button"
+                                        class="input-group-text">
+                                        R$
+                                    </button>
+                                </div>
                                 <input type="custo" class="form-control money" id="exampleInputCusto1"
-                                ng-required="!!view.erros.custo" aria-describedby="custoHelp">
+                                    ng-required="!!view.erros.custo" aria-describedby="custoHelp"
+                                    ng-model="view.entity.custo">
                             </div>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.custo}}</small>
                         </div>
@@ -76,8 +80,18 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputValor1">Valor</label>
-                            <input type="valor" class="form-control money" id="exampleInputValor1"
-                                ng-required="!!view.erros.valor" aria-describedby="valorHelp">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button"
+                                    class="input-group-text">
+                                    R$
+                                </button>
+                                </div>
+                                <input type="valor" class="form-control money" id="exampleInputValor1"
+                                    ng-required="!!view.erros.valor"
+                                    ng-model="view.entity.valor"
+                                    aria-describedby="valorHelp">
+                            </div>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.valor}}</small>
                         </div>
                     </div>

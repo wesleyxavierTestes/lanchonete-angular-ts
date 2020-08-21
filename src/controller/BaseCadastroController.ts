@@ -44,7 +44,7 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
   }
 
   public viewSalvar() {
-    this.$scope.$emit('loading', true);
+    this.updateLoading(true);
     this.service.save(this.entity)
       .then((resultado: any) => this.saveTry(resultado))
       .catch(error => this.errorMessage(error));
@@ -63,11 +63,11 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
     }else {
       this.$scope.$emit('erroMessage', errorResponse.message);
     }
-    this.$scope.$emit('loading', false);
+    this.updateLoading(false);
   }
 
   public viewEditar() {
-    this.$scope.$emit('loading', true);
+    this.updateLoading(true);
     this.service.update(this.entity)
       .then((resultado: any) => this.saveTry(resultado))
       .catch(error => this.errorMessage(error));
@@ -85,6 +85,10 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
       this.$scope.$emit('erroMessage', null);
       this.$location.path(this.$location.path().replace("cadastro", "editacao"));
     }
-    this.$scope.$emit('loading', false)
+    this.updateLoading(false);
+  }
+
+  protected updateLoading(loading: boolean) {
+    this.$scope.$emit('loading', loading);
   }
 }

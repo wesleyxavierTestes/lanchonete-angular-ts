@@ -1,6 +1,6 @@
 body {
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0 0 0 30px !important;
   height: 100vh;
   width: 100vw;
   overflow-x: hidden;
@@ -21,6 +21,10 @@ approot > main:nth-child(1).row {
   height: 50vh;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.list-group-header label {
+  font-weight: bold;
 }
 
 small.form-text.text-muted {
