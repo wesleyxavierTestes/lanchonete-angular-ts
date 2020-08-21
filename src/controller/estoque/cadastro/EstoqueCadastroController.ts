@@ -1,6 +1,6 @@
-import { EstoqueService } from './../../services/estoque/EstoqueService';
-import sglanchoneteApp from "../../app";
-import { BaseCadastroController } from '../BaseCadastroController';
+import { EstoqueService } from './../../../services/estoque/EstoqueService';
+import sglanchoneteApp from "../../../app";
+import { BaseCadastroController } from '../../BaseCadastroController';
 
 export class EstoqueCadastroController extends BaseCadastroController<any, EstoqueService> {
     static $inject = ['EstoqueService', '$scope', '$route', '$location'];
@@ -11,4 +11,9 @@ export class EstoqueCadastroController extends BaseCadastroController<any, Estoq
      }
     protected updateComponent() {}
 }
-sglanchoneteApp.controller('EstoqueCadastroController', EstoqueCadastroController);
+sglanchoneteApp.component('estoquecadastro',  
+{
+    controller: EstoqueCadastroController,
+    controllerAs: 'view',
+    template: require('./estoque.cadastro.html')
+});

@@ -1,16 +1,3 @@
-import { ClienteListController } from './../controller/cliente/lista/ClienteListController';
-import { VendaCadastroController } from './../controller/venda/VendaCadastroController';
-import { VendaListController } from './../controller/venda/VendaListController';
-import { PedidoCadastroController } from './../controller/pedido/PedidoCadastroController';
-import { PedidoListController } from './../controller/pedido/PedidoListController';
-import { LancheCadastroController } from './../controller/lanche/LancheCadastroController';
-import { LancheListController } from './../controller/lanche/LancheListController';
-import { EstoqueCadastroController } from './../controller/estoque/EstoqueCadastroController';
-import { EstoqueListController } from './../controller/estoque/EstoqueListController';
-import { ComboCadastroController } from './../controller/combo/ComboCadastroController';
-import { ComboListController } from './../controller/combo/ComboListController';
-import { CardapioCadastroController } from './../controller/cardapio/CardapioCadastroController';
-import { CardapioListController } from './../controller/cardapio/CardapioListController';
 import { VendaService } from './../services/venda/VendaService';
 import { PedidoService } from './../services/pedido/PedidoService';
 import { LancheService } from './../services/lanche/LancheService';
@@ -25,7 +12,7 @@ import sglanchoneteApp from "../app";
 sglanchoneteApp.config(function ($routeProvider) {
     $routeProvider
         .when("/home", {
-            template: require('./../views/home.html')
+            template: 'Home'
         })
 
         .when("/cliente/list", {
@@ -54,7 +41,7 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/categoria/list", {
-            template: '<categorialist></categorialist>',
+            template: '<categorialist></categorialist>'
         })
         .when("/categoria/cadastro", {
             template: '<categoriacadastro></categoriacadastro>',
@@ -104,14 +91,10 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/cardapio/list", {
-            template: require('./../views/cardapio/cardapio.list.html'),
-            controllerAs: 'view',
-            controller: CardapioListController.prototype.constructor.name,
+            template: '<cardapiolist></cardapiolist>'
         })
         .when("/cardapio/cadastro", {
-            template: require('./../views/cardapio/cardapio.cadastro.html'),
-            controllerAs: 'view',
-            controller: CardapioCadastroController.prototype.constructor.name,
+            template: '<cardapiocadastro></cardapiocadastro>',
             resolve: {
                 editar: () => false,
                 find: function (CardapioService) {
@@ -120,9 +103,7 @@ sglanchoneteApp.config(function ($routeProvider) {
             }
         })
         .when("/cardapio/editacao", {
-            template: require('./../views/cardapio/cardapio.cadastro.html'),
-            controllerAs: 'view',
-            controller: CardapioCadastroController.prototype.constructor.name,
+            template: '<cardapiocadastro></cardapiocadastro>',
             resolve: {
                 editar: () => true,
                 find: function (CardapioService, $rootScope) {
@@ -135,14 +116,10 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/combo/list", {
-            template: require('./../views/combo/combo.list.html'),
-            controllerAs: 'view',
-            controller: ComboListController.prototype.constructor.name,
+            template: '<combolist></combolist>'
         })
         .when("/combo/cadastro", {
-            template: require('./../views/combo/combo.cadastro.html'),
-            controllerAs: 'view',
-            controller: ComboCadastroController.prototype.constructor.name,
+            template: '<combocadastro></combocadastro>',
             resolve: {
                 editar: () => false,
                 find: function (ComboService) {
@@ -151,9 +128,7 @@ sglanchoneteApp.config(function ($routeProvider) {
             }
         })
         .when("/combo/editacao", {
-            template: require('./../views/combo/combo.cadastro.html'),
-            controllerAs: 'view',
-            controller: ComboCadastroController.prototype.constructor.name,
+            template: '<combocadastro></combocadastro>',
             resolve: {
                 editar: () => true,
                 find: function (ComboService, $rootScope) {
@@ -166,14 +141,10 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/estoque/list", {
-            template: require('./../views/estoque/estoque.list.html'),
-            controllerAs: 'view',
-            controller: EstoqueListController.prototype.constructor.name,
+            template: '<estoquelist></estoquelist>'
         })
         .when("/estoque/cadastro", {
-            template: require('./../views/estoque/estoque.cadastro.html'),
-            controllerAs: 'view',
-            controller: EstoqueCadastroController.prototype.constructor.name,
+            template: '<estoquecadastro></estoquecadastro>',
             resolve: {
                 editar: () => false,
                 find: function (EstoqueService) {
@@ -182,9 +153,7 @@ sglanchoneteApp.config(function ($routeProvider) {
             }
         })
         .when("/estoque/editacao", {
-            template: require('./../views/estoque/estoque.cadastro.html'),
-            controllerAs: 'view',
-            controller: EstoqueCadastroController.prototype.constructor.name,
+            template: '<estoquecadastro></estoquecadastro>',
             resolve: {
                 editar: () => true,
                 find: function (EstoqueService, $rootScope) {
@@ -197,14 +166,10 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/lanche/list", {
-            template: require('./../views/lanche/lanche.list.html'),
-            controllerAs: 'view',
-            controller: LancheListController.prototype.constructor.name,
+            template: '<lanchelist></lanchelist>'
         })
         .when("/lanche/cadastro", {
-            template: require('./../views/lanche/lanche.cadastro.html'),
-            controllerAs: 'view',
-            controller: LancheCadastroController.prototype.constructor.name,
+            template: '<lanchecadastro></lanchecadastro>',
             resolve: {
                 editar: () => false,
                 find: function (LancheService) {
@@ -213,9 +178,7 @@ sglanchoneteApp.config(function ($routeProvider) {
             }
         })
         .when("/lanche/editacao", {
-            template: require('./../views/lanche/lanche.cadastro.html'),
-            controllerAs: 'view',
-            controller: LancheCadastroController.prototype.constructor.name,
+            template: '<lanchecadastro></lanchecadastro>',
             resolve: {
                 editar: () => true,
                 find: function (LancheService, $rootScope) {
@@ -228,14 +191,10 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/pedido/list", {
-            template: require('./../views/pedido/pedido.list.html'),
-            controllerAs: 'view',
-            controller: PedidoListController.prototype.constructor.name,
+            template: '<pedidolist></pedidolist>'
         })
         .when("/pedido/cadastro", {
-            template: require('./../views/pedido/pedido.cadastro.html'),
-            controllerAs: 'view',
-            controller: PedidoCadastroController.prototype.constructor.name,
+            template: '<pedidocadastro></pedidocadastro>',
             resolve: {
                 editar: () => false,
                 find: function (PedidoService) {
@@ -244,9 +203,7 @@ sglanchoneteApp.config(function ($routeProvider) {
             }
         })
         .when("/pedido/editacao", {
-            template: require('./../views/pedido/pedido.cadastro.html'),
-            controllerAs: 'view',
-            controller: PedidoCadastroController.prototype.constructor.name,
+            template: '<pedidocadastro></pedidocadastro>',
             resolve: {
                 editar: () => true,
                 find: function (PedidoService, $rootScope) {
@@ -259,14 +216,10 @@ sglanchoneteApp.config(function ($routeProvider) {
         })
 
         .when("/venda/list", {
-            template: require('./../views/venda/venda.list.html'),
-            controllerAs: 'view',
-            controller: VendaListController.prototype.constructor.name,
+            template: '<vendalist></vendalist>'
         })
         .when("/venda/cadastro", {
-            template: require('./../views/venda/venda.cadastro.html'),
-            controllerAs: 'view',
-            controller: VendaCadastroController.prototype.constructor.name,
+            template: '<vendacadastro></vendacadastro>',
             resolve: {
                 editar: () => false,
                 find: function (VendaService) {
@@ -275,9 +228,7 @@ sglanchoneteApp.config(function ($routeProvider) {
             }
         })
         .when("/venda/editacao", {
-            template: require('./../views/venda/venda.cadastro.html'),
-            controllerAs: 'view',
-            controller: VendaCadastroController.prototype.constructor.name,
+            template: '<vendacadastro></vendacadastro>',
             resolve: {
                 editar: () => false,
                 find: function (VendaService, $rootScope) {

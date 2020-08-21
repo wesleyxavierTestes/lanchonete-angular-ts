@@ -1,6 +1,6 @@
-import { CardapioService } from './../../services/cardapio/CardapioService';
-import sglanchoneteApp from "../../app";
-import { BaseCadastroController } from '../BaseCadastroController';
+import { CardapioService } from './../../../services/cardapio/CardapioService';
+import sglanchoneteApp from "../../../app";
+import { BaseCadastroController } from '../../BaseCadastroController';
 
 export class CardapioCadastroController extends BaseCadastroController<any, CardapioService> {
    
@@ -13,4 +13,9 @@ export class CardapioCadastroController extends BaseCadastroController<any, Card
 
     protected updateComponent() {}
 }
-sglanchoneteApp.controller('CardapioCadastroController', CardapioCadastroController);
+sglanchoneteApp.component('cardapiocadastro', 
+{
+    controller: CardapioCadastroController,
+    controllerAs: 'view',
+    template: require('./cardapio.cadastro.html')
+});

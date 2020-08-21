@@ -3,6 +3,7 @@ import { ProdutoService } from './../../../services/produto/ProdutoService';
 import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
 import { MascaraSet } from '../../../utils/Mascaras';
+import * as _ from 'lodash';
 
 export class ProdutoCadastroController extends BaseCadastroController<any, ProdutoService> {
     static $inject = ['ProdutoService', '$scope', '$route', '$location', 'CategoriaService'];

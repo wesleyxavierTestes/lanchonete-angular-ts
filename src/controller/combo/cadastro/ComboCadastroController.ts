@@ -1,6 +1,6 @@
-import { ComboService } from './../../services/combo/ComboService';
-import sglanchoneteApp from "../../app";
-import { BaseCadastroController } from '../BaseCadastroController';
+import { ComboService } from './../../../services/combo/ComboService';
+import sglanchoneteApp from "../../../app";
+import { BaseCadastroController } from '../../BaseCadastroController';
 
 export class ComboCadastroController extends BaseCadastroController<any, ComboService> {
     static $inject = ['ComboService', '$scope', '$route', '$location'];
@@ -11,4 +11,9 @@ export class ComboCadastroController extends BaseCadastroController<any, ComboSe
     }
     protected updateComponent() {}
 }
-sglanchoneteApp.controller('ComboCadastroController', ComboCadastroController);
+sglanchoneteApp.component('combocadastro', 
+{
+    controller: ComboCadastroController,
+    controllerAs: 'view',
+    template: require('./combo.cadastro.html')
+});

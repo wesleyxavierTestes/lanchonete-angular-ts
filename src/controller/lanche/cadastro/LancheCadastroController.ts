@@ -1,6 +1,6 @@
-import { LancheService } from './../../services/lanche/LancheService';
-import sglanchoneteApp from "../../app";
-import { BaseCadastroController } from '../BaseCadastroController';
+import { LancheService } from './../../../services/lanche/LancheService';
+import sglanchoneteApp from "../../../app";
+import { BaseCadastroController } from '../../BaseCadastroController';
 
 export class LancheCadastroController extends BaseCadastroController<any, LancheService> {
     static $inject = ['LancheService', '$scope', '$route', '$location'];
@@ -11,4 +11,9 @@ export class LancheCadastroController extends BaseCadastroController<any, Lanche
      }
     protected updateComponent() {}
 }
-sglanchoneteApp.controller('LancheCadastroController', LancheCadastroController);
+sglanchoneteApp.component('lanchecadastro',  
+{
+    controller: LancheCadastroController,
+    controllerAs: 'view',
+    template: require('./lanche.cadastro.html')
+});

@@ -1,6 +1,6 @@
-import { VendaService } from './../../services/venda/VendaService';
-import sglanchoneteApp from "../../app";
-import { BaseCadastroController } from '../BaseCadastroController';
+import { VendaService } from './../../../services/venda/VendaService';
+import sglanchoneteApp from "../../../app";
+import { BaseCadastroController } from '../../BaseCadastroController';
 
 export class VendaCadastroController extends BaseCadastroController<any, VendaService> {
     static $inject = ['VendaService', '$scope', '$route', '$location'];
@@ -11,4 +11,9 @@ export class VendaCadastroController extends BaseCadastroController<any, VendaSe
      }
     protected updateComponent() {}
 }
-sglanchoneteApp.controller('VendaCadastroController', VendaCadastroController);
+sglanchoneteApp.component('vendacadastro',  
+{
+    controller: VendaCadastroController,
+    controllerAs: 'view',
+    template: require('./venda.cadastro.html')
+});

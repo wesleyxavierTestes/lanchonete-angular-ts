@@ -65,8 +65,11 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputCusto1">Custo</label>
-                            <input type="custo" class="form-control money" id="exampleInputCusto1"
+                            <div class="input-group">
+                                
+                                <input type="custo" class="form-control money" id="exampleInputCusto1"
                                 ng-required="!!view.erros.custo" aria-describedby="custoHelp">
+                            </div>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.custo}}</small>
                         </div>
                     </div>
