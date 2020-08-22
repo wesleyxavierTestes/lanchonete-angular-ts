@@ -33,13 +33,15 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist/'),
+    contentBase: path.join(__dirname, 'dist/dev/'),
     host: 'localhost',
-    port: 8080
+    port: 8081,
+   // writeToDisk: true
   },
   plugins: [
+
     new CopyPlugin({
       patterns: [
         {
@@ -49,20 +51,6 @@ module.exports = {
             ]
           }
         },
-        // {
-        //   from: 'src/views', to: 'views', globOptions: {
-        //     ignore: [
-        //       '**/*.ts'
-        //     ]
-        //   }
-        // },
-        // {
-        //   from: 'src/components', to: 'components', globOptions: {
-        //     ignore: [
-        //       '**/*.ts'
-        //     ]
-        //   }
-        // },
         {
           from: 'src/css', to: 'css', globOptions: {
             ignore: [

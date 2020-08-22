@@ -5,13 +5,14 @@ import { MascaraSet } from '../../../utils/Mascaras';
 
 export class ClienteCadastroController extends BaseCadastroController<any, ClienteService> {
 
-    static $inject = ['ClienteService', '$scope', '$route', '$location'];
+    static $inject = ['ClienteService', '$rootScope', '$state', '$location'];
 
     rota = 'Cliente';
     public tiposPessoa = [{ key: 'Pessoa Física', value: 'Fisica' }, { key: 'Pessoa Jurídica', value: 'Juridica' }];
 
-    constructor(protected clienteService: ClienteService, protected $scope, protected $route, protected $location) {
-        super(clienteService, $scope, $route, $location);
+    constructor(protected clienteService: ClienteService, 
+        protected $rootScope, protected state, protected $location) {
+        super(clienteService, $rootScope, state, $location);
         this.nome = 'Cliente';
     }
 
@@ -33,12 +34,16 @@ export class ClienteCadastroController extends BaseCadastroController<any, Clien
 
     viewEvento(event) {
         this.rota = event;
-        this.$scope.$apply();
+        this.$rootScope.$apply();
     }
 }
-sglanchoneteApp.component('clientecadastro', 
-{
-    controller: ClienteCadastroController,
-    controllerAs: 'view',
-    template: require('./cliente.cadastro.html')
-});
+sglanchoneteApp.component('clientecadastro',
+    {
+        controller: ClienteCadastroController,
+        bindings: {
+            entity: '<',
+            editar: '<'
+        },
+        controllerAs: 'view',
+        template: require('./cliente.cadastro.html')
+    });

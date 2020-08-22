@@ -6,7 +6,7 @@ import { MascaraSet } from '../../../utils/Mascaras';
 import * as _ from 'lodash';
 
 export class ProdutoCadastroController extends BaseCadastroController<any, ProdutoService> {
-    static $inject = ['ProdutoService', '$scope', '$route', '$location', 'CategoriaService'];
+    static $inject = ['ProdutoService', '$rootScope', '$state', '$location', 'CategoriaService'];
 
     public tiposProduto = [
         { key: 'Produto', value: 'Produto' },
@@ -18,8 +18,8 @@ export class ProdutoCadastroController extends BaseCadastroController<any, Produ
     ]
     public Categorias: any[];
 
-    constructor(protected podutoService: ProdutoService, protected $scope, protected $route, protected $location, protected categoriaService: CategoriaService) {
-        super(podutoService, $scope, $route, $location);
+    constructor(protected podutoService: ProdutoService, protected $rootScope, protected state, protected $location, protected categoriaService: CategoriaService) {
+        super(podutoService, $rootScope, state, $location);
         this.nome = 'Produto';
     }
 
@@ -29,7 +29,7 @@ export class ProdutoCadastroController extends BaseCadastroController<any, Produ
             .then(resultado => {
                 this.Categorias = resultado.data.content;
             })
-            .catch(error => this.$scope.$emit('erroMessage', error.message))
+            .catch(error => this.$rootScope.$emit('erroMessage', error.message))
             .finally(() => this.updateLoading(false))
     }
 

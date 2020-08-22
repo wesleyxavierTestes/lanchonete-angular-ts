@@ -9,7 +9,7 @@ export abstract class BaseListController<T, Y extends BaseService> {
     public list: T[];
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
     
-    constructor(protected service: Y, protected $scope) {  
+    constructor(protected service: Y, protected $rootScope) {  
         this.paginacaoFindAll();
     }
 
@@ -24,10 +24,10 @@ export abstract class BaseListController<T, Y extends BaseService> {
     }
 
     public viewFindAll() {
-        this.$scope.$emit('loading', true);
+        this.$rootScope.$emit('loading', true);
         this.service.findAll(this.paginacaoConfig.pageAtual)
             .then((resultado: any) => this.findAllTry(resultado))
-            .catch(error => this.$scope.$emit('loading', false));
+            .catch(error => this.$rootScope.$emit('loading', false));
     }
 
     protected findAllTry(resultado: {
@@ -39,36 +39,36 @@ export abstract class BaseListController<T, Y extends BaseService> {
     }) {
         this.list = resultado.data.content;
         this.paginacaoConfig = Paginacao.configure(resultado.data, this.paginacaoConfig.pageAtual);
-        this.$scope.$emit('loading', false);
+        this.$rootScope.$emit('loading', false);
     }
 
     viewAlterar(id: number) {
         sessionStorage.setItem('id', id.toString());
-        this.$scope.$emit('identificacao', id);
+        this.$rootScope.$emit('identificacao', id);
     }
 
     viewExcluir(id: number) {
         this.service.delete(id)
         .then((resultado: any) => this.findAllTry(resultado))
-        .catch(error => this.$scope.$emit('loading', false));
+        .catch(error => this.$rootScope.$emit('loading', false));
     }
 
     public viewAtivacao(event: boolean, id: number) {
-        this.$scope.$emit('loading', true);
+        this.$rootScope.$emit('loading', true);
         if (event) {
             this.service.active(id)
             .then((resultado: any) => this.viewFindAll())
-                .finally(() => this.$scope.$emit('loading', false));
+                .finally(() => this.$rootScope.$emit('loading', false));
         } else { 
             this.service.desactive(id)
             .then((resultado: any) => this.viewFindAll())
-            .finally(() => this.$scope.$emit('loading', false));
+            .finally(() => this.$rootScope.$emit('loading', false));
         }
     }
 
     public viewPesquisarNome(pesquisa) {
         this.pesquisaModel = pesquisa;
-        this.$scope.$emit('loading', true);
+        this.$rootScope.$emit('loading', true);
         this.paginacaoConfig = Paginacao.default;
         this.service.findAllFilter(this.paginacaoConfig.pageAtual, { nome: this.pesquisaModel })
             .then((resultado: any) => this.findAllTry(resultado));

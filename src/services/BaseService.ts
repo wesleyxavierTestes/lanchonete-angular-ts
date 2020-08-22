@@ -19,39 +19,39 @@ export abstract class BaseService {
         };
     }
 
-    findAll(page: number): Promise<any> {
+    findAll(page: number): Promise<{ data: any }> {
         return this.$http.get(rotaFindAll(this.routeName, page), this.CONFIG);
     }
 
-    active(id: number): Promise<any> {
+    active(id: number): Promise<{ data: any }> {
         return this.$http.delete(rotaActive(this.routeName, id), this.CONFIG);
     }
 
-    desactive(id: number): Promise<any> {
+    desactive(id: number): Promise<{ data: any }> {
         return this.$http.delete(rotaDesactive(this.routeName, id), this.CONFIG);
     }
 
-    delete(id: number): Promise<any> {
+    delete(id: number): Promise<{ data: any }> {
         return this.$http.delete(rotaDesactive(this.routeName, id), this.CONFIG);
     }
 
-    find(id: string) {
+    find(id: string): Promise<{ data: any }> {
         return this.$http.get(rotaFind(this.routeName, id), this.CONFIG);
     }
 
-    novo() {
+    novo(): Promise<{ data: any }> {
         return this.$http.get(rotaNovo(this.routeName), this.CONFIG);
     }
 
-    findAllFilter(page: number, objeto: object): Promise<any> {
+    findAllFilter(page: number, objeto: object): Promise<{ data: any }> {
         return this.$http.post(rotaFindAllFilter(this.routeName, page), JSON.stringify(objeto));
     }
 
-    save(entity: any): Promise<any> {
+    save(entity: any): Promise<{ data: any }> {
         return this.$http.post(rotaSave(this.routeName), JSON.stringify(entity));
     }
 
-    update(entity: any): Promise<any> {
+    update(entity: any): Promise<{ data: any }> {
         return this.$http.put(rotaUpdate(this.routeName), JSON.stringify(entity));
     }
 

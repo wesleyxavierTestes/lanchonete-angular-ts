@@ -4,10 +4,10 @@ import { BaseCadastroController } from '../../BaseCadastroController';
 
 export class CardapioCadastroController extends BaseCadastroController<any, CardapioService> {
    
-    static $inject = ['CardapioService', '$scope', '$route', '$location'];
+    static $inject = ['CardapioService', '$rootScope', '$state', '$location'];
 
-    constructor(protected cardapioService: CardapioService, protected $scope, protected $route, protected $location) {
-        super(cardapioService, $scope, $route, $location);
+    constructor(protected cardapioService: CardapioService, protected $rootScope, protected state, protected $location) {
+        super(cardapioService, $rootScope, state, $location);
         this.nome = 'Cardapio';
     }
 

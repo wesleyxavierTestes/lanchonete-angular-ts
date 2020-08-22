@@ -1,5 +1,9 @@
 
-const rotaBase = 'http://192.168.1.31:8080/api';
+const rotaBase = (() => {
+    
+        return 'http://localhost:8080/api';
+    //return 'http://192.168.1.31:8080/api';
+})();
 
 export function rotaFindAll(rota: string, page: number) {
     return rotaBase+'/'+rota+'/list?page='+ page;

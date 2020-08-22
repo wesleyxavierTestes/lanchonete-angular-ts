@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --port 8081 --open --config webpack.config.js",
+    "start": "webpack-dev-server --port 8081 --open --config webpack.config.js --inline --hot",
     "watch": "webpack --watch",
     "build": "webpack --config webpack.prod.js",
     "test": "jest"
@@ -13,7 +13,11 @@
   "author": "wesley xavier",
   "license": "ISC",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.28",
+    "@uirouter/core": "^6.0.6",
+    "@uirouter/rx": "^0.6.5",
     "angular": "1.6.8",
+    "angular-bootstrap": "^0.12.2",
     "global": "^4.4.0",
     "lit-element": "^2.4.0",
     "lodash": "^4.17.19",
@@ -31,6 +35,7 @@
     "babel-loader": "^8.0.5",
     "copy-webpack-plugin": "^6.0.3",
     "html-loader": "^1.1.0",
+    "node": "^14.8.0",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
     "typescript-lit-html-plugin": "^0.9.0",

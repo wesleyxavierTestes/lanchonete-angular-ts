@@ -7,9 +7,7 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
   public viewIndexTab: number = 1;
   protected editar = false;
   public erros = {};
-  constructor(protected service: Y, protected $scope, protected $route, protected $location) {
-    this.onChange($route);
-    this.onInit();
+  constructor(protected service: Y, protected $scope, protected $state, protected $location) {
     $scope.$watch('form', function (v) {
       if (!v) { return }
       this.updateView();
@@ -17,11 +15,6 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
   }
 
   protected abstract updateComponent();
-
-  public onChange($route: any) {
-    this.entity = $route.current.locals.find.data;
-    this.editar = $route.current.locals.editar;
-  }
 
   public updateViewBase() {
     setTimeout(() => {
@@ -31,7 +24,7 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
     }, 25);
   }
 
-  public onInit() {
+  public $onInit() {
     this.updateViewBase();
   }
 
@@ -58,9 +51,9 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
         this.erros[erro.property] = erro.message;
       }
       this.$scope.$emit('erros', this.erros);
-    } else  if (errorResponse.data && !Array.isArray(errorResponse.data)) {
+    } else if (errorResponse.data && !Array.isArray(errorResponse.data)) {
       this.$scope.$emit('erroMessage', errorResponse.data);
-    }else {
+    } else {
       this.$scope.$emit('erroMessage', errorResponse.message);
     }
     this.updateLoading(false);
@@ -74,7 +67,7 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
   }
 
   $doCheck() {
-    
+
   }
 
   saveTry(resultado) {

@@ -3,10 +3,10 @@ import sglanchoneteApp from "../../../app";
 import { BaseListController } from '../../BaseListController';
 
 export class ClienteListController extends BaseListController<any, ClienteService> {
-    static $inject = ['ClienteService', '$scope'];
+    static $inject = ['ClienteService', '$rootScope'];
 
-    constructor(protected clienteService, protected $scope) {
-        super(clienteService, $scope);
+    constructor(protected clienteService, protected $rootScope) {
+        super(clienteService, $rootScope);
         this.nome = 'Cliente';
     }
 }

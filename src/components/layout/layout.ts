@@ -1,6 +1,6 @@
 import sglanchoneteApp from "../../app";
 
-export const appRootConfigure = function () {
+export const appRootConfigure = function ($state) {
     return {
         template: require('./../../components/layout/layout.html'),
         controller: function ($scope) {
@@ -18,6 +18,10 @@ export const appRootConfigure = function () {
                 { ativo: '', nome: 'pedido', apelido: 'Pedido' },
                 { ativo: '', nome: 'venda', apelido: 'Venda' },
             ];
+
+            $scope.viewNavigate = (nome: string) => {
+                $state.go(nome+'list');
+            }
 
             $scope.$on('erros', function(event: any, data: any) {
                 $scope.erros = data;

@@ -9,235 +9,336 @@ import { CategoriaService } from './../services/categoria/CategoriaService';
 import { ClienteService } from './../services/cliente/ClienteService';
 import sglanchoneteApp from "../app";
 
-sglanchoneteApp.config(function ($routeProvider) {
-    $routeProvider
-        .when("/home", {
-            template: 'Home'
-        })
+interface IStateProvider {
+    state: (definations: {
+        name: string;
+        url: string;
+        template?: string;
+        templateUrl?: string;
+        bindings?: Object;
+        controller?: Object | Function;
+        component?: Object | Function;
+        resolve?: Object
+    }) => IStateProvider;
+}
 
-        .when("/cliente/list", {
-            template: '<clientelist></clientelist>'
-        })
-        .when("/cliente/cadastro", {
-            template: '<clientecadastro></clientecadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (ClienteService) {
-                    return ClienteService.novo();
-                }
-            }
-        })
-        .when("/cliente/editacao", {
-            template: '<clientecadastro></clientecadastro>',
-            resolve: {
-                editar: () => true,
-                find: function (ClienteService, $rootScope) {
-                    $rootScope.$on('identificacao', (event: any, data: any) => {
-                        sessionStorage.setItem('id', data)
-                    });
-                    return ClienteService.find(sessionStorage.getItem('id'));
-                }
-            }
-        })
+export class AppRouter {
 
-        .when("/categoria/list", {
-            template: '<categorialist></categorialist>'
-        })
-        .when("/categoria/cadastro", {
-            template: '<categoriacadastro></categoriacadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (CategoriaService) {
-                    return CategoriaService.novo();
-                }
-            }
-        })
-        .when("/categoria/editacao", {
-            template: '<categoriacadastro></categoriacadastro>',
-            resolve: {
-                editar: () => true,
-                find: function (CategoriaService, $rootScope) {
-                    $rootScope.$on('identificacao', (event: any, data: any) => {
-                        sessionStorage.setItem('id', data);
-                    });
-                    return CategoriaService.find(sessionStorage.getItem('id'));
-                }
-            }
-        })
+    static inject = ['$stateProvider', '$stateParams', '$scope', '$rootScope'];
+    private stateProvider: IStateProvider;
 
-        .when("/produto/list", {
-            template: '<produtolist></produtolist>'
-        })
-        .when("/produto/cadastro", {
-            template: '<produtocadastro></produtocadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (ProdutoService) {
-                    return ProdutoService.novo();
-                }
-            }
-        })
-        .when("/produto/editacao", {
-            template: '<produtocadastro></produtocadastro>',
-            resolve: {
-                editar: () => true,
-                find: function (ProdutoService, $rootScope) {
-                    $rootScope.$on('identificacao', (event: any, data: any) => {
-                        sessionStorage.setItem('id', data);
-                    });
-                    return ProdutoService.find(sessionStorage.getItem('id'));
-                }
-            }
-        })
 
-        .when("/cardapio/list", {
-            template: '<cardapiolist></cardapiolist>'
-        })
-        .when("/cardapio/cadastro", {
-            template: '<cardapiocadastro></cardapiocadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (CardapioService) {
-                    return CardapioService.novo();
-                }
-            }
-        })
-        .when("/cardapio/editacao", {
-            template: '<cardapiocadastro></cardapiocadastro>',
-            resolve: {
-                editar: () => true,
-                find: function (CardapioService, $rootScope) {
-                    $rootScope.$on('identificacao', (event: any, data: any) => {
-                        sessionStorage.setItem('id', data);
-                    });
-                    return CardapioService.find(sessionStorage.getItem('id'));
-                }
-            }
-        })
+    constructor($stateProvider, $urlRouterProvider) {
+        this.stateProvider = $stateProvider;
 
-        .when("/combo/list", {
-            template: '<combolist></combolist>'
-        })
-        .when("/combo/cadastro", {
-            template: '<combocadastro></combocadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (ComboService) {
-                    return ComboService.novo();
-                }
-            }
-        })
-        .when("/combo/editacao", {
-            template: '<combocadastro></combocadastro>',
-            resolve: {
-                editar: () => true,
-                find: function (ComboService, $rootScope) {
-                    $rootScope.$on('identificacao', (event: any, data: any) => {
-                        sessionStorage.setItem('id', data);
-                    });
-                    return ComboService.find(sessionStorage.getItem('id'));
-                }
-            }
-        })
+        this.onInit();
 
-        .when("/estoque/list", {
-            template: '<estoquelist></estoquelist>'
-        })
-        .when("/estoque/cadastro", {
-            template: '<estoquecadastro></estoquecadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (EstoqueService) {
-                    return EstoqueService.novo();
-                }
-            }
-        })
-        .when("/estoque/editacao", {
-            template: '<estoquecadastro></estoquecadastro>',
-            resolve: {
-                editar: () => true,
-                find: function (EstoqueService, $rootScope) {
-                    $rootScope.$on('identificacao', (event: any, data: any) => {
-                        sessionStorage.setItem('id', data);
-                    });
-                    return EstoqueService.find(sessionStorage.getItem('id'));
-                }
-            }
-        })
+        $urlRouterProvider.otherwise('/home')
+    }
 
-        .when("/lanche/list", {
-            template: '<lanchelist></lanchelist>'
-        })
-        .when("/lanche/cadastro", {
-            template: '<lanchecadastro></lanchecadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (LancheService) {
-                    return LancheService.novo();
+    private onInit() {
+        this.stateProvider
+            .state({
+                name: 'home',
+                url: '/home',
+                component: 'h1>Home</h1>'
+            })
+            .state({
+                url: "/cliente/list",
+                name: 'clientelist',
+                component: 'clientelist',
+            })
+            .state({
+                url: "/cliente/cadastro",
+                name: 'clientecadastro',
+                component: 'clientecadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: ClienteService) {
+                        return await service.novo().then( response => response.data);
+                    }
                 }
-            }
-        })
-        .when("/lanche/editacao", {
-            template: '<lanchecadastro></lanchecadastro>',
-            resolve: {
-                editar: () => true,
-                find: function (LancheService, $rootScope) {
-                    $rootScope.$on('identificacao', (event: any, data: any) => {
-                        sessionStorage.setItem('id', data);
-                    });
-                    return LancheService.find(sessionStorage.getItem('id'));
+            })
+            .state({
+                url: "/cliente/edicao",
+                name: 'clienteedicao',
+                component: 'clientecadastro',
+                resolve: {
+                    editar: () => true,
+                    entity: function (ClienteService, $rootScope) {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data)
+                        });
+                        return ClienteService.find(sessionStorage.getItem('id')).then( response => response.data);
+                    }
                 }
-            }
-        })
+            })
 
-        .when("/pedido/list", {
-            template: '<pedidolist></pedidolist>'
-        })
-        .when("/pedido/cadastro", {
-            template: '<pedidocadastro></pedidocadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (PedidoService) {
-                    return PedidoService.novo();
+            .state({
+                url: "/categoria/list",
+                name: 'categorialist',
+                component: 'categorialist',
+            })
+            .state({
+                url: "/categoria/cadastro",
+                name: 'categoriacadastro',
+                component: 'categoriacadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: CategoriaService) {
+                        return await service.novo().then( response => response.data);
+                    }
                 }
-            }
-        })
-        .when("/pedido/editacao", {
-            template: '<pedidocadastro></pedidocadastro>',
-            resolve: {
-                editar: () => true,
-                find: function (PedidoService, $rootScope) {
-                    $rootScope.$on('identificacao', (event: any, data: any) => {
-                        sessionStorage.setItem('id', data);
-                    });
-                    return PedidoService.find(sessionStorage.getItem('id'));
+            })
+            .state({
+                url: "/categoria/edicao",
+                name: 'categoriaedicao',
+                component: 'categoriacadastro',
+                resolve: {
+                    editar: () => true,
+                    service: 'ClienteService',
+                    entity: async function (service: CategoriaService, $rootScope) {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data);
+                        });
+                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                    }
                 }
-            }
-        })
+            })
 
-        .when("/venda/list", {
-            template: '<vendalist></vendalist>'
-        })
-        .when("/venda/cadastro", {
-            template: '<vendacadastro></vendacadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (VendaService) {
-                    return VendaService.novo();
+            .state({
+                url: "/produto/list",
+                name: 'produtolist',
+                component: 'produtolist',
+            })
+            .state({
+                url: "/produto/cadastro",
+                name: 'produtocadastro',
+                component: 'produtocadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: ProdutoService) {
+                        return await service.novo().then( response => response.data);
+                    }
                 }
-            }
-        })
-        .when("/venda/editacao", {
-            template: '<vendacadastro></vendacadastro>',
-            resolve: {
-                editar: () => false,
-                find: function (VendaService, $rootScope) {
-                    $rootScope.$on('identificacao', (event: any, data: any) => {
-                        sessionStorage.setItem('id', data);
-                    });
-                    return VendaService.find(sessionStorage.getItem('id'));
+            })
+            .state({
+                url: "/produto/edicao",
+                name: 'produtoedicao',
+                component: 'produtocadastro',
+                resolve: {
+                    editar: () => true,
+                    service: 'ClienteService',
+                    entity: async function (service: ProdutoService, $rootScope) {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data);
+                        });
+                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                    }
                 }
-            }
-        })
-        .otherwise("/home");
-});
+            })
+
+            .state({
+                url: "/cardapio/list",
+                name: 'cardapiolist',
+                component: 'cardapiolist',
+            })
+            .state({
+                url: "/cardapio/cadastro",
+                name: 'cardapiocadastro',
+                component: 'cardapiocadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: CardapioService) {
+                        return await service.novo().then( response => response.data);
+                    }
+                }
+            })
+            .state({
+                url: "/cardapio/edicao",
+                name: 'cardapioedicao',
+                component: 'cardapiocadastro',
+                resolve: {
+                    editar: () => true,
+                    service: 'ClienteService',
+                    entity: async function (service: CardapioService, $rootScope) {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data);
+                        });
+                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                    }
+                }
+            })
+
+            .state({
+                url: "/combo/list",
+                name: 'combolist',
+                component: 'combolist',
+            })
+            .state({
+                url: "/combo/cadastro",
+                name: 'combocadastro',
+                component: 'combocadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: ComboService) {
+                        return await service.novo().then( response => response.data);
+                    }
+                }
+            })
+            .state({
+                url: "/combo/edicao",
+                name: 'comboedicao',
+                component: 'combocadastro',
+                resolve: {
+                    editar: () => true,
+                    service: 'ClienteService',
+                    entity: async function (service: ComboService, $rootScope) {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data);
+                        });
+                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                    }
+                }
+            })
+
+            .state({
+                url: "/estoque/list",
+                name: 'estoquelist',
+                component: 'estoquelist',
+            })
+            .state({
+                url: "/estoque/cadastro",
+                name: 'estoquecadastro',
+                component: 'estoquecadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: EstoqueService) {
+                        return await service.novo().then( response => response.data);
+                    }
+                }
+            })
+            .state({
+                url: "/estoque/edicao",
+                name: 'estoqueedicao',
+                component: 'estoquecadastro',
+                resolve: {
+                    editar: () => true,
+                    service: 'ClienteService',
+                    entity: async function (service: EstoqueService, $rootScope) {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data);
+                        });
+                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                    }
+                }
+            })
+
+            .state({
+                url: "/lanche/list",
+                name: 'lanchelist',
+                component: 'lanchelist',
+            })
+            .state({
+                url: "/lanche/cadastro",
+                name: 'lanchecadastro',
+                component: 'lanchecadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: LancheService) {
+                        return await service.novo().then( response => response.data);
+                    }
+                }
+            })
+            .state({
+                url: "/lanche/edicao",
+                name: 'lancheedicao',
+                component: 'lanchecadastro',
+                resolve: {
+                    editar: () => true,
+                    service: 'ClienteService',
+                    entity: async function (service: LancheService, $rootScope) {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data);
+                        });
+                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                    }
+                }
+            })
+
+            .state({
+                url: "/pedido/list",
+                name: 'pedidolist',
+                component: 'pedidolist',
+            })
+            .state({
+                url: "/pedido/cadastro",
+                name: 'pedidocadastro',
+                component: 'pedidocadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: PedidoService) {
+                        return await service.novo().then( response => response.data);
+                    }
+                }
+            })
+            .state({
+                url: "/pedido/edicao",
+                name: 'pedidoedicao',
+                component: 'pedidocadastro',
+                resolve: {
+                    editar: () => true,
+                    service: 'ClienteService',
+                    entity: async function (service: PedidoService, $rootScope) {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data);
+                        });
+                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                    }
+                }
+            })
+
+            .state({
+                url: "/venda/list",
+                name: 'vendalist',
+                component: 'vendalist',
+            })
+            .state({
+                url: "/venda/cadastro",
+                name: 'vendacadastro',
+                component: 'vendacadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: VendaService) {
+                        return await service.novo().then( response => response.data);
+                    }
+                }
+            })
+            .state({
+                url: "/venda/edicao",
+                name: 'vendaedicao',
+                component: 'vendacadastro',
+                resolve: {
+                    editar: () => false,
+                    service: 'ClienteService',
+                    entity: async function (service: VendaService, $rootScope) {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data);
+                        });
+                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                    }
+                }
+            })
+    }
+}
+
+sglanchoneteApp.config(AppRouter);
