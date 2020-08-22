@@ -23,6 +23,10 @@ export class Paginacao {
     public static default = { page: 0, pageAtual: 1 };
 
     constructor($scope) {
+        $scope.viewPageNavigationPrimeira = () => {
+            $scope.config.pageAtual = 1;
+            $scope.outChange({ $event: $scope.config });
+        }
         $scope.viewPageNavigationAnterior = () => {
             $scope.config.pageAtual -= 1;
             $scope.outChange({ $event: $scope.config });
@@ -30,6 +34,11 @@ export class Paginacao {
 
         $scope.viewPageNavigationProxima = () => {
             $scope.config.pageAtual += 1;
+            $scope.outChange({ $event: $scope.config });
+        }
+
+        $scope.viewPageNavigationUltima = () => {
+            $scope.config.pageAtual = $scope.config.totalPages;
             $scope.outChange({ $event: $scope.config });
         }
 
@@ -59,7 +68,7 @@ export class Paginacao {
             paginationFirst: data.first,
             paginationLast: data.last,
             pagination: pagination.slice(
-                pageAtual == 1 ? (pageAtual - 1) : pageAtual - 2, 
+                pageAtual == 1 ? (pageAtual - 1) : pageAtual - 2,
                 pageAtual == 1 ? (pageAtual + 2) : (pageAtual + 1))
         }
     }

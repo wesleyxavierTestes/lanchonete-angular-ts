@@ -24,7 +24,7 @@ interface IStateProvider {
 
 export class AppRouter {
 
-    static inject = ['$stateProvider', '$stateParams', '$scope', '$rootScope'];
+    static inject = ['$stateProvider', '$stateParams', '$rootScope'];
     private stateProvider: IStateProvider;
 
 
