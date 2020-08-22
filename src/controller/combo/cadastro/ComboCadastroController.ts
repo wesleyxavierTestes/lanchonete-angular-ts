@@ -9,11 +9,15 @@ export class ComboCadastroController extends BaseCadastroController<any, ComboSe
         super(comboService, $rootScope, state, $location);
         this.nome = 'Combo';
     }
-    protected updateComponent() {}
+    protected updateComponent() { }
 }
-sglanchoneteApp.component('combocadastro', 
-{
-    controller: ComboCadastroController,
-    controllerAs: 'view',
-    template: require('./combo.cadastro.html')
-});
+sglanchoneteApp.component('combocadastro',
+    {
+        controller: ComboCadastroController,
+        bindings: {
+            entity: '<',
+            editar: '<'
+        },
+        controllerAs: 'view',
+        template: require('./combo.cadastro.html')
+    });

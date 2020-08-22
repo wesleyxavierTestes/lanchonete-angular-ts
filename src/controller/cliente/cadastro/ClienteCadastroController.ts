@@ -10,7 +10,7 @@ export class ClienteCadastroController extends BaseCadastroController<any, Clien
     rota = 'Cliente';
     public tiposPessoa = [{ key: 'Pessoa Física', value: 'Fisica' }, { key: 'Pessoa Jurídica', value: 'Juridica' }];
 
-    constructor(protected clienteService: ClienteService, 
+    constructor(protected clienteService: ClienteService,
         protected $rootScope, protected state, protected $location) {
         super(clienteService, $rootScope, state, $location);
         this.nome = 'Cliente';

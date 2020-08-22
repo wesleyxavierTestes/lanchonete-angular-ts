@@ -8,12 +8,16 @@ export class EstoqueCadastroController extends BaseCadastroController<any, Estoq
     constructor(protected estoqueService: EstoqueService, protected $rootScope, protected state, protected $location) {
         super(estoqueService, $rootScope, state, $location);
         this.nome = 'Estoque';
-     }
-    protected updateComponent() {}
+    }
+    protected updateComponent() { }
 }
-sglanchoneteApp.component('estoquecadastro',  
-{
-    controller: EstoqueCadastroController,
-    controllerAs: 'view',
-    template: require('./estoque.cadastro.html')
-});
+sglanchoneteApp.component('estoquecadastro',
+    {
+        controller: EstoqueCadastroController,
+        bindings: {
+            entity: '<',
+            editar: '<'
+        },
+        controllerAs: 'view',
+        template: require('./estoque.cadastro.html')
+    });

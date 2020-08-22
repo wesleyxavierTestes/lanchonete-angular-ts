@@ -12,8 +12,13 @@ export class CategoriaCadastroController extends BaseCadastroController<any, Cat
     }
     protected updateComponent() { }
 }
-sglanchoneteApp.component('categoriacadastro', {
-    controller: CategoriaCadastroController,
-    controllerAs: 'view',
-    template: require('./categoria.cadastro.html')
-});
+sglanchoneteApp.component('categoriacadastro',
+    {
+        controller: CategoriaCadastroController,
+        bindings: {
+            entity: '<',
+            editar: '<'
+        },
+        controllerAs: 'view',
+        template: require('./categoria.cadastro.html')
+    });

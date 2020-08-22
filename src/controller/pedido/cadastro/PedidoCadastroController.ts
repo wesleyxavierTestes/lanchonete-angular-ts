@@ -8,12 +8,16 @@ export class PedidoCadastroController extends BaseCadastroController<any, Pedido
     constructor(protected pedidoService: PedidoService, protected $rootScope, protected state, protected $location) {
         super(pedidoService, $rootScope, state, $location);
         this.nome = 'Pedido';
-     }
-    protected updateComponent() {}
+    }
+    protected updateComponent() { }
 }
-sglanchoneteApp.component('pedidocadastro',  
-{
-    controller: PedidoCadastroController,
-    controllerAs: 'view',
-    template: require('./pedido.cadastro.html')
-});
+sglanchoneteApp.component('pedidocadastro',
+    {
+        controller: PedidoCadastroController,
+        bindings: {
+            entity: '<',
+            editar: '<'
+        },
+        controllerAs: 'view',
+        template: require('./pedido.cadastro.html')
+    });

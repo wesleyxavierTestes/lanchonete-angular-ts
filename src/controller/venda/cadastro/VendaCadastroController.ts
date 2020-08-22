@@ -8,12 +8,16 @@ export class VendaCadastroController extends BaseCadastroController<any, VendaSe
     constructor(protected vendaService: VendaService, protected $rootScope, protected state, protected $location) {
         super(vendaService, $rootScope, state, $location);
         this.nome = 'Venda';
-     }
-    protected updateComponent() {}
+    }
+    protected updateComponent() { }
 }
-sglanchoneteApp.component('vendacadastro',  
-{
-    controller: VendaCadastroController,
-    controllerAs: 'view',
-    template: require('./venda.cadastro.html')
-});
+sglanchoneteApp.component('vendacadastro',
+    {
+        controller: VendaCadastroController,
+        bindings: {
+            entity: '<',
+            editar: '<'
+        },
+        controllerAs: 'view',
+        template: require('./venda.cadastro.html')
+    });

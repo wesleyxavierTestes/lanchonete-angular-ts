@@ -40,6 +40,10 @@ export class ProdutoCadastroController extends BaseCadastroController<any, Produ
 sglanchoneteApp.component('produtocadastro',
     {
         controller: ProdutoCadastroController,
+        bindings: {
+            entity: '<',
+            editar: '<'
+        },
         controllerAs: 'view',
         template: require('./produto.cadastro.html')
     });
