@@ -66,11 +66,12 @@ export class AppRouter {
                 component: 'clientecadastro',
                 resolve: {
                     editar: () => true,
-                    entity: function (ClienteService, $rootScope) {
-                        $rootScope.$on('identificacao', (event: any, data: any) => {
-                            sessionStorage.setItem('id', data)
+                    service: 'ClienteService',
+                    entity: async function (service: ClienteService, $rootScope) {
+                       $rootScope.$on('identificacao', (event: any, data: any) => {
+                            sessionStorage.setItem('id', data);
                         });
-                        return ClienteService.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
                     }
                 }
             })
@@ -86,7 +87,7 @@ export class AppRouter {
                 component: 'categoriacadastro',
                 resolve: {
                     editar: () => false,
-                    service: 'ClienteService',
+                    service: 'CategoriaService',
                     entity: async function (service: CategoriaService) {
                         return await service.novo().then( response => response.data);
                     }
@@ -98,7 +99,7 @@ export class AppRouter {
                 component: 'categoriacadastro',
                 resolve: {
                     editar: () => true,
-                    service: 'ClienteService',
+                    service: 'CategoriaService',
                     entity: async function (service: CategoriaService, $rootScope) {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
@@ -119,7 +120,7 @@ export class AppRouter {
                 component: 'produtocadastro',
                 resolve: {
                     editar: () => false,
-                    service: 'ClienteService',
+                    service: 'ProdutoService',
                     entity: async function (service: ProdutoService) {
                         return await service.novo().then( response => response.data);
                     }
@@ -131,7 +132,7 @@ export class AppRouter {
                 component: 'produtocadastro',
                 resolve: {
                     editar: () => true,
-                    service: 'ClienteService',
+                    service: 'ProdutoService',
                     entity: async function (service: ProdutoService, $rootScope) {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
@@ -152,7 +153,7 @@ export class AppRouter {
                 component: 'cardapiocadastro',
                 resolve: {
                     editar: () => false,
-                    service: 'ClienteService',
+                    service: 'CardapioService',
                     entity: async function (service: CardapioService) {
                         return await service.novo().then( response => response.data);
                     }
@@ -164,7 +165,7 @@ export class AppRouter {
                 component: 'cardapiocadastro',
                 resolve: {
                     editar: () => true,
-                    service: 'ClienteService',
+                    service: 'CardapioService',
                     entity: async function (service: CardapioService, $rootScope) {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
@@ -185,7 +186,7 @@ export class AppRouter {
                 component: 'combocadastro',
                 resolve: {
                     editar: () => false,
-                    service: 'ClienteService',
+                    service: 'ComboService',
                     entity: async function (service: ComboService) {
                         return await service.novo().then( response => response.data);
                     }
@@ -197,7 +198,7 @@ export class AppRouter {
                 component: 'combocadastro',
                 resolve: {
                     editar: () => true,
-                    service: 'ClienteService',
+                    service: 'ComboService',
                     entity: async function (service: ComboService, $rootScope) {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
@@ -218,7 +219,7 @@ export class AppRouter {
                 component: 'estoquecadastro',
                 resolve: {
                     editar: () => false,
-                    service: 'ClienteService',
+                    service: 'EstoqueService',
                     entity: async function (service: EstoqueService) {
                         return await service.novo().then( response => response.data);
                     }
@@ -230,7 +231,7 @@ export class AppRouter {
                 component: 'estoquecadastro',
                 resolve: {
                     editar: () => true,
-                    service: 'ClienteService',
+                    service: 'EstoqueService',
                     entity: async function (service: EstoqueService, $rootScope) {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
@@ -251,7 +252,7 @@ export class AppRouter {
                 component: 'lanchecadastro',
                 resolve: {
                     editar: () => false,
-                    service: 'ClienteService',
+                    service: 'LancheService',
                     entity: async function (service: LancheService) {
                         return await service.novo().then( response => response.data);
                     }
@@ -263,7 +264,7 @@ export class AppRouter {
                 component: 'lanchecadastro',
                 resolve: {
                     editar: () => true,
-                    service: 'ClienteService',
+                    service: 'LancheService',
                     entity: async function (service: LancheService, $rootScope) {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
@@ -284,7 +285,7 @@ export class AppRouter {
                 component: 'pedidocadastro',
                 resolve: {
                     editar: () => false,
-                    service: 'ClienteService',
+                    service: 'PedidoService',
                     entity: async function (service: PedidoService) {
                         return await service.novo().then( response => response.data);
                     }
@@ -296,7 +297,7 @@ export class AppRouter {
                 component: 'pedidocadastro',
                 resolve: {
                     editar: () => true,
-                    service: 'ClienteService',
+                    service: 'PedidoService',
                     entity: async function (service: PedidoService, $rootScope) {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
@@ -317,7 +318,7 @@ export class AppRouter {
                 component: 'vendacadastro',
                 resolve: {
                     editar: () => false,
-                    service: 'ClienteService',
+                    service: 'VendaService',
                     entity: async function (service: VendaService) {
                         return await service.novo().then( response => response.data);
                     }
@@ -329,7 +330,7 @@ export class AppRouter {
                 component: 'vendacadastro',
                 resolve: {
                     editar: () => false,
-                    service: 'ClienteService',
+                    service: 'VendaService',
                     entity: async function (service: VendaService, $rootScope) {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);

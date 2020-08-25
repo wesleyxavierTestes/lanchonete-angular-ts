@@ -1,9 +1,12 @@
 {
     "compilerOptions": {
         "allowJs": true,
-        "module": "es6",
-        "target": "es6",
+        "module": "esnext",
+        "target": "es2018",
+        "lib": ["es2018", "dom"],
+        "moduleResolution": "node",
         "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "esModuleInterop": true,
         "sourceMap": true,
         "noImplicitAny": false,

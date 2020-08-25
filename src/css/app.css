@@ -17,7 +17,7 @@ approot > main:nth-child(1).row {
 }
 
 .lanc-tab {
-    padding: 10px;;
+  padding: 10px;
   height: 50vh;
   overflow-x: hidden;
   overflow-y: auto;
@@ -27,11 +27,15 @@ approot > main:nth-child(1).row {
   font-weight: bold;
 }
 
+button > small {
+  color: #000;
+}
+
 small.form-text.text-muted {
   color: rgb(230, 78, 109) !important;
 }
 
-.ng-invalid.ng-invalid-required  {
+.ng-invalid.ng-invalid-required {
   border-color: rgb(230, 78, 109) !important;
 }
 

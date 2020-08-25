@@ -1,75 +1,49 @@
-import sglanchoneteApp from "../../app";
-
-// export class InputRgComponent {
-//     ngModel: any;
-//     entity: any;
-
-//     constructor() {
-        
-//     }
-
-//     $onInit() {
-//       this.entity = this.ngModel;
-//     }
-// }
-// const appRootConfigure = function () {
-//     return {
-//         template: `
-//         <input type="text" class="form-control rg" id="id_rg" ng-required="!!view.erros.rg"
-//             ng-value="$ctrl.entity" aria-describedby="RG do cliente" placeholder="">
-//         `,
-//         controller: InputRgComponent,
-//         bindings: {
-//             ngModel: '='
-//         }
-//     };
-// };
-// sglanchoneteApp.component('inputRg', appRootConfigure());
-
-function listener() {
-    return {
-     link: function(scope, elem, attrs) {
-       elem.bind("change", function(event) {
-          scope.view.viewEvento(event.target.value);
-          // event.preventDefault();
-       });
-     }
-    }
-  }
-  
-  sglanchoneteApp.directive('listener', listener);
-    
-
-import { LitElement, html } from 'lit-element';
-
+import { html, css, LitElement, customElement, property, CSSResult, TemplateResult } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
+@customElement('input-rg')
 class InputRg extends LitElement {
-    static get properties() {
-        return {
-            value: { type: String }
-        };
-   }
-   
-   private value: string;
-   
-   constructor() {
+
+  @property({ type: String }) value: string = null;
+  @property({ type: String, attribute: true }) customclass = {};
+  @property({ type: Boolean, attribute: true }) required: boolean = false;
+
+  constructor() {
     super();
-    this.value = '';
   }
 
-
-  render(){
+  render() {
     return html`
     <div class="form-group">
-        <input type="text" class="form-control rg" id="id_rg" ng-required="!!view.erros.rg"
-            @keyup="${e => this.valueChange(e) }"
+        <input type="text" class="${this.customclass}" 
+            @keyup="${e => this.valueChange(e.target)}" required="${this.required}"
              value="${ this.value }" aria-describedby="RG do cliente" placeholder="digite aqui">
       </div>
     `;
   }
 
-    private valueChange(e: any) {
-        this.value = e.target.value;
-        this.dispatchEvent(new CustomEvent('change', { detail: this.value }));
-    }
+  createRenderRoot() { return this; }
+  formatarRG(v: string) {
+
+    v = v.replace(/\D/g, "").replace(/^[a-z]{0,7}$/, '$1');
+
+    if (v.length > 9)
+      v = v.substring(0, 9);
+
+    if (v.length === 8)
+      v = v.replace(/(\d{1})(\d{3})(\d{3})(\d{1})$/, "$1.$2.$3-$4");
+
+    if (v.length === 9)
+       v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{1})$/, "$1.$2.$3-$4");
+
+    return v.replace('$1', '');
+  }
+
+  private valueChange(e: any) {
+    this.value = e.value = this.formatarRG(e.value);
+    this.value = this.value.replace(/\D/g, "");
+
+    this.dispatchEvent(new CustomEvent('customrgchange', { detail: this.value }));
+  }
 }
-customElements.define('input-rg', InputRg);
+
+

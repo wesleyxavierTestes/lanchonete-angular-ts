@@ -4,7 +4,7 @@
     </menu>
 </header>
 <main class="row">
-    <section class="lanc-menu col-xl-12 col-lg-12 col-md-12 col-sm-2 navbar navbar-expand-lg navbar-light bg-light">
+    <section class="lanc-menu col-xl-12 col-lg-12 col-md-2 col-sm-2 navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav">
             <li ng-repeat="item in list track by $index" class="nav-item {{item.ativo}}">
                 <a class="nav-link" ng-click="viewSetActive(item.nome)" 
@@ -12,7 +12,7 @@
             </li>
         </ul>
     </section>
-    <section ng-show="!loading" class="col-xl-12 col-lg-12 col-md-12 col-sm-10">
+    <section ng-show="!loading" class="col-xl-12 col-lg-12 col-md-10 col-sm-10">
         <div class="container-fluid">
             <div class="alert alert-danger" ng-if="erroMessage">
                 {{ erroMessage }}

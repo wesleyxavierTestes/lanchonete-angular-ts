@@ -2,7 +2,8 @@ import { ClienteService } from './../../../services/cliente/ClienteService';
 import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
 import { MascaraSet } from '../../../utils/Mascaras';
-
+import { CreateCustomUtils } from '../../../utils/CreateCustomUtils';
+ 
 export class ClienteCadastroController extends BaseCadastroController<any, ClienteService> {
 
     static $inject = ['ClienteService', '$rootScope', '$state', '$location'];
@@ -23,6 +24,11 @@ export class ClienteCadastroController extends BaseCadastroController<any, Clien
 
     protected updateComponent() {
         this.configureCpfCnpj();
+        
+        CreateCustomUtils.EventListener('input-rg', 'customrgchange', (event: CustomEvent) => {
+            this.entity.rg = event.detail;
+            this.$rootScope.$apply();
+        });
     }
 
     public configureCpfCnpj() {
@@ -30,11 +36,6 @@ export class ClienteCadastroController extends BaseCadastroController<any, Clien
         MascaraSet.cep();
         MascaraSet.cpf();
         MascaraSet.cnpj();
-    }
-
-    viewEvento(event) {
-        this.rota = event;
-        this.$rootScope.$apply();
     }
 }
 sglanchoneteApp.component('clientecadastro',
@@ -47,3 +48,5 @@ sglanchoneteApp.component('clientecadastro',
         controllerAs: 'view',
         template: require('./cliente.cadastro.html')
     });
+
+

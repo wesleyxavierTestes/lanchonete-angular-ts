@@ -13,22 +13,23 @@
             </div>
         </nav>
         <div class="tab-content lanc-tab" id="nav-tabContent">
-            <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 1 }" id="nav-home" role="tabpanel"
-                aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 1 }" id="nav-home"
+                role="tabpanel" aria-labelledby="nav-home-tab">
                 <!-- TAB DADOS -->
                 <div class="row">
                     <div class="col-2">
                         <div class="form-group">
                             <label for="id">Id</label>
-                            <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id" ng-required="false" ng-value="view.entity.id">
+                            <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id"
+                                ng-required="false" ng-value="view.entity.id">
                         </div>
 
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="id_nome">Nome</label>
-                            <input type="text" class="form-control" id="id_nome" ng-model="view.entity.nome" aria-describedby="textHelp"
-                                placeholder="">
+                            <input type="text" class="form-control" id="id_nome" ng-model="view.entity.nome"
+                                aria-describedby="textHelp" placeholder="">
                             <small id="textHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
@@ -41,14 +42,97 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 2 }" id="nav-profile"
-                role="tabpanel" aria-labelledby="nav-profile-tab">
-                <!-- TAB ITENS -->
-
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="col">
+                            <div class="row">
+                                <h6>Produtos</h6>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="item in view.produtos">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <button ng-disabled="true" type="button" class="btn btn-out-light">
+                                                <small><b>{{item.id}}</b></small>
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <button ng-disabled="true" type="button" class="btn btn-out-light">
+                                                <small>
+                                                    <b>Produto:</b> {{item.nome}}
+                                                </small>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <div class="col">
+                            <div class="row">
+                                <h6>Itens</h6>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="item in view.list">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <button ng-disabled="true" type="button" class="btn btn-out-light">
+                                                <small style="color:#000"><b>{{item.id}}</b></small>
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <small>
+                                                    <b>Produto:</b> {{item.produtoNome}}
+                                                </small>
+                                            </div>
+                                            <div class="row">
+                                                <small>
+                                                    <b>Quantidade:</b> {{item.quantidade}}
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <acoes rota="view.nome"
+                                                config="{ ativo: item.ativo, usarAtivacao: true, alterarAtivo: true, excluirAtivo: true }"
+                                                out-alterar="view.viewAlterar(item.id)"
+                                                out-excluir="view.viewExcluir(item.id)">
+                                            </acoes>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div ng-if="!!view.produtos" class="lanc-list-pagination">
+                            <paginacao config="view.paginacaoConfig" out-change="view.viewPaginacaoChange($event)">
+                            </paginacao>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">{{ view.editar ? 'Atualizar' : 'Salvar'}}</button>
     </form>
 </div>
+
+<style scoped>
+    ul.list-group {
+        height: 100px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        border: 1px solid rgba(0, 0, 0, .125);
+    }
+    ul.list-group > li.list-group-item {
+        padding: 0;
+    }
+</style>

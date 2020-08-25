@@ -1,17 +1,17 @@
-<div class="col-12">
+<div ng-show="show" ng-class="{ 'show' : show, 'hide' : show }">
     <div class="row justify-content-end">
         <div ng-if="config.usarAtivacao && !config.ativo" class="col-3">
             <button alt="Ativo" type="button" ng-click="viewAtivo()" class="btn btn-success">
                 <i class="fas fa-eye"></i>
-            </button> 
+            </button>
         </div>
         <div ng-if="config.usarAtivacao && config.ativo" class="col-3">
             <button alt="Desativo" type="button" ng-click="viewDesativo()" class="btn btn-info">
                 <i class="fas fa-eye-slash"></i>
-            </button> 
+            </button>
         </div>
         <div ng-if="config.alterarAtivo" class="col-3">
-            <a href="#!{{rota | lowercase }}/edicao">
+            <a href="#!{{ rota | lowercase }}/edicao">
                 <button alt="Alterar" type="button" ng-click="viewAlterar()" class="btn btn-primary">
                     <i class="fas fa-edit"></i>
                 </button>
@@ -24,3 +24,21 @@
         </div>
     </div>
 </div>
+
+<button type="button" ng-click="viewShow()" class="btn btn-out-primary">
+    ...
+</button>
+
+<style scoped>
+    acoes>div.hide {
+        position: absolute;
+        z-index: 999;
+        margin: 0 0 0 0;
+        transition: margin 0.3s ease-in;
+    }
+    acoes>div.show {
+        position: absolute;
+        z-index: 999;
+        margin: 0 0 0 -250px;
+    }
+</style>

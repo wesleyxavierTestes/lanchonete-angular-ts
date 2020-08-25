@@ -5,7 +5,7 @@ import { BaseListController } from '../../BaseListController';
 export class ProdutoListController extends BaseListController<any, ProdutoService> {
     static $inject = ['ProdutoService', '$rootScope'];
 
-    constructor(protected podutoService, protected $rootScope) {
+    constructor(protected podutoService: ProdutoService, protected $rootScope) {
         super(podutoService, $rootScope);
         this.nome = 'Produto';
     }

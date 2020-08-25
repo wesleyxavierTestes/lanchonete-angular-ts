@@ -2,6 +2,8 @@ import sglanchoneteApp from "../../app";
 
 class Acoes {
     constructor($scope: any) {
+        $scope.show = false;
+        
         if (!$scope.config) 
             $scope.config = { };
 
@@ -9,6 +11,10 @@ class Acoes {
         $scope.config.usarAtivacao = $scope.config.usarAtivacao == undefined ? false : $scope.config.usarAtivacao;
         $scope.config.alterarAtivo = $scope.config.alterarAtivo == undefined ? true : $scope.config.alterarAtivo;
         $scope.config.excluirAtivo = $scope.config.excluirAtivo == undefined ? true : $scope.config.excluirAtivo;
+
+        $scope.viewShow = () => {
+            $scope.show = !$scope.show;
+        }
 
         $scope.viewAtivo = () => {
             $scope.outAticao({ $event: true });

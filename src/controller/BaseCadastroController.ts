@@ -7,11 +7,15 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
   public viewIndexTab: number = 1;
   protected editar = false;
   public erros = {};
-  constructor(protected service: Y, protected $scope, protected $state, protected $location) {
-    $scope.$watch('form', function (v) {
+  constructor(protected service: Y, protected $rootScope, protected $state, protected $location) {
+    $rootScope.$watch('form', function (v) {
       if (!v) { return }
       this.updateView();
     })
+  }
+
+  public updateView() {
+    this.$rootScope.$apply();
   }
 
   protected abstract updateComponent();
@@ -20,7 +24,7 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
     setTimeout(() => {
       this.updateComponent();
       this.erros = null;
-      this.$scope.$emit('erros', null);
+      this.$rootScope.$emit('erros', null);
     }, 25);
   }
 
@@ -45,16 +49,16 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
 
   private errorMessage(errorResponse: any): any {
     this.erros = {};
-    this.$scope.$emit('erroMessage', null);
+    this.$rootScope.$emit('erroMessage', null);
     if (errorResponse.data && Array.isArray(errorResponse.data)) {
       for (let erro of (<{ property: string; message: string }[]>errorResponse.data)) {
         this.erros[erro.property] = erro.message;
       }
-      this.$scope.$emit('erros', this.erros);
+      this.$rootScope.$emit('erros', this.erros);
     } else if (errorResponse.data && !Array.isArray(errorResponse.data)) {
-      this.$scope.$emit('erroMessage', errorResponse.data);
+      this.$rootScope.$emit('erroMessage', errorResponse.data);
     } else {
-      this.$scope.$emit('erroMessage', errorResponse.message);
+      this.$rootScope.$emit('erroMessage', errorResponse.message);
     }
     this.updateLoading(false);
   }
@@ -73,15 +77,15 @@ export abstract class BaseCadastroController<T, Y extends BaseService> {
   saveTry(resultado) {
     if (resultado.status == 200) {
       this.erros = null;
-      this.$scope.$emit('identificacao', resultado.data.id);
-      this.$scope.$emit('erros', { succes: true });
-      this.$scope.$emit('erroMessage', null);
+      this.$rootScope.$emit('identificacao', resultado.data.id);
+      this.$rootScope.$emit('erros', { succes: true });
+      this.$rootScope.$emit('erroMessage', null);
       this.$location.path(this.$location.path().replace("cadastro", "editacao"));
     }
     this.updateLoading(false);
   }
 
   protected updateLoading(loading: boolean) {
-    this.$scope.$emit('loading', loading);
+    this.$rootScope.$emit('loading', loading);
   }
 }

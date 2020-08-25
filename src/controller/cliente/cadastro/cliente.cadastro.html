@@ -11,9 +11,7 @@
                     data-toggle="tab" ng-click="view.viewSetTab(2)" role="tab" aria-controls="nav-profile"
                     aria-selected="false">Endereço</a>
             </div>
-        </nav>
-        {{ view.rota }}
-        <input-rg value="{{ view.rota }}" listener></input-rg>
+        </nav>        
         <div class="tab-content lanc-tab" id="nav-tabContent">
             <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 1 }" id="nav-home"
                 role="tabpanel" aria-labelledby="nav-home-tab">
@@ -51,17 +49,19 @@
                             <select type="text" class="form-control" id="id_tipoPessoa"
                                 ng-options="item.value as item.key for item in view.tiposPessoa track by item.value"
                                 ng-required="false" ng-value="view.entity.tipoPessoa" ng-model="view.entity.tipoPessoa"
-                                ng-change="view.updateViewBase()">
+                                ng-change="view.updateViewBase();view.updateComponent()">
                                 <option selected>Selecione</option>
                             </select>
                         </div>
                     </div>
 
                     <div ng-if="view.isPessoaFisica" class="col">
+                        
                         <div class="form-group">
                             <label for="id_rg">RG</label>
-                            <input type="text" class="form-control rg" id="id_rg" ng-required="!!view.erros.rg"
-                                ng-model="view.entity.rg" aria-describedby="RG do cliente" placeholder="">
+                            <input-rg value="{{ view.entity.rg }}" 
+                            customclass="{{ !view.erros.rg ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
+                            required="{{ !!view.erros.rg }}" ng-model="view.entity.rg" onchange></input-rg>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.rg}}</small>
                         </div>
                     </div>
