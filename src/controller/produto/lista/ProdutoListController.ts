@@ -1,8 +1,9 @@
 import { ProdutoService } from './../../../services/produto/ProdutoService';
 import sglanchoneteApp from "../../../app";
 import { BaseListController } from '../../BaseListController';
+import { ProdutoModel } from '../../../models/produto/ProdutoModel';
 
-export class ProdutoListController extends BaseListController<any, ProdutoService> {
+export class ProdutoListController extends BaseListController<ProdutoModel, ProdutoService> {
     static $inject = ['ProdutoService', '$rootScope'];
 
     constructor(protected podutoService: ProdutoService, protected $rootScope) {

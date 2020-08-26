@@ -1,8 +1,9 @@
 import { ComboService } from './../../../services/combo/ComboService';
 import sglanchoneteApp from "../../../app";
 import { BaseListController } from '../../BaseListController';
+import { ComboModel } from '../../../models/combo/ComboModel';
 
-export class ComboListController extends BaseListController<any, ComboService> {
+export class ComboListController extends BaseListController<ComboModel, ComboService> {
     static $inject = ['ComboService', '$rootScope'];
 
     constructor(protected comboService, protected $rootScope) {
