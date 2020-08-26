@@ -1,41 +1,20 @@
+import { PedidoItemModel } from './PedidoItemModel';
+import { ClienteModel } from '../cliente/ClienteModel';
+import { EnumEstadoPedido } from '../../enuns/pedido/EnumEstadoPedido';
 
 export class PedidoModel  {
 
-    public long id;
-    public boolean ativo;
-    
-    public String dataCadastro;
-
-    
-    public String codigo;
-
-    
-    
-    
-    public BigDecimal valor;
-
-    
-    
-    
-    public BigDecimal valorDesconto;
-
-    
-    
-    
-    public BigDecimal valorTotal;
-    
-    
-    public boolean cancelado;
-
-    
-    public String dataCancelado;
-
-    
-    public EnumEstadoPedido estado;
-
-    
-    public ClienteGenericModel cliente;
-
-    
-    public List<PedidoItemModel> pedidoitens;
-}
+    id: number;
+    ativo: boolean;
+    dataCadastro: Date;
+    codigo: string;
+    valor: number;
+    valorDesconto: number;
+    valorTotal: number;
+    cancelado: boolean;
+    dataCancelado?: Date;
+    estado: EnumEstadoPedido;
+    cliente: ClienteModel;
+    pedidoitens: PedidoItemModel[];
+  }
+  

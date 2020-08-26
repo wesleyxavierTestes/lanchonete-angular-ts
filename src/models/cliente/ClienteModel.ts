@@ -5,7 +5,7 @@ export class ClienteModel  {
     ativo: boolean;
     nome: string;
     cpf: string;
-    cnjp?: any;
+    cnpj?: any;
     email?: any;
     rg?: any;
     tipoPessoa: string;

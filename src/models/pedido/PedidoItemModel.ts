@@ -1,16 +1,11 @@
+import { EnumTipoProduto } from '../../enuns/produto/EnumTipoProduto';
 
 export class PedidoItemModel  {
 
-    public long id;
-    public boolean ativo;
+    id: number;
+    ativo: boolean;
+    nome: string;
+    codigo: string;
+    tipoProduto: EnumTipoProduto;
     
-    
-    
-    public String nome;
-
-    
-    public String codigo;
-    
-    
-    public EnumTipoProduto tipoProduto;
 }

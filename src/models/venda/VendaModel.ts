@@ -1,24 +1,12 @@
+import { PedidoModel } from '../pedido/PedidoModel';
 
 export class VendaModel {
 
-    public long id;   
-    public boolean ativo;
-    
-    
-    
-    
-    public BigDecimal valorDesconto;
-
-    
-    
-    
-    public BigDecimal valor;
-
-    
-    
-    
-    public BigDecimal valorTotal;
-
-    
-    public List<VendaItemModel> vendaItens;
+    id: number;
+    ativo: boolean;
+    valorDesconto?: number;
+    valor?: number;
+    valorTotal?: number;
+    pedido?: PedidoModel;
 }
+
