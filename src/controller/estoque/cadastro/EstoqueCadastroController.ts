@@ -1,8 +1,9 @@
 import { EstoqueService } from './../../../services/estoque/EstoqueService';
 import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
+import { EstoqueModel } from '../../../models/estoque/EstoqueModel';
 
-export class EstoqueCadastroController extends BaseCadastroController<any, EstoqueService> {
+export class EstoqueCadastroController extends BaseCadastroController<EstoqueModel, EstoqueService> {
     static $inject = ['EstoqueService', '$rootScope', '$state', '$location'];
 
     constructor(protected estoqueService: EstoqueService, protected $rootScope, protected state, protected $location) {

@@ -4,8 +4,9 @@ import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
 import { MascaraSet } from '../../../utils/Mascaras';
 import * as _ from 'lodash';
+import { ProdutoModel } from '../../../models/produto/ProdutoModel';
 
-export class ProdutoCadastroController extends BaseCadastroController<any, ProdutoService> {
+export class ProdutoCadastroController extends BaseCadastroController<ProdutoModel, ProdutoService> {
     static $inject = ['ProdutoService', '$rootScope', '$state', '$location', 'CategoriaService'];
 
     public tiposProduto = [

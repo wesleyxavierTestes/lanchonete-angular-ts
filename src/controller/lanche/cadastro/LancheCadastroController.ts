@@ -3,8 +3,9 @@ import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
 import { IpaginateConfigure, Paginacao } from '../../../components/paginacao/paginacao';
 import { ProdutoService } from '../../../services/produto/ProdutoService';
+import { LancheModel } from '../../../models/lanche/LancheModel';
 
-export class LancheCadastroController extends BaseCadastroController<any, LancheService> {
+export class LancheCadastroController extends BaseCadastroController<LancheModel, LancheService> {
     static $inject = ['LancheService', '$rootScope', '$state', '$location', 'ProdutoService'];
     public produtos: any[];
 

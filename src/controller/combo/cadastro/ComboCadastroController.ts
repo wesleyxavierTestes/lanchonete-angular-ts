@@ -1,8 +1,9 @@
 import { ComboService } from './../../../services/combo/ComboService';
 import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
+import { ComboModel } from '../../../models/combo/ComboModel';
 
-export class ComboCadastroController extends BaseCadastroController<any, ComboService> {
+export class ComboCadastroController extends BaseCadastroController<ComboModel, ComboService> {
     static $inject = ['ComboService', '$rootScope', '$state', '$location'];
 
     constructor(protected comboService: ComboService, protected $rootScope, protected state, protected $location) {

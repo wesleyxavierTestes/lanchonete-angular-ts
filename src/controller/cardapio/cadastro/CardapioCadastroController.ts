@@ -1,8 +1,9 @@
 import { CardapioService } from './../../../services/cardapio/CardapioService';
 import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
+import { CardapioModel } from '../../../models/cardapio/CardapioModel';
 
-export class CardapioCadastroController extends BaseCadastroController<any, CardapioService> {
+export class CardapioCadastroController extends BaseCadastroController<CardapioModel, CardapioService> {
 
     static $inject = ['CardapioService', '$rootScope', '$state', '$location'];
 

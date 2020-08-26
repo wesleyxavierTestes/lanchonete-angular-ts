@@ -1,8 +1,9 @@
 import { VendaService } from './../../../services/venda/VendaService';
 import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
+import { VendaModel } from '../../../models/venda/VendaModel';
 
-export class VendaCadastroController extends BaseCadastroController<any, VendaService> {
+export class VendaCadastroController extends BaseCadastroController<VendaModel, VendaService> {
     static $inject = ['VendaService', '$rootScope', '$state', '$location'];
 
     constructor(protected vendaService: VendaService, protected $rootScope, protected state, protected $location) {

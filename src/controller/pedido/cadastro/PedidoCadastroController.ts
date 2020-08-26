@@ -1,8 +1,9 @@
 import { PedidoService } from './../../../services/pedido/PedidoService';
 import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
+import { PedidoModel } from '../../../models/pedido/PedidoModel';
 
-export class PedidoCadastroController extends BaseCadastroController<any, PedidoService> {
+export class PedidoCadastroController extends BaseCadastroController<PedidoModel, PedidoService> {
     static $inject = ['PedidoService', '$rootScope', '$state', '$location'];
 
     constructor(protected pedidoService: PedidoService, protected $rootScope, protected state, protected $location) {

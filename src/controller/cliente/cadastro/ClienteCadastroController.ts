@@ -3,8 +3,9 @@ import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
 import { MascaraSet } from '../../../utils/Mascaras';
 import { CreateCustomUtils } from '../../../utils/CreateCustomUtils';
+import { ClienteModel } from '../../../models/cliente/ClienteModel';
  
-export class ClienteCadastroController extends BaseCadastroController<any, ClienteService> {
+export class ClienteCadastroController extends BaseCadastroController<ClienteModel, ClienteService> {
 
     static $inject = ['ClienteService', '$rootScope', '$state', '$location'];
 
