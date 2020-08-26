@@ -1,5 +1,5 @@
-export class EnderecoModel  {
-    
+export class EnderecoModel {
+
     id: number;
     cep: string;
     numero: string;

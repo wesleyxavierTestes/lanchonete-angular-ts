@@ -4,6 +4,7 @@ import { BaseCadastroController } from '../../BaseCadastroController';
 import { MascaraSet } from '../../../utils/Mascaras';
 import { CreateCustomUtils } from '../../../utils/CreateCustomUtils';
 import { ClienteModel } from '../../../models/cliente/ClienteModel';
+import { EnderecoModel } from '../../../models/cliente/EnderecoModel';
  
 export class ClienteCadastroController extends BaseCadastroController<ClienteModel, ClienteService> {
 
@@ -11,6 +12,8 @@ export class ClienteCadastroController extends BaseCadastroController<ClienteMod
 
     rota = 'Cliente';
     public tiposPessoa = [{ key: 'Pessoa Física', value: 'Fisica' }, { key: 'Pessoa Jurídica', value: 'Juridica' }];
+    enderecoB: EnderecoModel;
+    enderecoA: EnderecoModel;
 
     constructor(protected clienteService: ClienteService,
         protected $rootScope, protected state, protected $location) {
@@ -28,6 +31,18 @@ export class ClienteCadastroController extends BaseCadastroController<ClienteMod
         
         CreateCustomUtils.EventListener('input-rg', 'customrgchange', (event: CustomEvent) => {
             this.entity.rg = event.detail;
+            this.$rootScope.$apply();
+        });
+
+        CreateCustomUtils.EventListener('input-cep', 'customcepchange', (event: CustomEvent) => {
+            if (!this.entity.endereco) this.entity.endereco = new EnderecoModel();
+            this.entity.endereco.cep = event.detail;
+            this.$rootScope.$apply();
+        });
+
+        CreateCustomUtils.EventListener('input-cep', 'customenderecocep', (event: CustomEvent) => {
+            alert(JSON.stringify(event.detail));
+            this.entity.endereco = event.detail;
             this.$rootScope.$apply();
         });
     }

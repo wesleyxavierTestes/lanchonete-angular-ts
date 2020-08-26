@@ -29,6 +29,7 @@ export const appRootConfigure = function ($state) {
 
             $scope.$on('loading', function(event: any, data: any) {
                 $scope.loading = data;
+                $scope.erros = {};
             });
 
             $scope.$on('erroMessage', function(event: any, data: any) {

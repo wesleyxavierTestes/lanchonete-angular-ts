@@ -80,7 +80,8 @@ export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
       this.$rootScope.$emit('identificacao', resultado.data.id);
       this.$rootScope.$emit('erros', { succes: true });
       this.$rootScope.$emit('erroMessage', null);
-      this.$location.path(this.$location.path().replace("cadastro", "editacao"));
+
+      this.$location.path(this.$location.path().replace("cadastro", "edicao"));
     }
     this.updateLoading(false);
   }
