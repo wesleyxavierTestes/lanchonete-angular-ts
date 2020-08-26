@@ -19,7 +19,7 @@ export abstract class BaseService<T> {
         };
     }
 
-    findAll(page: number): Promise<{ data: T }> {
+    findAll(page: number): Promise<{ data: { content: T[] } }> {
         return this.$http.get(rotaFindAll(this.routeName, page), this.CONFIG);
     }
 
@@ -43,7 +43,7 @@ export abstract class BaseService<T> {
         return this.$http.get(rotaNovo(this.routeName), this.CONFIG);
     }
 
-    findAllFilter(page: number, objeto: object): Promise<{ data: T }> {
+    findAllFilter(page: number, objeto: object): Promise<{ data: { content: T[] } }> {
         return this.$http.post(rotaFindAllFilter(this.routeName, page), JSON.stringify(objeto));
     }
 

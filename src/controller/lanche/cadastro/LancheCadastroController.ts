@@ -4,10 +4,11 @@ import { BaseCadastroController } from '../../BaseCadastroController';
 import { IpaginateConfigure, Paginacao } from '../../../components/paginacao/paginacao';
 import { ProdutoService } from '../../../services/produto/ProdutoService';
 import { LancheModel } from '../../../models/lanche/LancheModel';
+import { ProdutoModel } from '../../../models/produto/ProdutoModel';
 
 export class LancheCadastroController extends BaseCadastroController<LancheModel, LancheService> {
     static $inject = ['LancheService', '$rootScope', '$state', '$location', 'ProdutoService'];
-    public produtos: any[];
+    public produtos: ProdutoModel[];
 
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
 

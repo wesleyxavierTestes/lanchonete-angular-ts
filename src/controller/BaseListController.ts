@@ -1,7 +1,7 @@
 import { IpaginateConfigure, Paginacao } from '../components/paginacao/paginacao';
 import { BaseService } from '../services/BaseService';
 
-export abstract class BaseListController<T, Y extends BaseService> {
+export abstract class BaseListController<T, Y extends BaseService<T>> {
 
     public usarAtivar = true;
     public pesquisaModel = '';

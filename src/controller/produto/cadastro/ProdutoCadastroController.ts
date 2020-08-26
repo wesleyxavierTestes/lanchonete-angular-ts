@@ -5,6 +5,7 @@ import { BaseCadastroController } from '../../BaseCadastroController';
 import { MascaraSet } from '../../../utils/Mascaras';
 import * as _ from 'lodash';
 import { ProdutoModel } from '../../../models/produto/ProdutoModel';
+import { CategoriaModel } from '../../../models/categoria/CategoriaModel';
 
 export class ProdutoCadastroController extends BaseCadastroController<ProdutoModel, ProdutoService> {
     static $inject = ['ProdutoService', '$rootScope', '$state', '$location', 'CategoriaService'];
@@ -17,7 +18,7 @@ export class ProdutoCadastroController extends BaseCadastroController<ProdutoMod
         { key: 'Combo', value: 'Combo' },
         { key: 'Outros', value: 'Outros' }
     ]
-    public Categorias: any[];
+    public Categorias: CategoriaModel[];
 
     constructor(protected podutoService: ProdutoService, protected $rootScope, protected state, protected $location, protected categoriaService: CategoriaService) {
         super(podutoService, $rootScope, state, $location);
