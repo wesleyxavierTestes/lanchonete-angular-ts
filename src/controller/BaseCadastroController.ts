@@ -1,6 +1,6 @@
 import { BaseService } from "../services/BaseService";
 
-export abstract class BaseCadastroController<T, Y extends BaseService> {
+export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
 
   public nome: string;
   public entity: T;
