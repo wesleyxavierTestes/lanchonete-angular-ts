@@ -6,7 +6,9 @@ export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
   public entity: T;
   public viewIndexTab: number = 1;
   protected editar = false;
+  protected navegaEditar = true;
   public erros = {};
+
   constructor(protected service: Y, protected $rootScope, protected $state, protected $location) {
     $rootScope.$watch('form', function (v) {
       if (!v) { return }
@@ -40,14 +42,14 @@ export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
     this.editar ? this.viewEditar() : this.viewSalvar();
   }
 
-  public viewSalvar() {
+  public viewSalvar(tipo?: string) {
     this.updateLoading(true);
-    this.service.save(this.entity)
+    this.service.save(this.entity, tipo)
       .then((resultado: any) => this.saveTry(resultado))
       .catch(error => this.errorMessage(error));
   }
 
-  private errorMessage(errorResponse: any): any {
+  protected errorMessage(errorResponse: any): any {
     this.erros = {};
     this.$rootScope.$emit('erroMessage', null);
     if (errorResponse.data && Array.isArray(errorResponse.data)) {
@@ -63,9 +65,9 @@ export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
     this.updateLoading(false);
   }
 
-  public viewEditar() {
+  public viewEditar(tipo?: string) {
     this.updateLoading(true);
-    this.service.update(this.entity)
+    this.service.update(this.entity, tipo)
       .then((resultado: any) => this.saveTry(resultado))
       .catch(error => this.errorMessage(error));
   }
@@ -77,11 +79,15 @@ export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
   saveTry(resultado) {
     if (resultado.status == 200) {
       this.erros = null;
+
       this.$rootScope.$emit('identificacao', resultado.data.id);
       this.$rootScope.$emit('erros', { succes: true });
       this.$rootScope.$emit('erroMessage', null);
 
-      const roraEdicao = this.$state.$current.name.replace("cadastro", "edicao");
+      const roraEdicao = (this.navegaEditar)
+        ? this.$state.$current.name.replace("cadastro", "edicao")
+        : this.$state.$current.name.replace("cadastro", "list");
+        
       this.$state.go(roraEdicao);
     }
     this.updateLoading(false);

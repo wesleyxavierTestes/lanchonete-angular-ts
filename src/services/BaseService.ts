@@ -6,15 +6,18 @@ import {
     rotaNovo, 
     rotaFindAllFilter, 
     rotaSave, 
-    rotaUpdate } from "../utils/HttpConfig";
+    rotaUpdate, 
+    rotaSaveTipo,
+    rotaUpdateTipo} from "../utils/HttpConfig";
 
 export abstract class BaseService<T> {
     static $inject = ['$http'];
-    CONFIG: { headers: { "content-type": string; }; };
+    CONFIG: { headers: {}; };
     constructor(protected $http, protected routeName: string) {
         this.CONFIG = {
-            headers: {
-                "content-type": "application/json"
+            headers:    {             
+                "content-type": "application/json",
+                "access-control-allow-origin": "*",
             }
         };
     }
@@ -44,15 +47,15 @@ export abstract class BaseService<T> {
     }
 
     findAllFilter(page: number, objeto: object): Promise<{ data: { content: T[] } }> {
-        return this.$http.post(rotaFindAllFilter(this.routeName, page), JSON.stringify(objeto));
+        return this.$http.post(rotaFindAllFilter(this.routeName, page), JSON.stringify(objeto), this.CONFIG);
     }
 
-    save(entity: T): Promise<{ data: T }> {
-        return this.$http.post(rotaSave(this.routeName), JSON.stringify(entity));
+    save(entity: T, tipo?: string): Promise<{ data: T }> {
+        return this.$http.post(rotaSaveTipo(this.routeName, tipo), JSON.stringify(entity), this.CONFIG);
     }
 
-    update(entity: T): Promise<{ data: T }> {
-        return this.$http.put(rotaUpdate(this.routeName), JSON.stringify(entity));
+    update(entity: T, tipo?: string): Promise<{ data: T }> {
+        return this.$http.put(rotaUpdateTipo(this.routeName, tipo), JSON.stringify(entity), this.CONFIG);
     }
 
 }

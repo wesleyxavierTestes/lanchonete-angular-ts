@@ -1,6 +1,6 @@
 
 const rotaBase = (() => {
-    const ehSg = false;
+    const ehSg = true;
 
     const ip = ehSg ? "192.168.1.31" : "192.168.1.11";
     const port = ehSg ? "8080" : "7071";
@@ -43,4 +43,14 @@ export function rotaSave(rota: string) {
 
 export function rotaUpdate(rota: string) {
     return rotaBase + '/' + rota + '/update';
+}
+
+export function rotaSaveTipo(rota: string, tipo?:string) {
+    if (!tipo) tipo = "";
+    return rotaBase + '/' + rota + '/save/'+tipo;
+}
+
+export function rotaUpdateTipo(rota: string, tipo?:string) {
+    if (!tipo) tipo = "";
+    return rotaBase + '/' + rota + '/update/'+tipo;
 }

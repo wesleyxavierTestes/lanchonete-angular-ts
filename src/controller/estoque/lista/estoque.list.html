@@ -35,9 +35,16 @@
                                 </small>
                             </div>
                             <div class="row">
+                               <div class="col-6">
                                 <small>
                                     <b>Quantidade:</b> {{item.quantidade}}
                                 </small>
+                               </div>
+                               <div class="col-6">
+                                <small>
+                                    <b>Data:</b> {{item.dataCadastro | customdate }}
+                                </small>
+                               </div>
                             </div>
                         </div>
                         <div class="col-1">

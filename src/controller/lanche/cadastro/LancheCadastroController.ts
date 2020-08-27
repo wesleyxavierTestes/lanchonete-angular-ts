@@ -37,6 +37,12 @@ export class LancheCadastroController extends BaseCadastroController<LancheModel
             .catch(error => this.$rootScope.$emit('loading', false));
     }
 
+    public viewRemoverItem(id: number) {
+        if (this.entity.ingredientesLanche && Array.isArray(this.entity.ingredientesLanche)) {
+            this.entity.ingredientesLanche = this.entity.ingredientesLanche.filter(item => item.id !== id);
+        }
+    }
+
     protected findAllTry(resultado: {
         data: {
             content: Array<any>;
@@ -53,6 +59,8 @@ export class LancheCadastroController extends BaseCadastroController<LancheModel
         if (!this.entity.ingredientesLanche) this.entity.ingredientesLanche = [];
         const produto = this.produtos[index] as any;
         this.entity.ingredientesLanche.push((<IngredienteModel>produto));
+        this.entity.valor =
+            this.entity.ingredientesLanche.reduce((valor, update) => update.valor + valor, 0).toString();
     }
 
     public contarQuantidade(id) {
@@ -62,7 +70,7 @@ export class LancheCadastroController extends BaseCadastroController<LancheModel
     public ingredientesLancheFilter() {
         return this.entity.ingredientesLanche.filter((value, index, self) => self.indexOf(value) === index);
     }
- }
+}
 sglanchoneteApp.component('lanchecadastro',
     {
         controller: LancheCadastroController,

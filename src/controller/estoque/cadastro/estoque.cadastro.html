@@ -26,44 +26,29 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="id_produto">Produto</label>
-                            <div class="input-group">
-                                <input ng-if="view.pesquisarProdutoAtivo"
-                                ng-required="view.erros.produto" type="text" class="form-control"
-                                placeholder="Nome Produto..." ng-keydown="$event.keyCode === 13 && view.viewPesquisarProduto()"
-                                ng-model="view.produtoNome">
-                                <select ng-if="!view.pesquisarProdutoAtivo" type="text" class="form-control"
-                                ng-disabled="!view.produtos"
-                                    ng-options="item.nome for item in view.produtos track by item.id"
-                                    ng-required="view.erros.produto" ng-model="view.entity.produto"
-                                    ng-change="view.updateViewBase()">
-                                    <option selected>Selecione</option>
-                                </select>
-                                <div ng-if="!view.pesquisarProdutoAtivo" class="input-group-append">
-                                    <button type="button" ng-click="view.pesquisarProdutoAtivo = !view.pesquisarProdutoAtivo; view.produtoNome=''" style="border: none;" class="input-group-text"><i
-                                            class="fa fa-search"></i></button>
-                                </div>
-                                <div ng-if="view.pesquisarProdutoAtivo" class="input-group-append">
-                                    <button type="button" ng-click="view.viewPesquisarProduto()"  ng-maxlength="100" style="border: none;" class="input-group-text"><i
-                                            class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                            <small ng-if="view.erros.produto" id="textHelp" class="form-text text-muted">{{view.erros.produto}}</small>
-                            <small ng-if="!view.erros.produto && view.produtoPage.numberOfElements">{{view.produtoPage.numberOfElements}} 
+                            <select-pesquisa value="view.entity.produto.nome" list="view.produtos"
+                                required="view.erros.produto" set-item="view.viewSetProduto($event)"
+                                pesquisar-item="view.viewPesquisarProduto($event)"></select-pesquisa>
+                            <small ng-if="view.erros.produto" id="textHelp"
+                                class="form-text text-muted">{{view.erros.produto}}</small>
+                            <small
+                                ng-if="!view.erros.produto && view.produtoPage.numberOfElements">{{view.produtoPage.numberOfElements}}
                                 de {{view.produtoPage.totalElements}} - Paginas {{view.produtoPage.totalPages}}</small>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-2">
                         <div class="form-group">
                             <label for="exampleInputQuantidade1">Quantidade</label>
-                            <input type="number" class="form-control" id="exampleInputQuantidade1"
+                            <input type="number" class="form-control" id="exampleInputQuantidade1" minlength="1"
+                                ng-required="!!view.erros.quantidade" ng-model="view.entity.quantidade"
                                 aria-describedby="quantidadeHelp" placeholder="">
-                            <small id="quantidadeHelp" class="form-text text-muted"></small>
+                            <small id="quantidadeHelp" class="form-text text-muted">{{view.erros.quantidade}}</small>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">{{ view.editar ? 'Atualizar' : 'Salvar'}}</button>
+        <button-salvar editar="view.editar"></button-salvar>
     </form>
 </div>
