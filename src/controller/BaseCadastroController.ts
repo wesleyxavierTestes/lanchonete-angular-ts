@@ -81,7 +81,8 @@ export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
       this.$rootScope.$emit('erros', { succes: true });
       this.$rootScope.$emit('erroMessage', null);
 
-      this.$location.path(this.$location.path().replace("cadastro", "edicao"));
+      const roraEdicao = this.$state.$current.name.replace("cadastro", "edicao");
+      this.$state.go(roraEdicao);
     }
     this.updateLoading(false);
   }

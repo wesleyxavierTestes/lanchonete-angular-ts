@@ -1,7 +1,30 @@
 import sglanchoneteApp from "../../app";
+import { IScope } from 'angular';
+
+interface IAcoes extends IScope {
+    outAticao: (event: { $event: boolean })=> void;
+    outAlterar: ()=> void;
+    outExcluir: ()=> void;
+    show: boolean;
+    rota: string;
+    config: {
+        ativo?: boolean,
+        usarAtivacao?: boolean,
+        alterarAtivo?: boolean,
+        excluirAtivo?: boolean
+    };
+
+    viewNavigate:() => void;
+
+    viewShow: () => void;
+    viewAtivo: () => void;
+    viewDesativo: () => void;
+    viewAlterar: () => void;
+    viewExcluir: () => void;
+}
 
 class Acoes {
-    constructor($scope: any) {
+    constructor($scope: IAcoes, $state) {
         $scope.show = false;
         
         if (!$scope.config) 
@@ -11,6 +34,10 @@ class Acoes {
         $scope.config.usarAtivacao = $scope.config.usarAtivacao == undefined ? false : $scope.config.usarAtivacao;
         $scope.config.alterarAtivo = $scope.config.alterarAtivo == undefined ? true : $scope.config.alterarAtivo;
         $scope.config.excluirAtivo = $scope.config.excluirAtivo == undefined ? true : $scope.config.excluirAtivo;
+        
+        $scope.viewNavigate = () => {
+            $state.go($scope.rota.toLowerCase() + 'edicao');
+        }
 
         $scope.viewShow = () => {
             $scope.show = !$scope.show;
@@ -33,7 +60,7 @@ class Acoes {
         }
     }
 }
-export const appRootConfigure = function () {
+const appRootConfigure = function () {
     return {
         template: require('./../../components/acoes/acoes.html'),
         controller: Acoes,

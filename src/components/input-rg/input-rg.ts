@@ -16,7 +16,7 @@ class InputRg extends LitElement {
     <div class="form-group">
         <input type="text" class="${this.customclass}" 
             @keyup="${e => this.valueChange(e.target)}" required="${this.required}"
-             value="${ this.value }" aria-describedby="RG do cliente" placeholder="digite aqui">
+             value="${ this.formatarRG(this.value) }" aria-describedby="RG do cliente" placeholder="digite aqui">
       </div>
     `;
   }

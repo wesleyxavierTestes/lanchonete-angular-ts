@@ -5,6 +5,6 @@ export class ComboListModel {
     nome: string;
     valor: string;
     valorTotal: string;
-    lancheNome: string;
-    bebidaNome: string;
+    lanches: string[];
+    bebidas: string[];
 }

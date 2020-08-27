@@ -11,6 +11,18 @@ export class VendaCadastroController extends BaseCadastroController<VendaModel, 
         this.nome = 'Venda';
     }
     protected updateComponent() { }
+
+    viewUpdateValor(event: string) {
+        this.entity.valor = event;
+    }
+
+    viewUpdateValorDesconto(event: string) {
+        this.entity.valorDesconto = event;
+    }
+
+    viewUpdateValorTotal(event: string) {
+        this.entity.valorTotal = event;
+    }
 }
 sglanchoneteApp.component('vendacadastro',
     {

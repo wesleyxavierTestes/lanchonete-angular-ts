@@ -2,7 +2,7 @@
 const rotaBase = (() => {
     const ehSg = false;
 
-    const ip = ehSg ? "192.168.1.31" : "192.168.1.12";
+    const ip = ehSg ? "192.168.1.31" : "192.168.1.11";
     const port = ehSg ? "8080" : "7071";
 
     return `http://${ip}:${port}/api`;
@@ -11,6 +11,11 @@ const rotaBase = (() => {
 export function rotaFindAll(rota: string, page: number) {
     return rotaBase + '/' + rota + '/list?page=' + page;
 }
+
+export function rotaFindAllNome(rota: string, page: number, nome: string) {
+    return rotaBase + '/' + rota + '/list/nome?page=' + page +'&nome='+nome;
+}
+
 
 export function rotaFindAllFilter(rota: string, page: number) {
     return rotaBase + '/' + rota + '/list/filter?page=' + page;

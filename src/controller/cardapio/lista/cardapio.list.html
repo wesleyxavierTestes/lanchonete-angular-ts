@@ -20,12 +20,12 @@
     </cadastro>
     <div ng-if="!!view.list && view.list.length > 0" class="row lanc-list-table">
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="item in view.list">
+            <li class="list-group-item" ng-repeat="item in view.list track by $index">
                 <div class="col-12">
                     <div class="row">
                         <div class="col-2">
                             <button ng-disabled="true" type="button" class="btn btn-out-light">
-                                <small style="color:#000"><b>{{item.id}}</b></small>
+                                <small><b>{{item.id}}</b></small>
                             </button>
                         </div>
                         <div class="col">
@@ -41,7 +41,7 @@
                         </div>
                         <div class="col-1">
                             <acoes rota="view.nome"
-                                config="{ ativo: item.ativo, usarAtivacao: true, alterarAtivo: true, excluirAtivo: true }"
+                                config="{ ativo: item.ativo, usarAtivacao: true, alterarAtivo: true, excluirAtivo: false }"
                                 out-alterar="view.viewAlterar(item.id)" out-excluir="view.viewExcluir(item.id)">
                             </acoes>                                
                         </div>

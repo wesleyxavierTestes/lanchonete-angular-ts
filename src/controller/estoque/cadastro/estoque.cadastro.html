@@ -10,30 +10,52 @@
             </div>
         </nav>
         <div class="tab-content lanc-tab" id="nav-tabContent">
-            <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 1 }" id="nav-home" role="tabpanel"
-                aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 1 }" id="nav-home"
+                role="tabpanel" aria-labelledby="nav-home-tab">
                 <!-- TAB DADOS -->
 
                 <div class="row">
                     <div class="col-2">
                         <div class="form-group">
                             <label for="id">Id</label>
-                            <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id" ng-required="false" ng-value="view.entity.id">
+                            <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id"
+                                ng-required="false" ng-value="view.entity.id">
                         </div>
 
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="id_nome">Produto</label>
-                            <input type="text" class="form-control" id="id_nome" ng-model="view.entity.nome" aria-describedby="textHelp"
-                                placeholder="">
-                            <small id="textHelp" class="form-text text-muted"></small>
+                            <label for="id_produto">Produto</label>
+                            <div class="input-group">
+                                <input ng-if="view.pesquisarProdutoAtivo"
+                                ng-required="view.erros.produto" type="text" class="form-control"
+                                placeholder="Nome Produto..." ng-keydown="$event.keyCode === 13 && view.viewPesquisarProduto()"
+                                ng-model="view.produtoNome">
+                                <select ng-if="!view.pesquisarProdutoAtivo" type="text" class="form-control"
+                                ng-disabled="!view.produtos"
+                                    ng-options="item.nome for item in view.produtos track by item.id"
+                                    ng-required="view.erros.produto" ng-model="view.entity.produto"
+                                    ng-change="view.updateViewBase()">
+                                    <option selected>Selecione</option>
+                                </select>
+                                <div ng-if="!view.pesquisarProdutoAtivo" class="input-group-append">
+                                    <button type="button" ng-click="view.pesquisarProdutoAtivo = !view.pesquisarProdutoAtivo; view.produtoNome=''" style="border: none;" class="input-group-text"><i
+                                            class="fa fa-search"></i></button>
+                                </div>
+                                <div ng-if="view.pesquisarProdutoAtivo" class="input-group-append">
+                                    <button type="button" ng-click="view.viewPesquisarProduto()"  ng-maxlength="100" style="border: none;" class="input-group-text"><i
+                                            class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <small ng-if="view.erros.produto" id="textHelp" class="form-text text-muted">{{view.erros.produto}}</small>
+                            <small ng-if="!view.erros.produto && view.produtoPage.numberOfElements">{{view.produtoPage.numberOfElements}} 
+                                de {{view.produtoPage.totalElements}} - Paginas {{view.produtoPage.totalPages}}</small>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputQuantidade1">Quantidade</label>
-                            <input type="quantidade" class="form-control" id="exampleInputQuantidade1"
+                            <input type="number" class="form-control" id="exampleInputQuantidade1"
                                 aria-describedby="quantidadeHelp" placeholder="">
                             <small id="quantidadeHelp" class="form-text text-muted"></small>
                         </div>

@@ -6,9 +6,8 @@ const appRootConfigure = function ($state) {
         template: require('./../../components/base-cadastro/base-cadastro.html'),
         transclude: true,
         controller: function ($scope) {
-            $scope.viewNavigate = (nome: string) => {
-                //$state.go(nome.toLowerCase + 'cadastro');
-                this.$location.path('/'+nome.toLowerCase + '/cadastro');
+            $scope.viewNavigate = () => {
+                $state.go($scope.nome.toLowerCase() + 'cadastro');
             }
         },
         scope: {

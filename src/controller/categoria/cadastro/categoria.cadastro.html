@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="id_nome">Nome</label>
                             <input type="text" class="form-control" id="id_nome" ng-required="!!view.erros.nome"
-                                ng-model="view.entity.nome" aria-describedby="Nome do cliente" placeholder="">
+                                ng-maxlength="{{150}}" ng-model="view.entity.nome" aria-describedby="Nome do cliente" placeholder="">
                             <small id="textHelp" class="form-text text-muted">{{view.erros.nome}}</small>
                         </div>
                     </div>

@@ -6,13 +6,13 @@ export class PedidoModel  {
 
     id: number;
     ativo: boolean;
-    dataCadastro: Date;
+    dataCadastro: string;
     codigo: string;
-    valor: number;
-    valorDesconto: number;
-    valorTotal: number;
+    valor: string;
+    valorDesconto: string;
+    valorTotal: string;
     cancelado: boolean;
-    dataCancelado?: Date;
+    dataCancelado: string;
     estado: EnumEstadoPedido;
     cliente: ClienteModel;
     pedidoitens: PedidoItemModel[];

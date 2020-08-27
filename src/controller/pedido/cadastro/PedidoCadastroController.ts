@@ -11,6 +11,18 @@ export class PedidoCadastroController extends BaseCadastroController<PedidoModel
         this.nome = 'Pedido';
     }
     protected updateComponent() { }
+
+    viewUpdateValor(event: string) {
+        this.entity.valor = event;
+    }
+
+    viewUpdateValorDesconto(event: string) {
+        this.entity.valorDesconto = event;
+    }
+
+    viewUpdateValorTotal(event: string) {
+        this.entity.valorTotal = event;
+    }
 }
 sglanchoneteApp.component('pedidocadastro',
     {

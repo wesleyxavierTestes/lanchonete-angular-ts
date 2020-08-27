@@ -11,7 +11,7 @@
             </button>
         </div>
         <div ng-if="config.alterarAtivo" class="col-3">
-            <a href="#!{{ rota | lowercase }}/edicao">
+            <a ng-click="viewNavigate()">
                 <button alt="Alterar" type="button" ng-click="viewAlterar()" class="btn btn-primary">
                     <i class="fas fa-edit"></i>
                 </button>

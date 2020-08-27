@@ -4,9 +4,9 @@ export class VendaModel {
 
     id: number;
     ativo: boolean;
-    valorDesconto?: number;
-    valor?: number;
-    valorTotal?: number;
+    valorDesconto?: string;
+    valor?: string;
+    valorTotal?: string;
     pedido?: PedidoModel;
 }
 

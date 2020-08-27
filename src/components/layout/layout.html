@@ -1,14 +1,13 @@
 <header>
     <menu>
-        <a class="navbar-brand" href="#!home">Lanchonete</a>
+        <a class="navbar-brand" ng-click="viewNavigate()">Lanchonete</a>
     </menu>
 </header>
 <main class="row">
     <section class="lanc-menu col-xl-12 col-lg-12 col-md-2 col-sm-2 navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav">
             <li ng-repeat="item in list track by $index" class="nav-item {{item.ativo}}">
-                <a class="nav-link" ng-click="viewSetActive(item.nome)" 
-                href="#!{{item.nome}}/list">{{item.apelido}}</a>
+                <a class="nav-link" ng-click="viewSetActive(item.nome); viewNavigate(item.nome)">{{item.apelido}}</a>
             </li>
         </ul>
     </section>

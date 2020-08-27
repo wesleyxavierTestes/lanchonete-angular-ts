@@ -13,6 +13,6 @@ export class PedidoListModel {
     cliente: ClienteModel;
     estado: EnumEstadoPedido;
     cancelado: boolean;
-    dataCancelado?: any;
+    dataCancelado: string;
   }
   

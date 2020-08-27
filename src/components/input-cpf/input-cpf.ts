@@ -16,7 +16,7 @@ class InputCpf extends LitElement {
     <div class="form-group">
         <input type="text" class="${this.customclass}" 
             @keyup="${e => this.valueChange(e.target)}" required="${this.required}"
-             value="${ this.value }" aria-describedby="CPF do cliente" placeholder="digite aqui">
+             value="${ this.formatarCPF(this.value) }" aria-describedby="CPF do cliente" placeholder="digite aqui">
       </div>
     `;
   }
@@ -24,16 +24,13 @@ class InputCpf extends LitElement {
   createRenderRoot() { return this; }
   formatarCPF(v: string) {
 
-    v = v.replace(/\D/g, "").replace(/^[a-z]{0,7}$/, '$1');
+    v = v.replace(/\D/g, "").replace(/^[a-z]{0,11}$/, '$1');
 
-    if (v.length > 9)
-      v = v.substring(0, 9);
+    if (v.length > 11)
+      v = v.substring(0, 11);
 
-    if (v.length === 8)
-      v = v.replace(/(\d{1})(\d{3})(\d{3})(\d{1})$/, "$1.$2.$3-$4");
-
-    if (v.length === 9)
-       v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{1})$/, "$1.$2.$3-$4");
+    if (v.length === 11)
+      v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
 
     return v.replace('$1', '');
   }

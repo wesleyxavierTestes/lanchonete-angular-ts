@@ -1,6 +1,8 @@
 const path = require('path');
 const glob = require('glob');
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const isDevelopment = true;
 
 module.exports = {
   mode: 'development',
@@ -14,6 +16,39 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'html-loader',
+      },
+      {
+        test: /\.module\.s(a|c)ss$/,
+        loader: [
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: isDevelopment
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: isDevelopment
+            }
+          }
+        ]
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        exclude: /\.module.(s(a|c)ss)$/,
+        loader: [
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: isDevelopment
+            }
+          }
+        ]
       },
       {
         test: /\.tsx?$/,
@@ -31,28 +66,24 @@ module.exports = {
       }]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js', '.scss']
   },
   devtool: 'source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist/dev/'),
     host: 'localhost',
     port: 8081,
-   // writeToDisk: true
+    // writeToDisk: true
   },
   plugins: [
-
+    new MiniCssExtractPlugin({
+      filename: isDevelopment ? '[name].css' : '[name].[hash].css',
+      chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
+    }),
     new CopyPlugin({
       patterns: [
         {
           from: 'src/lib', to: 'lib', globOptions: {
-            ignore: [
-              '**/*.ts'
-            ]
-          }
-        },
-        {
-          from: 'src/css', to: 'css', globOptions: {
             ignore: [
               '**/*.ts'
             ]

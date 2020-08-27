@@ -24,16 +24,17 @@ interface IStateProvider {
 
 export class AppRouter {
 
-    static inject = ['$stateProvider', '$stateParams', '$rootScope'];
+    static inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$rootScope'];
     private stateProvider: IStateProvider;
 
 
-    constructor($stateProvider, $urlRouterProvider) {
+    constructor($stateProvider, $urlRouterProvider, $locationProvider) {
         this.stateProvider = $stateProvider;
 
         this.onInit();
 
-        $urlRouterProvider.otherwise('/home')
+        $urlRouterProvider.otherwise('/home');
+        $locationProvider.hashPrefix = '';
     }
 
     private onInit() {
@@ -41,7 +42,7 @@ export class AppRouter {
             .state({
                 name: 'home',
                 url: '/home',
-                component: 'h1>Home</h1>'
+                component: 'homebase'
             })
             .state({
                 url: "/cliente/list",
@@ -56,7 +57,7 @@ export class AppRouter {
                     editar: () => false,
                     service: 'ClienteService',
                     entity: async function (service: ClienteService) {
-                        return await service.novo().then( response => response.data);
+                        return await service.novo().then(response => response.data);
                     }
                 }
             })
@@ -68,10 +69,10 @@ export class AppRouter {
                     editar: () => true,
                     service: 'ClienteService',
                     entity: async function (service: ClienteService, $rootScope) {
-                       $rootScope.$on('identificacao', (event: any, data: any) => {
+                        $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
                         });
-                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then(response => response.data);
                     }
                 }
             })
@@ -89,7 +90,7 @@ export class AppRouter {
                     editar: () => false,
                     service: 'CategoriaService',
                     entity: async function (service: CategoriaService) {
-                        return await service.novo().then( response => response.data);
+                        return await service.novo().then(response => response.data);
                     }
                 }
             })
@@ -104,7 +105,7 @@ export class AppRouter {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
                         });
-                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then(response => response.data);
                     }
                 }
             })
@@ -122,7 +123,7 @@ export class AppRouter {
                     editar: () => false,
                     service: 'ProdutoService',
                     entity: async function (service: ProdutoService) {
-                        return await service.novo().then( response => response.data);
+                        return await service.novo().then(response => response.data);
                     }
                 }
             })
@@ -137,7 +138,7 @@ export class AppRouter {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
                         });
-                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then(response => response.data);
                     }
                 }
             })
@@ -155,7 +156,7 @@ export class AppRouter {
                     editar: () => false,
                     service: 'CardapioService',
                     entity: async function (service: CardapioService) {
-                        return await service.novo().then( response => response.data);
+                        return await service.novo().then(response => response.data);
                     }
                 }
             })
@@ -170,7 +171,7 @@ export class AppRouter {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
                         });
-                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then(response => response.data);
                     }
                 }
             })
@@ -188,7 +189,7 @@ export class AppRouter {
                     editar: () => false,
                     service: 'ComboService',
                     entity: async function (service: ComboService) {
-                        return await service.novo().then( response => response.data);
+                        return await service.novo().then(response => response.data);
                     }
                 }
             })
@@ -203,7 +204,7 @@ export class AppRouter {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
                         });
-                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then(response => response.data);
                     }
                 }
             })
@@ -221,7 +222,7 @@ export class AppRouter {
                     editar: () => false,
                     service: 'EstoqueService',
                     entity: async function (service: EstoqueService) {
-                        return await service.novo().then( response => response.data);
+                        return await service.novo().then(response => response.data);
                     }
                 }
             })
@@ -236,7 +237,7 @@ export class AppRouter {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
                         });
-                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then(response => response.data);
                     }
                 }
             })
@@ -254,7 +255,7 @@ export class AppRouter {
                     editar: () => false,
                     service: 'LancheService',
                     entity: async function (service: LancheService) {
-                        return await service.novo().then( response => response.data);
+                        return await service.novo().then(response => response.data);
                     }
                 }
             })
@@ -269,7 +270,7 @@ export class AppRouter {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
                         });
-                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then(response => response.data);
                     }
                 }
             })
@@ -287,7 +288,7 @@ export class AppRouter {
                     editar: () => false,
                     service: 'PedidoService',
                     entity: async function (service: PedidoService) {
-                        return await service.novo().then( response => response.data);
+                        return await service.novo().then(response => response.data);
                     }
                 }
             })
@@ -302,7 +303,7 @@ export class AppRouter {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
                         });
-                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then(response => response.data);
                     }
                 }
             })
@@ -320,7 +321,7 @@ export class AppRouter {
                     editar: () => false,
                     service: 'VendaService',
                     entity: async function (service: VendaService) {
-                        return await service.novo().then( response => response.data);
+                        return await service.novo().then(response => response.data);
                     }
                 }
             })
@@ -335,7 +336,7 @@ export class AppRouter {
                         $rootScope.$on('identificacao', (event: any, data: any) => {
                             sessionStorage.setItem('id', data);
                         });
-                        return await service.find(sessionStorage.getItem('id')).then( response => response.data);
+                        return await service.find(sessionStorage.getItem('id')).then(response => response.data);
                     }
                 }
             })

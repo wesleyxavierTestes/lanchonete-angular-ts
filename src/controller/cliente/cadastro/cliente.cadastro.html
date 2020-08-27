@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <label for="id_nome">Nome</label>
                             <input type="text" class="form-control" id="id_nome" ng-required="!!view.erros.nome"
-                                ng-model="view.entity.nome" aria-describedby="Nome do cliente" placeholder="">
+                                ng-maxlength="{{150}}" ng-model="view.entity.nome" aria-describedby="Nome do cliente" placeholder="">
                             <small id="textHelp" class="form-text text-muted">{{view.erros.nome}}</small>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label for="id_email">Email</label>
                             <input type="email" class="form-control" id="id_email" ng-required="!!view.erros.email"
-                                ng-model="view.entity.email" aria-describedby="Email do cliente" placeholder="">
+                            ng-maxlength="{{100}}" ng-model="view.entity.email" aria-describedby="Email do cliente" placeholder="">
                             <small id="textHelp" class="form-text text-muted">{{view.erros.email}}</small>
                         </div>
                     </div>
@@ -59,17 +59,20 @@
                         
                         <div class="form-group">
                             <label for="id_rg">RG</label>
-                            <input-rg value="{{ view.entity.rg }}" 
-                            customclass="{{ !view.erros.rg ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
-                            required="{{ !!view.erros.rg }}" ng-model="view.entity.rg" onchange></input-rg>
+                            <input-rg 
+                                value="{{ view.entity.rg }}" 
+                                customclass="{{ !view.erros.rg ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
+                                required="{{ !!view.erros.rg }}" ng-model="view.entity.rg" onchange></input-rg>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.rg}}</small>
                         </div>
                     </div>
                     <div ng-if="view.isPessoaFisica" class="col">
                         <div class="form-group">
                             <label for="id_cpf">Cpf</label>
-                            <input type="text" class="form-control cpf" id="id_cpf" ng-required="!!view.erros.cpf"
-                                ng-model="view.entity.cpf" aria-describedby="Cpf do cliente" placeholder="">
+                            <input-cpf 
+                                value="{{ view.entity.cpf }}" 
+                                customclass="{{ !view.erros.cpf ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
+                                required="{{ !!view.erros.cpf }}" ng-model="view.entity.cpf" onchange></input-cpf>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.cpf}}</small>
                         </div>
                     </div>
@@ -77,8 +80,10 @@
                     <div ng-if="!view.isPessoaFisica" class="col">
                         <div class="form-group">
                             <label for="id_cnpj">Cnpj</label>
-                            <input type="text" class="form-control cnpj" id="id_cnpj" ng-required="!!view.erros.cnpj"
-                                ng-model="view.entity.cnpj" aria-describedby="Cnpj do cliente" placeholder="">
+                            <input-cnpj 
+                                value="{{ view.entity.cnpj }}" 
+                                customclass="{{ !view.erros.cnpj ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
+                                required="{{ !!view.erros.cnpj }}" ng-model="view.entity.cnpj" onchange></input-cnpj>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.cnpj}}</small>
                         </div>
                     </div>

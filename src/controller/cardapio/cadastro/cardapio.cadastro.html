@@ -22,12 +22,12 @@
                             <label for="id">Id</label>
                             <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id" ng-required="false" ng-value="view.entity.id">
                         </div>
-
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="id_nome">Nome</label>
-                            <input type="text" class="form-control" id="id_nome" ng-model="view.entity.nome" aria-describedby="textHelp"
+                            <input type="text" class="form-control" id="id_nome" 
+                            ng-maxlength="{{150}}" ng-model="view.entity.nome" aria-describedby="textHelp"
                                 placeholder="">
                             <small id="textHelp" class="form-text text-muted"></small>
                         </div>

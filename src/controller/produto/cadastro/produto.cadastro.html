@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="id_nome">Nome</label>
                             <input type="text" class="form-control" id="id_nome" ng-required="!!view.erros.nome"
-                                ng-model="view.entity.nome" aria-describedby="Nome do cliente">
+                                ng-maxlength="{{150}}" ng-model="view.entity.nome" aria-describedby="Nome do cliente">
                             <small id="textHelp" class="form-text text-muted">{{view.erros.nome}}</small>
                         </div>
                     </div>
@@ -51,8 +51,7 @@
                             <input ng-if="!view.Categorias" ng-readonly="true" ng-required="view.erros.categoria"
                                 type="text" class="form-control" placeholder="Selecione"
                                 ng-click="view.viewInitCategorias()" ng-model="view.entity.categoria.nome">
-                            <select ng-if="view.Categorias" type="text" 
-                                    class="form-control" id="id_categoria"
+                            <select ng-if="view.Categorias" type="text" class="form-control" id="id_categoria"
                                 ng-options="item.nome for item in view.Categorias track by item.id" ng-required="true"
                                 ng-model="view.entity.categoria" ng-change="view.updateViewBase()">
                                 <option selected>Selecione</option>
@@ -63,35 +62,18 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputCusto1">Custo</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="button"
-                                        class="input-group-text">
-                                        R$
-                                    </button>
-                                </div>
-                                <input type="custo" class="form-control money" id="exampleInputCusto1"
-                                    ng-required="!!view.erros.custo" aria-describedby="custoHelp"
-                                    ng-model="view.entity.custo">
-                            </div>
+                            <input-money value="view.entity.custo" out-change="view.viewUpdateCusto($event)"
+                                customclass="!view.erros.custo ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                            </input-money>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.custo}}</small>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputValor1">Valor</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="button"
-                                    class="input-group-text">
-                                    R$
-                                </button>
-                                </div>
-                                <input type="valor" class="form-control money" id="exampleInputValor1"
-                                    ng-required="!!view.erros.valor"
-                                    ng-model="view.entity.valor"
-                                    aria-describedby="valorHelp">
-                            </div>
+                            <input-money value="view.entity.valor" out-change="view.viewUpdateValor($event)"
+                                customclass="!view.erros.valor ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                            </input-money>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.valor}}</small>
                         </div>
                     </div>

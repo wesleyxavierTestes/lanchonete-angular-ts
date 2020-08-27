@@ -19,8 +19,9 @@ export const appRootConfigure = function ($state) {
                 { ativo: '', nome: 'venda', apelido: 'Venda' },
             ];
 
-            $scope.viewNavigate = (nome: string) => {
-                $state.go(nome+'list');
+            $scope.viewNavigate = (nome?: string) => {
+                const rota = !nome ? 'home' : nome+'list';
+                $state.go(rota);
             }
 
             $scope.$on('erros', function(event: any, data: any) {

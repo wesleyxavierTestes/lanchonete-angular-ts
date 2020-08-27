@@ -2,7 +2,6 @@ import { CategoriaService } from './../../../services/categoria/CategoriaService
 import { ProdutoService } from './../../../services/produto/ProdutoService';
 import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
-import { MascaraSet } from '../../../utils/Mascaras';
 import * as _ from 'lodash';
 import { ProdutoModel } from '../../../models/produto/ProdutoModel';
 import { CategoriaModel } from '../../../models/categoria/CategoriaModel';
@@ -19,6 +18,7 @@ export class ProdutoCadastroController extends BaseCadastroController<ProdutoMod
         { key: 'Outros', value: 'Outros' }
     ]
     public Categorias: CategoriaModel[];
+    class: string;
 
     constructor(protected podutoService: ProdutoService, protected $rootScope, protected state, protected $location, protected categoriaService: CategoriaService) {
         super(podutoService, $rootScope, state, $location);
@@ -35,8 +35,12 @@ export class ProdutoCadastroController extends BaseCadastroController<ProdutoMod
             .finally(() => this.updateLoading(false))
     }
 
+    viewUpdateValor(event: string) {
+        this.entity.valor = event;
+    }
+
     protected updateComponent() {
-        MascaraSet.money();
+
     }
 }
 sglanchoneteApp.component('produtocadastro',

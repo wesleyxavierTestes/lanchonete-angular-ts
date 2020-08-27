@@ -5,6 +5,7 @@ import { IpaginateConfigure, Paginacao } from '../../../components/paginacao/pag
 import { ProdutoService } from '../../../services/produto/ProdutoService';
 import { LancheModel } from '../../../models/lanche/LancheModel';
 import { ProdutoModel } from '../../../models/produto/ProdutoModel';
+import { IngredienteModel } from '../../../models/lanche/IngredienteModel';
 
 export class LancheCadastroController extends BaseCadastroController<LancheModel, LancheService> {
     static $inject = ['LancheService', '$rootScope', '$state', '$location', 'ProdutoService'];
@@ -47,7 +48,21 @@ export class LancheCadastroController extends BaseCadastroController<LancheModel
         this.paginacaoConfig = Paginacao.configure(resultado.data, this.paginacaoConfig.pageAtual);
         this.$rootScope.$emit('loading', false);
     }
-}
+
+    public viewSelecionarProduto(index: number) {
+        if (!this.entity.ingredientesLanche) this.entity.ingredientesLanche = [];
+        const produto = this.produtos[index] as any;
+        this.entity.ingredientesLanche.push((<IngredienteModel>produto));
+    }
+
+    public contarQuantidade(id) {
+        return this.entity.ingredientesLanche.filter(ingrediente => ingrediente.id == id).length;
+    }
+
+    public ingredientesLancheFilter() {
+        return this.entity.ingredientesLanche.filter((value, index, self) => self.indexOf(value) === index);
+    }
+ }
 sglanchoneteApp.component('lanchecadastro',
     {
         controller: LancheCadastroController,

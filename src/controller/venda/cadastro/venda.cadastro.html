@@ -27,7 +27,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="id_nome">Codigo</label>
-                            <input type="text" class="form-control" id="id_nome" ng-model="view.entity.nome" aria-describedby="textHelp"
+                            <input type="text" class="form-control" id="id_nome" ng-maxlength="{{150}}" ng-model="view.entity.nome" aria-describedby="textHelp"
                                 placeholder="">
                             <small id="textHelp" class="form-text text-muted"></small>
                         </div>
@@ -35,9 +35,28 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputValor1">Valor</label>
-                            <input type="valor" class="form-control" id="exampleInputValor1"
-                                aria-describedby="valorHelp" placeholder="">
-                            <small id="valorHelp" class="form-text text-muted"></small>
+                            <input-money value="view.entity.valor" out-change="view.viewUpdateValor($event)"
+                            customclass="!view.erros.valor ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                        </input-money>
+                            <small id="valorHelp" class="form-text text-muted">{{ view.erros.valor }}</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleInputValorDesconto1">Desconto</label>
+                            <input-money value="view.entity.valorDesconto" out-change="view.viewUpdateValorDesconto($event)"
+                            customclass="!view.erros.valorDesconto ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                        </input-money>
+                            <small id="valorHelp" class="form-text text-muted">{{ view.erros.valorDesconto  }}</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleInputValorTotal1">Total</label>
+                            <input-money value="view.entity.valorTotal" out-change="view.viewUpdateValorTotal($event)"
+                            customclass="!view.erros.valorTotal ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                        </input-money>
+                            <small id="valorHelp" class="form-text text-muted">{{ view.erros.valorTotal  }}</small>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ export class ProdutoModel {
     pedido?: any;
     venda?: any;
     nome: string;
-    valor: number;
+    valor: string;
     tipoProduto: string;
     estoque: any[];
     estoqueAtual: number;
