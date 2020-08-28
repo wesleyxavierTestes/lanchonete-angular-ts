@@ -1,12 +1,22 @@
 import sglanchoneteApp from "../../app";
+import { IScope } from 'angular';
 
-const appRootConfigure = function ($state) {
-    return {
-        template: require('./../../components/home/home.html'),
-        controller: function ($scope) {
+class HomeBase {
+    
+    constructor($scope: IScope, private $element: JQLite) {
 
-        }
-    };
-};
+    }
 
-sglanchoneteApp.directive('homebase', appRootConfigure);
+    $onInit() {
+        let template: HTMLTemplateElement = (<any>this.$element)[0].firstElementChild as HTMLTemplateElement;
+
+        setTimeout(() => {
+            this.$element.append(template.content.firstElementChild);
+        }, 2000);
+    }
+}
+
+sglanchoneteApp.component('homebase', {
+    template: require('./../../components/home/home.html'),
+    controller: HomeBase
+});

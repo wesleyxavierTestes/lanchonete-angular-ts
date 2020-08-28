@@ -1,7 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const CopyPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isDevelopment = true;
 
 module.exports = {

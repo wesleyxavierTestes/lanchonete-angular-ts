@@ -11,6 +11,7 @@ interface IInputMoney extends IScope {
 
     $ctrl: {
         value: string;
+        disabled: boolean | string;
         customclass: string;
         outChange: (event: {}) => void;
     }
@@ -18,15 +19,21 @@ interface IInputMoney extends IScope {
 
 class InputMoney {
 
-    constructor($scope: IInputMoney) {
+    constructor(private $scope: IInputMoney) {
         $scope.viewKeyPress = (input: HTMLInputElement) => {
             $scope.$ctrl.value = input.value = this.viewFormatMaskMoney(input.value);
             $scope.$ctrl.value = $scope.$ctrl.value.replace(/\D/g, '');
-            $scope.$ctrl.outChange({ $event: $scope.$ctrl.value});
+            $scope.$ctrl.outChange({ $event: $scope.$ctrl.value });
         };
         $scope.viewFormatMaskMoney = this.viewFormatMaskMoney;
     }
-    
+
+    $onInit() {
+        if (typeof this.$scope.$ctrl.disabled === 'string')
+            this.$scope.$ctrl.disabled = !!this.$scope.$ctrl.disabled && this.$scope.$ctrl.disabled.toString().toLowerCase() !== 'false';
+
+    }
+
     private viewFormatMaskMoney(v: string) {
         if (_.isEmpty(v)) return v;
 
@@ -60,6 +67,7 @@ sglanchoneteApp.component('inputMoney', {
     bindings: {
         value: "<",
         customclass: "<",
+        disabled: "<",
 
         outChange: '&'
     }

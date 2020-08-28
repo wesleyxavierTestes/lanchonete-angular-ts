@@ -11,7 +11,7 @@ export class ComboModel  {
     categoria: CategoriaModel;
     valor: number;
     valorTotal: number;
-    bebida: BebidaModel;
-    lanche: LancheModel;
+    bebidas: BebidaModel[];
+    lanches: LancheModel[];
 
 }

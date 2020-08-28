@@ -26,6 +26,7 @@
     "jest": "^26.4.2",
     "lit-element": "^2.4.0",
     "lodash": "^4.17.19",
+    "numeral": "^2.0.6",
     "reflect-metadata": "^0.1.13",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"

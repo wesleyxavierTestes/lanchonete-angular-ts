@@ -3,6 +3,6 @@
         <button type="button" ng-disabled="true" style="border: none;" class="input-group-text"
             id="basic-addon2">{{'R$'}}</button>
     </div>
-    <input type="text" class="{{ $ctrl.customclass }}" name="" aria-describedby="helpId"
+    <input ng-disabled="$ctrl.disabled" type="text" class="{{ $ctrl.customclass }}" name="" aria-describedby="helpId"
         ng-keyup="viewKeyPress($event.target)" ng-value="viewFormatMaskMoney($ctrl.value)" placeholder="">
 </div>

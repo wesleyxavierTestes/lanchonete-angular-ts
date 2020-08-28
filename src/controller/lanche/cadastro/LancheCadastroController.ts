@@ -6,6 +6,8 @@ import { ProdutoService } from '../../../services/produto/ProdutoService';
 import { LancheModel } from '../../../models/lanche/LancheModel';
 import { ProdutoModel } from '../../../models/produto/ProdutoModel';
 import { IngredienteModel } from '../../../models/lanche/IngredienteModel';
+import numeral from 'numeral';
+
 
 export class LancheCadastroController extends BaseCadastroController<LancheModel, LancheService> {
     static $inject = ['LancheService', '$rootScope', '$state', '$location', 'ProdutoService'];
@@ -56,19 +58,27 @@ export class LancheCadastroController extends BaseCadastroController<LancheModel
     }
 
     public viewSelecionarProduto(index: number) {
-        if (!this.entity.ingredientesLanche) this.entity.ingredientesLanche = [];
+        if (!this.entity.ingredientesLanche || !Array.isArray(this.entity.ingredientesLanche)) this.entity.ingredientesLanche = [];
         const produto = this.produtos[index] as any;
         this.entity.ingredientesLanche.push((<IngredienteModel>produto));
+
         this.entity.valor =
-            this.entity.ingredientesLanche.reduce((valor, update) => update.valor + valor, 0).toString();
+            this.entity.ingredientesLanche
+            .reduce((valor, update) => numeral(valor).add(update.valor).value(), 0);
+
     }
 
     public contarQuantidade(id) {
-        return this.entity.ingredientesLanche.filter(ingrediente => ingrediente.id == id).length;
+        if (this.entity.ingredientesLanche && Array.isArray(this.entity.ingredientesLanche))
+            return this.entity.ingredientesLanche.filter(ingrediente => ingrediente.id == id).length;
+        return [];
     }
 
     public ingredientesLancheFilter() {
-        return this.entity.ingredientesLanche.filter((value, index, self) => self.indexOf(value) === index);
+        if (this.entity.ingredientesLanche && Array.isArray(this.entity.ingredientesLanche))
+            return this.entity.ingredientesLanche.filter((value, index, self) => self.indexOf(value) === index);
+
+        return [];
     }
 }
 sglanchoneteApp.component('lanchecadastro',

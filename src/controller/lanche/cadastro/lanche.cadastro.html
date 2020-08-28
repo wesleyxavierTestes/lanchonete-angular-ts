@@ -4,15 +4,14 @@
     <form ng-submit="view.formSubmit()" novalidate>
         <div class="tab-content lanche">
             <div class="row">
-                <div class="col-2">
+                <div class="col-lg-1 col-md-2">
                     <div class="form-group">
                         <label for="id">Id</label>
                         <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id"
                             ng-required="false" ng-value="view.entity.id">
                     </div>
-
                 </div>
-                <div class="col">
+                <div class="col-lg-5 col-md-10">
                     <div class="form-group">
                         <label for="id_nome">Nome</label>
                         <input type="text" class="form-control" id="id_nome" ng-maxlength="{{150}}"
@@ -20,11 +19,20 @@
                         <small id="textHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-lg-3 col-md-6">
                     <div class="form-group">
                         <label for="exampleInputValor1">Valor</label>
-                        <input-money value="view.entity.valor" out-change="view.viewUpdateValor($event)"
+                        <input-money disabled="true" value="view.entity.valor" out-change="view.viewUpdateValor($event)"
                             customclass="!view.erros.valor ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                        </input-money>
+                        <small id="valorHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputValorTotal1">Total</label>
+                        <input-money value="view.entity.valorTotal" out-change="view.viewUpdateValorTotal($event)"
+                            customclass="!view.erros.valorTotal ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
                         </input-money>
                         <small id="valorHelp" class="form-text text-muted"></small>
                     </div>
@@ -52,9 +60,16 @@
                                         </div>
                                         <div class="col">
                                             <button ng-disabled="true" type="button" class="btn btn-out-light">
-                                                <small>
-                                                    <b>Produto:</b> {{item.nome}}
-                                                </small>
+                                                <div class="row">
+                                                    <small>
+                                                        <b>Produto:</b> {{item.nome}}
+                                                    </small>
+                                                </div>
+                                                <div class="row">
+                                                    <small>
+                                                        <b>R$:</b> {{item.valor}}
+                                                    </small>
+                                                </div>
                                             </button>
                                         </div>
                                     </div>
@@ -75,7 +90,7 @@
                                     <div class="row">
                                         <div class="col-2">
                                             <button ng-disabled="true" type="button" class="btn btn-out-light">
-                                                <small><b>{{item.id}}</b></small>
+                                                <small><b>{{$index+ 1}}</b></small>
                                             </button>
                                         </div>
                                         <div class="col">
@@ -85,13 +100,21 @@
                                                 </small>
                                             </div>
                                             <div class="row">
-                                                <small>
-                                                    <b>Quantidade:</b> {{view.contarQuantidade(item.id)}}
-                                                </small>
+                                                <div class="col-6">
+                                                    <small>
+                                                        <b>R$:</b> {{item.valor}}
+                                                    </small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small>
+                                                        <b>Quantidade:</b> {{view.contarQuantidade(item.id)}}
+                                                    </small>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-1">
-                                            <button type="button" ng-click="view.viewRemoverItem(item.id)" class="btn btn-danger">
+                                            <button type="button" ng-click="view.viewRemoverItem(item.id)"
+                                                class="btn btn-danger">
                                                 <i class="fa fa-times"></i>
                                             </button>
                                         </div>
@@ -118,7 +141,11 @@
 
 <style scoped>
     div.tab-content.lanche {
-        height: 58vh !important;
+        height: 380px !important;
+    }
+
+    div.tab-content.lanche.md {
+        height: 450px !important;
     }
 
     ul.list-group {
