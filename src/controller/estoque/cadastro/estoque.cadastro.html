@@ -1,27 +1,35 @@
 <div class="EstoqueCadastroController">
-    <h3>{{ view.editar ? 'Edição' : 'Cadastro'}}</h3>
-    <br>
     <form ng-submit="view.formSubmit()" novalidate>
+        <button-salvar editar="view.editar"></button-salvar>
+        <hr>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 1 }" id="nav-home-tab"
-                    data-toggle="tab" ng-click="view.viewSetTab(1)" role="tab" aria-controls="nav-home"
-                    aria-selected="true">Dados</a>
+                <a class="nav-item nav-link"
+                    ng-class="{ 'border border-bottom-dark text-secondary active' : view.viewIndexTab == 1 }"
+                    id="nav-home-tab" data-toggle="tab" ng-click="view.viewSetTab(1);view.viewSetEntrada()" role="tab"
+                    aria-controls="nav-home" aria-selected="true">Entrada</a>
+                <a class="nav-item nav-link"
+                    ng-class="{ 'border border-bottom-dark text-secondary active': view.viewIndexTab == 2 }"
+                    id="nav-home-tab" data-toggle="tab" ng-click="view.viewSetTab(2);view.viewSetSaida()" role="tab"
+                    aria-controls="nav-home" aria-selected="true">Saída</a>
             </div>
         </nav>
         <div class="tab-content lanc-tab" id="nav-tabContent">
-            <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 1 }" id="nav-home"
-                role="tabpanel" aria-labelledby="nav-home-tab">
-                <!-- TAB DADOS -->
-
+            <div class="show active" aria-labelledby="nav-home-tab">
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-1">
                         <div class="form-group">
                             <label for="id">Id</label>
                             <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id"
                                 ng-required="false" ng-value="view.entity.id">
                         </div>
-
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group">
+                            <label for="id">Tipo</label>
+                            <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id"
+                                ng-required="false" ng-value="view.viewIndexTab == 1 ? 'Entrada' : 'Saída'">
+                        </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
@@ -46,9 +54,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <button-salvar editar="view.editar"></button-salvar>
     </form>
 </div>

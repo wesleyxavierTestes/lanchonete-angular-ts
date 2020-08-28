@@ -1,7 +1,7 @@
+import { EntityBase } from './../BaseModel';
 import { EnumTipoProduto } from '../../enuns/produto/EnumTipoProduto';
-export class CardapioItemModel {
+export class CardapioItemModel extends EntityBase {
 
-    id: number;
     nome: string;
     codigo: string;
     tipoProduto: EnumTipoProduto;

@@ -1,7 +1,7 @@
 <div class="ProdutoCadastroController">
-    <h3>{{ view.editar ? 'Edição' : 'Cadastro'}}</h3>
-    <br>
     <form ng-submit="view.formSubmit()" novalidate>
+        <button-salvar editar="view.editar"></button-salvar>
+        <hr>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 1 }" id="nav-home-tab"
@@ -80,6 +80,5 @@
                 </div>
             </div>
         </div>
-        <button-salvar editar="view.editar"></button-salvar>
     </form>
 </div>

@@ -1,7 +1,7 @@
 <div class="ClienteCadastroController">
-    <h3>{{ view.editar ? 'Edição' : 'Cadastro'}}</h3>
-    <br>
     <form ng-focus="view.updateViewBase()" ng-submit="view.formSubmit()" novalidate>
+        <button-salvar editar="view.editar"></button-salvar>
+        <hr>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 1 }" id="nav-home-tab"
@@ -11,7 +11,7 @@
                     data-toggle="tab" ng-click="view.viewSetTab(2)" role="tab" aria-controls="nav-profile"
                     aria-selected="false">Endereço</a>
             </div>
-        </nav>        
+        </nav>
         <div class="tab-content lanc-tab" id="nav-tabContent">
             <div class="tab-pane fade" ng-class="{ 'show active': view.viewIndexTab == 1 }" id="nav-home"
                 role="tabpanel" aria-labelledby="nav-home-tab">
@@ -28,7 +28,8 @@
                         <div class="form-group">
                             <label for="id_nome">Nome</label>
                             <input type="text" class="form-control" id="id_nome" ng-required="!!view.erros.nome"
-                                ng-maxlength="{{150}}" ng-model="view.entity.nome" aria-describedby="Nome do cliente" placeholder="">
+                                ng-maxlength="{{150}}" ng-model="view.entity.nome" aria-describedby="Nome do cliente"
+                                placeholder="">
                             <small id="textHelp" class="form-text text-muted">{{view.erros.nome}}</small>
                         </div>
                     </div>
@@ -36,7 +37,8 @@
                         <div class="form-group">
                             <label for="id_email">Email</label>
                             <input type="email" class="form-control" id="id_email" ng-required="!!view.erros.email"
-                            ng-maxlength="{{100}}" ng-model="view.entity.email" aria-describedby="Email do cliente" placeholder="">
+                                ng-maxlength="{{100}}" ng-model="view.entity.email" aria-describedby="Email do cliente"
+                                placeholder="">
                             <small id="textHelp" class="form-text text-muted">{{view.erros.email}}</small>
                         </div>
                     </div>
@@ -56,11 +58,10 @@
                     </div>
 
                     <div ng-if="view.isPessoaFisica" class="col">
-                        
+
                         <div class="form-group">
                             <label for="id_rg">RG</label>
-                            <input-rg 
-                                value="{{ view.entity.rg }}" 
+                            <input-rg value="{{ view.entity.rg }}"
                                 customclass="{{ !view.erros.rg ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
                                 required="{{ !!view.erros.rg }}" ng-model="view.entity.rg" onchange></input-rg>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.rg}}</small>
@@ -69,8 +70,7 @@
                     <div ng-if="view.isPessoaFisica" class="col">
                         <div class="form-group">
                             <label for="id_cpf">Cpf</label>
-                            <input-cpf 
-                                value="{{ view.entity.cpf }}" 
+                            <input-cpf value="{{ view.entity.cpf }}"
                                 customclass="{{ !view.erros.cpf ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
                                 required="{{ !!view.erros.cpf }}" ng-model="view.entity.cpf" onchange></input-cpf>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.cpf}}</small>
@@ -80,8 +80,7 @@
                     <div ng-if="!view.isPessoaFisica" class="col">
                         <div class="form-group">
                             <label for="id_cnpj">Cnpj</label>
-                            <input-cnpj 
-                                value="{{ view.entity.cnpj }}" 
+                            <input-cnpj value="{{ view.entity.cnpj }}"
                                 customclass="{{ !view.erros.cnpj ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
                                 required="{{ !!view.erros.cnpj }}" ng-model="view.entity.cnpj" onchange></input-cnpj>
                             <small id="textHelp" class="form-text text-muted">{{view.erros.cnpj}}</small>
@@ -98,11 +97,10 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="id_endereco.cep">Cep</label>
-                                    <input-cep
-                                    value="{{ view.entity.endereco.cep }}" 
-                                    customclass="{{ !view.erros.endereco.cep ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
-                                    required="{{ !!view.erros.endereco.cep }}" ng-model="view.entity.endereco.cep" onchange
-                                    ></input-cep>
+                                    <input-cep value="{{ view.entity.endereco.cep }}"
+                                        customclass="{{ !view.erros.endereco.cep ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
+                                        required="{{ !!view.erros.endereco.cep }}" ng-model="view.entity.endereco.cep"
+                                        onchange></input-cep>
                                     <small id="textHelp"
                                         class="form-text text-muted">{{view.erros.endereco.cep}}</small>
                                 </div>
@@ -110,10 +108,12 @@
                             <div class="col-8">
                                 <div class="form-group">
                                     <label for="id_endereco.logradouro">Logradouro</label>
-                                    <input type="text" class="form-control endereco.logradouro" id="id_endereco.logradouro" ng-required="!!view.erros.endereco.logradouro"
-                                        ng-model="view.entity.endereco.logradouro" aria-describedby="Logradouro do cliente"
-                                        placeholder="">
-                                    <small id="textHelp" class="form-text text-muted">{{view.erros.endereco.logradouro}}</small>
+                                    <input type="text" class="form-control endereco.logradouro"
+                                        id="id_endereco.logradouro" ng-required="!!view.erros.endereco.logradouro"
+                                        ng-model="view.entity.endereco.logradouro"
+                                        aria-describedby="Logradouro do cliente" placeholder="">
+                                    <small id="textHelp"
+                                        class="form-text text-muted">{{view.erros.endereco.logradouro}}</small>
                                 </div>
                             </div>
                         </div>
@@ -123,25 +123,34 @@
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="id_endereco.numero">Número</label>
-                                    <input type="text" class="form-control endereco.numero" id="id_endereco.numero" ng-required="!!view.erros.endereco.numero"
-                                        ng-model="view.entity.endereco.numero" aria-describedby="Número do cliente" placeholder="">
-                                    <small id="textHelp" class="form-text text-muted">{{view.erros.endereco.numero}}</small>
+                                    <input type="text" class="form-control endereco.numero" id="id_endereco.numero"
+                                        ng-required="!!view.erros.endereco.numero"
+                                        ng-model="view.entity.endereco.numero" aria-describedby="Número do cliente"
+                                        placeholder="">
+                                    <small id="textHelp"
+                                        class="form-text text-muted">{{view.erros.endereco.numero}}</small>
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="id_endereco.bairro">Bairro</label>
-                                    <input type="text" class="form-control endereco.bairro" id="id_endereco.bairro" ng-required="!!view.erros.endereco.bairro"
-                                        ng-model="view.entity.endereco.bairro" aria-describedby="Bairro do cliente" placeholder="">
-                                    <small id="textHelp" class="form-text text-muted">{{view.erros.endereco.bairro}}</small>
+                                    <input type="text" class="form-control endereco.bairro" id="id_endereco.bairro"
+                                        ng-required="!!view.erros.endereco.bairro"
+                                        ng-model="view.entity.endereco.bairro" aria-describedby="Bairro do cliente"
+                                        placeholder="">
+                                    <small id="textHelp"
+                                        class="form-text text-muted">{{view.erros.endereco.bairro}}</small>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="id_endereco.complemento">Complemento</label>
-                                    <input type="text" class="form-control endereco.complemento" id="id_endereco.complemento" ng-required="!!view.erros.endereco.complemento"
-                                        ng-model="view.entity.endereco.complemento" aria-describedby="Complemento do cliente" placeholder="">
-                                    <small id="textHelp" class="form-text text-muted">{{view.erros.endereco.complemento}}</small>
+                                    <input type="text" class="form-control endereco.complemento"
+                                        id="id_endereco.complemento" ng-required="!!view.erros.endereco.complemento"
+                                        ng-model="view.entity.endereco.complemento"
+                                        aria-describedby="Complemento do cliente" placeholder="">
+                                    <small id="textHelp"
+                                        class="form-text text-muted">{{view.erros.endereco.complemento}}</small>
                                 </div>
                             </div>
                         </div>
@@ -173,6 +182,5 @@
                 </div>
             </div>
         </div>
-        <button-salvar editar="view.editar"></button-salvar>
     </form>
 </div>

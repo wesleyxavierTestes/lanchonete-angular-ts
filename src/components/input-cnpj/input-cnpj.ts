@@ -1,7 +1,7 @@
+import { ICnpj } from './../../models/ICnpj';
 import { html, css, LitElement, customElement, property, CSSResult, TemplateResult, internalProperty } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import * as _ from 'lodash';
-import { EnderecoModel } from '../../models/cliente/EnderecoModel';
 @customElement('input-cnpj')
 class InputCnpj extends LitElement {
 
@@ -10,7 +10,7 @@ class InputCnpj extends LitElement {
 
   @property({ type: String, attribute: true }) placeholder: string = "...";
   @property({ type: Boolean, attribute: true }) required: boolean = false;
-  @internalProperty() cnpj: EnderecoModel;
+  @internalProperty() cnpj: ICnpj;
 
   constructor() {
     super();
@@ -43,7 +43,7 @@ class InputCnpj extends LitElement {
       v = v.substring(0, 14);
 
     if (v.length === 14)
-    v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
+      v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
 
     return v.replace('$1', '');
   }
@@ -59,22 +59,25 @@ class InputCnpj extends LitElement {
     const tamanho = this.value.length;
     const estaVazio = _.isEmpty(this.value);
     const cnpj = this.value;
-    const url = `https://www.receitaws.com.br/v1/cnpj/${cnpj}`;
+    const url = `http://localhost:8080/api/cep/cnpj/${cnpj}`;
     if (!estaVazio && tamanho === 14) {
       this.dispatchEvent(new CustomEvent('customenderecocnpj', { detail: {} }));
-      fetch(url)
+      fetch(url, {
+         headers: {
+          "content-type": "application/json",
+          "access-control-allow-origin": "*"
+        }
+      })
         .then(reponse => reponse.json())
-        .then((cnpj: EnderecoModel) => {
+        .then((cnpj: ICnpj) => {
           this.cnpj = cnpj;
           this.dispatchEvent(new CustomEvent('customenderecocnpj', { detail: this.cnpj }))
         })
         .catch(error => {
-          this.cnpj = {} as EnderecoModel;
+          this.cnpj = {} as any;
           console.log(error);
         })
         .finally(() => { })
     }
   }
 }
-
-

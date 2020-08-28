@@ -1,8 +1,7 @@
+import { EntityBase } from './../BaseModel';
 import { EnderecoModel } from './EnderecoModel';
 
-export class ClienteModel  {
-    id: number;
-    ativo: boolean;
+export class ClienteModel extends EntityBase  {
     nome: string;
     cpf: string;
     cnpj?: any;

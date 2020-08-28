@@ -1,6 +1,6 @@
-export class EnderecoModel {
+import { EntityBase } from './../BaseModel';
+export class EnderecoModel extends EntityBase {
 
-    id: number;
     cep: string;
     numero: string;
     logradouro: string;

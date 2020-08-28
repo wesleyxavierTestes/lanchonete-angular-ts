@@ -1,5 +1,5 @@
-export class EstoqueProdutoModel {
+import { EntityBase } from './../BaseModel';
+export class EstoqueProdutoModel extends EntityBase {
 
-    id: number;
     nome: string;
 }

@@ -1,9 +1,9 @@
 
 const rotaBase = (() => {
-    const ehSg = false;
+    const ehSg = true;
 
     const ip = ehSg ? "192.168.1.31" : "192.168.1.11";
-    const port = !ehSg ? "8080" : "7071";
+    const port = ehSg ? "8080" : "7071";
 
     return `http://${ip}:${port}/api`;
 })();

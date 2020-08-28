@@ -1,6 +1,7 @@
+import { EntityBase } from './../models/BaseModel';
 import { BaseService } from "../services/BaseService";
 
-export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
+export abstract class BaseCadastroController<T extends EntityBase, Y extends BaseService<T>> {
 
   public nome: string;
   public entity: T;
@@ -45,20 +46,19 @@ export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
   public viewSalvar(tipo?: string) {
     this.updateLoading(true);
     this.service.save(this.entity, tipo)
-      .then((resultado: any) => this.saveTry(resultado))
-      .catch(error => this.errorMessage(error));
+      .then((resultado) => !resultado.Notifications ? this.saveTry(resultado) : this.errorMessage(resultado.Notifications));
   }
 
   protected errorMessage(errorResponse: any): any {
     this.erros = {};
     this.$rootScope.$emit('erroMessage', null);
-    if (errorResponse.data && Array.isArray(errorResponse.data)) {
-      for (let erro of (<{ property: string; message: string }[]>errorResponse.data)) {
+    if (errorResponse && Array.isArray(errorResponse)) {
+      for (let erro of (<{ property: string; message: string }[]>errorResponse)) {
         this.erros[erro.property] = erro.message;
       }
       this.$rootScope.$emit('erros', this.erros);
-    } else if (errorResponse.data && !Array.isArray(errorResponse.data)) {
-      this.$rootScope.$emit('erroMessage', errorResponse.data);
+    } else if (errorResponse && !Array.isArray(errorResponse)) {
+      this.$rootScope.$emit('erroMessage', errorResponse);
     } else {
       this.$rootScope.$emit('erroMessage', errorResponse.message);
     }
@@ -68,28 +68,25 @@ export abstract class BaseCadastroController<T, Y extends BaseService<T>> {
   public viewEditar(tipo?: string) {
     this.updateLoading(true);
     this.service.update(this.entity, tipo)
-      .then((resultado: any) => this.saveTry(resultado))
-      .catch(error => this.errorMessage(error));
+      .then((resultado) => !resultado.Notifications ? this.saveTry(resultado) : this.errorMessage(resultado.Notifications));
   }
 
   $doCheck() {
 
   }
 
-  saveTry(resultado) {
-    if (resultado.status == 200) {
-      this.erros = null;
+  saveTry(resultado: T) {
+    this.erros = null;
 
-      this.$rootScope.$emit('identificacao', resultado.data.id);
-      this.$rootScope.$emit('erros', { succes: true });
-      this.$rootScope.$emit('erroMessage', null);
+    this.$rootScope.$emit('identificacao', (<any>resultado).id);
+    this.$rootScope.$emit('erros', { succes: true });
+    this.$rootScope.$emit('erroMessage', null);
 
-      const roraEdicao = (this.navegaEditar)
-        ? this.$state.$current.name.replace("cadastro", "edicao")
-        : this.$state.$current.name.replace("cadastro", "list");
-        
-      this.$state.go(roraEdicao);
-    }
+    const roraEdicao = (this.navegaEditar)
+      ? this.$state.$current.name.replace("cadastro", "edicao")
+      : this.$state.$current.name.replace("cadastro", "list");
+
+    this.$state.go(roraEdicao);
     this.updateLoading(false);
   }
 

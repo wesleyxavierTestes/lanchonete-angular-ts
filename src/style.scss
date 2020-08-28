@@ -1,14 +1,21 @@
 @import '~bootstrap-scss';
 @import '~@fortawesome/fontawesome-free';
 
+$fontSize: 0.8rem;
+
 body {
   margin: 0 !important;
   padding: 0 0 0 30px !important;
   height: 100vh;
   width: 100vw;
+  font-size: $fontSize;
   overflow-x: hidden;
   overflow-y: auto;
   color: #3b3b3b;
+}
+
+.form-control, .btn {
+  font-size: $fontSize;
 }
 
 a {
@@ -78,9 +85,12 @@ approot > main .container-fluid {
 }
 
 .lanc-list-table {
-  height: calc(100vh - calc(250px));
+  height: calc(100vh - calc(215px));
   overflow-x: hidden;
   overflow-y: auto;
+  @media (max-width: 900px)  {
+    height: calc(100vh - calc(165px));
+  }
 }
 
 .lanc-list-table-empty {
@@ -102,4 +112,25 @@ approot > main .container-fluid {
   background-color: #000;
   opacity: 0.2;
   padding: 40vh 40vw;
+}
+
+.LancheCadastroController, .LancheCadastroController  {
+  div.tab-content.lanche {
+      height: 380px !important;
+  }
+
+  div.tab-content.lanche.md {
+      height: 450px !important;
+  }
+
+  ul.list-group {
+      height: 180px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      border: 1px solid rgba(0, 0, 0, .125);
+  }
+
+  ul.list-group>li.list-group-item {
+      padding: 0;
+  }
 }

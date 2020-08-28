@@ -1,9 +1,8 @@
+import { EntityBase } from './../BaseModel';
 import { PedidoModel } from '../pedido/PedidoModel';
 
-export class VendaModel {
+export class VendaModel extends EntityBase {
 
-    id: number;
-    ativo: boolean;
     valorDesconto?: string;
     valor?: string;
     valorTotal?: string;

@@ -1,6 +1,4 @@
-export class CategoriaModel  {
-    id: number;
-    dataCadastro: string;
-    ativo: boolean;
+import { EntityBase } from './../BaseModel';
+export class CategoriaModel extends EntityBase  {
     nome: string;
 }

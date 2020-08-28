@@ -1,7 +1,7 @@
 <div class="PedidoCadastroController">
-    <h3>{{ view.editar ? 'Edição' : 'Cadastro'}}</h3>
-    <br>
     <form ng-submit="view.formSubmit()" novalidate>
+        <button-salvar editar="view.editar"></button-salvar>
+        <hr>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 1 }" id="nav-home-tab"
@@ -37,17 +37,18 @@
                         <div class="form-group">
                             <label for="exampleInputValor1">Valor</label>
                             <input-money value="view.entity.valor" out-change="view.viewUpdateValor($event)"
-                            customclass="!view.erros.valor ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
-                        </input-money>
+                                customclass="!view.erros.valor ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                            </input-money>
                             <small id="valorHelp" class="form-text text-muted">{{ view.erros.valor }}</small>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputValorDesconto1">Desconto</label>
-                            <input-money value="view.entity.valorDesconto" out-change="view.viewUpdateValorDesconto($event)"
-                            customclass="!view.erros.valorDesconto ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
-                        </input-money>
+                            <input-money value="view.entity.valorDesconto"
+                                out-change="view.viewUpdateValorDesconto($event)"
+                                customclass="!view.erros.valorDesconto ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                            </input-money>
                             <small id="valorHelp" class="form-text text-muted">{{ view.erros.valorDesconto  }}</small>
                         </div>
                     </div>
@@ -55,8 +56,8 @@
                         <div class="form-group">
                             <label for="exampleInputValorTotal1">Total</label>
                             <input-money value="view.entity.valorTotal" out-change="view.viewUpdateValorTotal($event)"
-                            customclass="!view.erros.valorTotal ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
-                        </input-money>
+                                customclass="!view.erros.valorTotal ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                            </input-money>
                             <small id="valorHelp" class="form-text text-muted">{{ view.erros.valorTotal  }}</small>
                         </div>
                     </div>
@@ -64,9 +65,9 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputValor1">Cadastro</label>
-                            <input-date value="view.entity.dataCadastro" 
-                            customclass="!view.erros.dataCadastro ? 'form-control' : 'form-control ng-invalid ng-invalid-required'"
-                            out-change="viewUpdateValue($event)"></input-date>
+                            <input-date value="view.entity.dataCadastro"
+                                customclass="!view.erros.dataCadastro ? 'form-control' : 'form-control ng-invalid ng-invalid-required'"
+                                out-change="viewUpdateValue($event)"></input-date>
                             <small id="valorHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
@@ -79,6 +80,5 @@
 
             </div>
         </div>
-        <button-salvar editar="view.editar"></button-salvar>
     </form>
 </div>

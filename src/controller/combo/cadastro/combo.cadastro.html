@@ -1,49 +1,61 @@
 <div class="LancheCadastroController">
-    <h3>{{ view.editar ? 'Edição' : 'Cadastro'}}</h3>
-    <br>
     <form ng-submit="view.formSubmit()" novalidate>
+        <button-salvar editar="view.editar"></button-salvar>
+        <hr>
         <div class="tab-content lanche">
-            <div class="row">
-                <div class="col-lg-1 col-md-2">
-                    <div class="form-group">
-                        <label for="id">Id</label>
-                        <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id"
-                            ng-required="false" ng-value="view.entity.id">
+            <div class="col">
+                <div class="row">
+                    <div class="col-lg-1 col-md-2">
+                        <div class="form-group">
+                            <label for="id">Id</label>
+                            <input ng-readonly="true" ng-disabled="true" type="text" class="form-control" id="id"
+                                ng-required="false" ng-value="view.entity.id">
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-5 col-md-10">
-                    <div class="form-group">
-                        <label for="id_nome">Nome</label>
-                        <input type="text" class="form-control" id="id_nome" ng-maxlength="{{150}}"
-                            ng-model="view.entity.nome" aria-describedby="textHelp" placeholder="">
-                        <small id="textHelp" class="form-text text-muted"></small>
+                    <div class="col-lg-5 col-md-10">
+                        <div class="form-group">
+                            <label for="id_nome">Nome</label>
+                            <input type="text" class="form-control" id="id_nome" ng-maxlength="{{150}}"
+                                ng-model="view.entity.nome" aria-describedby="textHelp" placeholder="">
+                            <small id="textHelp" class="form-text text-muted"></small>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="form-group">
-                        <label for="exampleInputValor1">Valor</label>
-                        <input-money disabled="true" value="view.entity.valor" out-change="view.viewUpdateValor($event)"
-                            customclass="!view.erros.valor ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
-                        </input-money>
-                        <small id="valorHelp" class="form-text text-muted"></small>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputValor1">Valor</label>
+                            <input-money disabled="true" value="view.entity.valor" out-change="view.viewUpdateValor($event)"
+                                customclass="!view.erros.valor ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                            </input-money>
+                            <small id="valorHelp" class="form-text text-muted"></small>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="form-group">
-                        <label for="exampleInputValorTotal1">Total</label>
-                        <input-money value="view.entity.valorTotal" out-change="view.viewUpdateValorTotal($event)"
-                            customclass="!view.erros.valorTotal ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
-                        </input-money>
-                        <small id="valorHelp" class="form-text text-muted"></small>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputValorTotal1">Total</label>
+                            <input-money value="view.entity.valorTotal" out-change="view.viewUpdateValorTotal($event)"
+                                customclass="!view.erros.valorTotal ? 'form-control' : 'form-control ng-invalid ng-invalid-required'">
+                            </input-money>
+                            <small id="valorHelp" class="form-text text-muted"></small>
+                        </div>
                     </div>
                 </div>
             </div>
             <hr>
 
             <!-- ITENS  -->
-            <div class="col">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 1 }" id="nav-home-tab"
+                        data-toggle="tab" ng-click="view.viewSetTab(1)" role="tab" aria-controls="nav-home"
+                        aria-selected="true">Lanches</a>
+                    <a class="nav-item nav-link" ng-class="{ active: view.viewIndexTab == 2 }" id="nav-profile-tab"
+                        data-toggle="tab" ng-click="view.viewSetTab(2)" role="tab" aria-controls="nav-profile"
+                        aria-selected="false">Bebidas</a>
+                </div>
+            </nav>
+            <div class="tab-content lanc-tab" id="nav-tabContent">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="tab-pane fade col-12 show active" ng-if="view.viewIndexTab == 1">
                         <!-- LANCHE -->
                         <div class="d-flex justify-content-center">
                             <h6>Lanches</h6>
@@ -56,8 +68,9 @@
                                     </div>
                                 </div>
                                 <ul class="list-group">
-                                    <li class="list-group-item" ng-repeat="item in view.lanches track by $index">
-                                        <div class="col-12" ng-click="view.viewSelecionarLanche($index)">
+                                    <li class="list-group-item"
+                                        ng-repeat="item in view.viewLanchesFiltrado() track by $index">
+                                        <div class="col-12" ng-click="view.viewSelecionarLanche(item.id)">
                                             <div class="row">
                                                 <div class="col-2">
                                                     <button ng-disabled="true" type="button" class="btn btn-out-light">
@@ -91,7 +104,7 @@
                                 </div>
                                 <ul class="list-group">
                                     <li class="list-group-item"
-                                        ng-repeat="item in view.lanchesFilter() track by $index">
+                                        ng-repeat="item in view.viewLanchesFilter() track by $index">
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-2">
@@ -114,16 +127,35 @@
                                                         <div class="col-6">
                                                             <small>
                                                                 <b>Quantidade:</b>
-                                                                {{view.contarQuantidadeLanche(item.id)}}
+                                                                {{view.viewContarQuantidadeLanche(item.id)}}
                                                             </small>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-1">
-                                                    <button type="button" ng-click="view.viewRemoverLanche(item.id)"
-                                                        class="btn btn-danger">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
+                                                <div class="col-3">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <button type="button"
+                                                                ng-click="view.viewDuplicarLanche(item.id)"
+                                                                class="btn btn-primary">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <button type="button"
+                                                                ng-click="view.viewUnicoLanche(item.id)"
+                                                                class="btn btn-info">
+                                                                <i class="fa fa-minus"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <button type="button"
+                                                                ng-click="view.viewRemoverLanche(item.id)"
+                                                                class="btn btn-danger">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -141,7 +173,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="tab-pane fade col-12 show active" ng-if="view.viewIndexTab == 2">
                         <!-- BEBIDA -->
                         <div class="d-flex justify-content-center">
                             <h6>Bebidas</h6>
@@ -155,8 +187,9 @@
                                     </div>
                                 </div>
                                 <ul class="list-group">
-                                    <li class="list-group-item" ng-repeat="item in view.bebidas track by $index">
-                                        <div class="col-12" ng-click="view.viewSelecionarBebida($index)">
+                                    <li class="list-group-item"
+                                        ng-repeat="item in view.viewBebidasFiltrado() track by $index">
+                                        <div class="col-12" ng-click="view.viewSelecionarBebida(item.id)">
                                             <div class="row">
                                                 <div class="col-2">
                                                     <button ng-disabled="true" type="button" class="btn btn-out-light">
@@ -189,7 +222,8 @@
                                     </div>
                                 </div>
                                 <ul class="list-group">
-                                    <li class="list-group-item" ng-repeat="item in view.bebidaFilter() track by $index">
+                                    <li class="list-group-item"
+                                        ng-repeat="item in view.viewBebidasFilter() track by $index">
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-2">
@@ -212,16 +246,35 @@
                                                         <div class="col-6">
                                                             <small>
                                                                 <b>Quantidade:</b>
-                                                                {{view.contarQuantidadeBebida(item.id)}}
+                                                                {{view.viewContarQuantidadeBebida(item.id)}}
                                                             </small>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-1">
-                                                    <button type="button" ng-click="view.viewRemoverBebida(item.id)"
-                                                        class="btn btn-danger">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
+                                                <div class="col-3">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <button type="button"
+                                                                ng-click="view.viewDuplicarBebida(item.id)"
+                                                                class="btn btn-primary">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <button type="button"
+                                                                ng-click="view.viewUnicoBebida(item.id)"
+                                                                class="btn btn-info">
+                                                                <i class="fa fa-minus"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <button type="button"
+                                                                ng-click="view.viewRemoverBebida(item.id)"
+                                                                class="btn btn-danger">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -238,40 +291,19 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div ng-if="!!view.produtos" class="lanc-list-pagination">
-                            <paginacao config="view.paginacaoConfig" out-change="view.viewPaginacaoChange($event)">
-                            </paginacao>
+                        <div class="row">
+                            <div class="col-12">
+                                <div ng-if="!!view.produtos" class="lanc-list-pagination">
+                                    <paginacao config="view.paginacaoConfig"
+                                        out-change="view.viewPaginacaoChange($event)">
+                                    </paginacao>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <button-salvar editar="view.editar"></button-salvar>
     </form>
 </div>
-
-<style scoped>
-    div.tab-content.lanche {
-        height: 380px !important;
-    }
-
-    div.tab-content.lanche.md {
-        height: 450px !important;
-    }
-
-    ul.list-group {
-        height: 180px;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        border: 1px solid rgba(0, 0, 0, .125);
-    }
-
-    ul.list-group>li.list-group-item {
-        padding: 0;
-    }
-</style>

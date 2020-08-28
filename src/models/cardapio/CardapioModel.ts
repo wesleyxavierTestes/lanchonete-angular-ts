@@ -1,8 +1,6 @@
+import { EntityBase } from './../BaseModel';
 import { CardapioItemModel } from './CardapioItemDto';
-export class CardapioModel  {
-
-    id: number;
-  ativo: boolean;
+export class CardapioModel extends EntityBase  {
   nome: string;
   itensDisponiveis: CardapioItemModel[];
 }

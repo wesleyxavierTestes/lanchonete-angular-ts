@@ -1,7 +1,9 @@
+import { EntityBase } from './../models/BaseModel';
+import { IResponse } from "./../models/IResponse";
 import { IpaginateConfigure, Paginacao } from '../components/paginacao/paginacao';
 import { BaseService } from '../services/BaseService';
 
-export abstract class BaseListController<T, Y extends BaseService<T>> {
+export abstract class BaseListController<T extends EntityBase, Y extends BaseService<T>> {
 
     public usarAtivar = true;
     public pesquisaModel = '';
@@ -26,19 +28,13 @@ export abstract class BaseListController<T, Y extends BaseService<T>> {
     public viewFindAll() {
         this.$rootScope.$emit('loading', true);
         this.service.findAll(this.paginacaoConfig.pageAtual)
-            .then((resultado: any) => this.findAllTry(resultado))
+            .then((resultado) => this.findAllTry(resultado))
             .catch(error => this.$rootScope.$emit('loading', false));
     }
 
-    protected findAllTry(resultado: {
-        data: {
-            content: Array<any>;
-            totalElements: number; totalPages: number;
-            first: boolean; last: boolean;
-        };
-    }) {
-        this.list = resultado.data.content;
-        this.paginacaoConfig = Paginacao.configure(resultado.data, this.paginacaoConfig.pageAtual);
+    protected findAllTry(resultado: IResponse<T>) {
+        this.list = resultado.content;
+        this.paginacaoConfig = Paginacao.configure(resultado, this.paginacaoConfig.pageAtual);
         this.$rootScope.$emit('loading', false);
     }
 

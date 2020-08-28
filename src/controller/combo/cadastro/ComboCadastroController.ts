@@ -1,18 +1,18 @@
-import { ComboService } from './../../../services/combo/ComboService';
-import sglanchoneteApp from "../../../app";
+import { IResponse } from "./../../../models/IResponse";
+import sglanchoneteApp from '../../../app';
 import { BaseCadastroController } from '../../BaseCadastroController';
-import { ComboModel } from '../../../models/combo/ComboModel';
-import { LancheModel } from '../../../models/lanche/LancheModel';
-import { IpaginateConfigure, Paginacao } from '../../../components/paginacao/paginacao';
 import { BebidaModel } from '../../../models/bebida/BebidaModel';
-import numeral from 'numeral';
-import { LancheService } from '../../../services/lanche/LancheService';
 import { BebidaService } from '../../../services/bebida/BebidaService';
+import { ComboModel } from '../../../models/combo/ComboModel';
+import { ComboService } from './../../../services/combo/ComboService';
+import { IpaginateConfigure, Paginacao } from '../../../components/paginacao/paginacao';
+import { LancheModel } from '../../../models/lanche/LancheModel';
+import { LancheService } from '../../../services/lanche/LancheService';
 
 export class ComboCadastroController extends BaseCadastroController<ComboModel, ComboService> {
     static $inject = ['ComboService', '$rootScope', '$state', '$location', 'BebidaService', 'LancheService'];
-    public lanches: LancheModel[];
-    public bebidas: BebidaModel[];
+    public lanches: LancheModel[] = [];
+    public bebidas: BebidaModel[] = [];
 
     public paginacaoLancheConfig: IpaginateConfigure = Paginacao.default;
     public paginacaoBebidaConfig: IpaginateConfigure = Paginacao.default;
@@ -25,7 +25,7 @@ export class ComboCadastroController extends BaseCadastroController<ComboModel, 
     }
     protected updateComponent() { }
 
-    ////#region LANCHE
+    //#region LANCHE
     public viewPaginacaoLancheChange(even: IpaginateConfigure) {
         this.paginacaoLancheConfig = even;
         this.paginacaoLancheFindAll();
@@ -39,53 +39,49 @@ export class ComboCadastroController extends BaseCadastroController<ComboModel, 
     public viewLancheFindAll() {
         this.$rootScope.$emit('loading', true);
         this.lancheService.findAll(this.paginacaoLancheConfig.pageAtual)
-            .then((resultado: any) => this.findAllLancheTry(resultado))
+            .then((resultado) => this.findAllLancheTry(resultado))
             .catch(error => this.$rootScope.$emit('loading', false));
     }
 
-    protected findAllLancheTry(resultado: {
-        data: {
-            content: Array<any>;
-            totalElements: number; totalPages: number;
-            first: boolean; last: boolean;
-        };
-    }) {
-        this.lanches = resultado.data.content;
-        this.paginacaoLancheConfig = Paginacao.configure(resultado.data, this.paginacaoLancheConfig.pageAtual);
+    protected findAllLancheTry(resultado: IResponse<LancheModel>) {
+        this.lanches = resultado.content;
+        this.paginacaoLancheConfig = Paginacao.configure(resultado, this.paginacaoLancheConfig.pageAtual);
         this.$rootScope.$emit('loading', false);
     }
-    public viewSelecionarLanche(index: number) {
-        if (!this.entity.lanches || !Array.isArray(this.entity.lanches)) this.entity.lanches = [];
-        const produto = this.lanches[index] as any;
-        this.entity.lanches.push((produto));
-
-        this.entity.valor =
-            this.entity.lanches
-            .reduce((valor, update) => numeral(valor).add(update.valor).value(), 0);
-
+    public viewSelecionarLanche(id: number) {
+        this.entity.viewSelecionarLanche(id, this.lanches);
     }
 
     public viewRemoverLanche(id: number) {
-        if (this.entity.lanches && Array.isArray(this.entity.lanches)) {
-            this.entity.lanches = this.entity.lanches.filter(item => item.id !== id);
-        }
+        this.entity.viewRemoverLanche(id);
     }
 
-    public contarQuantidadeLanche(id) {
-        if (this.entity.lanches && Array.isArray(this.entity.lanches))
-            return this.entity.lanches.filter(ingrediente => ingrediente.id == id).length;
+    public viewLanchesFilter() {
+        return this.entity.lanchesFilter();
+    }
+
+    public viewDuplicarLanche(id: number) {
+        this.entity.viewDuplicarLanche(id);
+    }
+
+    public viewUnicoLanche(id: number) {
+        this.entity.viewUnicoLanche(id);
+    }
+
+    public viewLanchesFiltrado() {
+        if (this.lanches)
+            return this.lanches.filter(p =>
+                !(this.entity.lanches
+                    && this.entity.lanches.find(i => i.id === p.id)));
         return [];
     }
 
-    public lanchesFilter() {
-        if (this.entity.lanches && Array.isArray(this.entity.lanches))
-            return this.entity.lanches.filter((value, index, self) => self.indexOf(value) === index);
-
-        return [];
+    public viewContarQuantidadeLanche(id) {
+        this.entity.contarQuantidadeLanche(id);
     }
-    ////#endregion
+    //#endregion
 
-    ////#region BEBIDA
+    //#region BEBIDA
     public viewPaginacaoBebidaChange(even: IpaginateConfigure) {
         this.paginacaoBebidaConfig = even;
         this.paginacaoBebidaFindAll();
@@ -99,52 +95,48 @@ export class ComboCadastroController extends BaseCadastroController<ComboModel, 
     public viewBebidaFindAll() {
         this.$rootScope.$emit('loading', true);
         this.bebidaService.findAll(this.paginacaoBebidaConfig.pageAtual)
-            .then((resultado: any) => this.findAllBebidaTry(resultado))
+            .then((resultado) => this.findAllBebidaTry(resultado))
             .catch(error => this.$rootScope.$emit('loading', false));
     }
     
-    protected findAllBebidaTry(resultado: {
-        data: {
-            content: Array<any>;
-            totalElements: number; totalPages: number;
-            first: boolean; last: boolean;
-        };
-    }) {
-        this.lanches = resultado.data.content;
-        this.paginacaoBebidaConfig = Paginacao.configure(resultado.data, this.paginacaoBebidaConfig.pageAtual);
+    protected findAllBebidaTry(resultado: IResponse<BebidaModel>) {
+        this.bebidas = resultado.content;
+        this.paginacaoBebidaConfig = Paginacao.configure(resultado, this.paginacaoBebidaConfig.pageAtual);
         this.$rootScope.$emit('loading', false);
     }
 
-    public viewSelecionarBebida(index: number) {
-        if (!this.entity.bebidas || !Array.isArray(this.entity.bebidas)) this.entity.bebidas = [];
-        const produto = this.bebidas[index] as any;
-        this.entity.bebidas.push((produto));
-
-        this.entity.valor =
-            this.entity.bebidas
-            .reduce((valor, update) => numeral(valor).add(update.valor).value(), 0);
-
+    public viewSelecionarBebida(id: number) {
+        this.entity.viewSelecionarBebida(id, this.bebidas);
     }
 
     public viewRemoverBebida(id: number) {
-        if (this.entity.bebidas && Array.isArray(this.entity.bebidas)) {
-            this.entity.bebidas = this.entity.bebidas.filter(item => item.id !== id);
-        }
+        this.entity.viewRemoverBebida(id);
     }
     
-    public contarQuantidadeBebida(id) {
-        if (this.entity.bebidas && Array.isArray(this.entity.bebidas))
-            return this.entity.bebidas.filter(ingrediente => ingrediente.id == id).length;
+    public viewBebidasFilter() {
+        return this.entity.bebidasFilter();
+    }
+
+    public viewDuplicarBebida(id: number) {
+        this.entity.viewDuplicarBebida(id);
+    }
+
+    public viewUnicoBebida(id: number) {
+        this.entity.viewUnicoBebida(id);
+    }
+
+    public viewBebidasFiltrado() {
+        if (this.bebidas)
+            return this.bebidas.filter(p =>
+                !(this.entity.bebidas
+                    && this.entity.bebidas.find(i => i.id === p.id)));
         return [];
     }
-    
-    public bebidasFilter() {
-        if (this.entity.bebidas && Array.isArray(this.entity.bebidas))
-            return this.entity.bebidas.filter((value, index, self) => self.indexOf(value) === index);
-    
-        return [];
+
+    public viewContarQuantidadeBebida(id) {
+        this.entity.contarQuantidadeBebida(id);
     }
-    ////#endregion
+    //#endregion
 }
 sglanchoneteApp.component('combocadastro',
     {

@@ -1,3 +1,4 @@
+import { ICnpj } from './../../../models/ICnpj';
 import { ClienteService } from './../../../services/cliente/ClienteService';
 import sglanchoneteApp from "../../../app";
 import { BaseCadastroController } from '../../BaseCadastroController';
@@ -42,6 +43,11 @@ export class ClienteCadastroController extends BaseCadastroController<ClienteMod
         CreateCustomUtils.EventListener('input-cnpj', 'customcnpjchange', (event: CustomEvent) => {
             if (!this.entity.endereco) this.entity.endereco = new EnderecoModel();
             this.entity.cnpj = event.detail;
+            this.$rootScope.$apply();
+        });
+
+        CreateCustomUtils.EventListener('input-cnpj', 'customenderecocnpj', (event: CustomEvent<ICnpj>) => {
+             this.entity.nome = event.detail.nome;
             this.$rootScope.$apply();
         });
 

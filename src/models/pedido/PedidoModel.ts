@@ -1,12 +1,10 @@
+import { EntityBase } from './../BaseModel';
 import { PedidoItemModel } from './PedidoItemModel';
 import { ClienteModel } from '../cliente/ClienteModel';
 import { EnumEstadoPedido } from '../../enuns/pedido/EnumEstadoPedido';
 
-export class PedidoModel  {
+export class PedidoModel extends EntityBase  {
 
-    id: number;
-    ativo: boolean;
-    dataCadastro: string;
     codigo: string;
     valor: string;
     valorDesconto: string;

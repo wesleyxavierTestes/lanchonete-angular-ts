@@ -1,61 +1,95 @@
-import { 
-    rotaFindAll, 
-    rotaActive, 
-    rotaDesactive, 
-    rotaFind, 
-    rotaNovo, 
-    rotaFindAllFilter, 
-    rotaSave, 
-    rotaUpdate, 
+import { EntityBase } from './../models/BaseModel';
+import { IResponse } from "./../models/IResponse";
+import { IHttpService, IHttpPromise, IPromise, IHttpResponse } from 'angular';
+import {
+    rotaFindAll,
+    rotaActive,
+    rotaDesactive,
+    rotaFind,
+    rotaNovo,
+    rotaFindAllFilter,
+    rotaSave,
+    rotaUpdate,
     rotaSaveTipo,
-    rotaUpdateTipo} from "../utils/HttpConfig";
+    rotaUpdateTipo
+} from "../utils/HttpConfig";
 
-export abstract class BaseService<T> {
+export abstract class BaseService<T extends EntityBase> {
     static $inject = ['$http'];
     CONFIG: { headers: {}; };
-    constructor(protected $http, protected routeName: string) {
+    constructor(protected $http: IHttpService, protected routeName: string) {
         this.CONFIG = {
-            headers:    {             
+            headers: {
                 "content-type": "application/json",
                 "access-control-allow-origin": "*",
             }
         };
     }
 
-    findAll(page: number): Promise<{ data: { content: T[] } }> {
-        return this.$http.get(rotaFindAll(this.routeName, page), this.CONFIG);
+    protected catchCustom<T>(response: IHttpResponse<T>) {
+        if (response.status == 0) { }
+
+        return Promise.resolve((<T>response.data));
     }
 
-    active(id: number): Promise<{ data: T }> {
-        return this.$http.delete(rotaActive(this.routeName, id), this.CONFIG);
+    protected catchCustomSave<T>(response: IHttpResponse<T>, data: any) {
+        if (response.status == 0) { }
+        data.Notifications = response.data;
+        return Promise.resolve((data));
     }
 
-    desactive(id: number): Promise<{ data: T }> {
-        return this.$http.delete(rotaDesactive(this.routeName, id), this.CONFIG);
+    findAll(page: number): IPromise<IResponse<T>> {
+        return this.$http.get<T>(rotaFindAll(this.routeName, page), this.CONFIG)
+            .then(response => Promise.resolve((<any>response.data) as IResponse<T>))
+            .catch((response: IHttpResponse<T>) => this.catchCustom<IResponse<T>>(response as any));
     }
 
-    delete(id: number): Promise<{ data: T }> {
-        return this.$http.delete(rotaDesactive(this.routeName, id), this.CONFIG);
+    active(id: number): IPromise<T> {
+        return this.$http.delete<T>(rotaActive(this.routeName, id), this.CONFIG)
+            .then(response => Promise.resolve((response.data)))
+            .catch((response: IHttpResponse<T>) => this.catchCustom(response));
     }
 
-    find(id: string): Promise<{ data: T }> {
-        return this.$http.get(rotaFind(this.routeName, id), this.CONFIG);
+    desactive(id: number): IPromise<T> {
+        return this.$http.delete<T>(rotaDesactive(this.routeName, id), this.CONFIG)
+            .then(response => Promise.resolve((response.data)))
+            .catch((response: IHttpResponse<T>) => this.catchCustom(response));
     }
 
-    novo(): Promise<{ data: T }> {
-        return this.$http.get(rotaNovo(this.routeName), this.CONFIG);
+    delete(id: number): IPromise<T> {
+        return this.$http.delete<T>(rotaDesactive(this.routeName, id), this.CONFIG)
+            .then(response => Promise.resolve((response.data)))
+            .catch((response: IHttpResponse<T>) => this.catchCustom(response));
     }
 
-    findAllFilter(page: number, objeto: object): Promise<{ data: { content: T[] } }> {
-        return this.$http.post(rotaFindAllFilter(this.routeName, page), JSON.stringify(objeto), this.CONFIG);
+    find(id: string): IPromise<T> {
+        return this.$http.get<T>(rotaFind(this.routeName, id), this.CONFIG)
+            .then(response => Promise.resolve((response.data)))
+            .catch((response: IHttpResponse<T>) => this.catchCustom(response));
     }
 
-    save(entity: T, tipo?: string): Promise<{ data: T }> {
-        return this.$http.post(rotaSaveTipo(this.routeName, tipo), JSON.stringify(entity), this.CONFIG);
+    novo(): IPromise<T> {
+        return this.$http.get<T>(rotaNovo(this.routeName), this.CONFIG)
+            .then(response => Promise.resolve((response.data)))
+            .catch((response: IHttpResponse<T>) => this.catchCustom(response));
     }
 
-    update(entity: T, tipo?: string): Promise<{ data: T }> {
-        return this.$http.put(rotaUpdateTipo(this.routeName, tipo), JSON.stringify(entity), this.CONFIG);
+    findAllFilter(page: number, objeto: object): IPromise<T> {
+        return this.$http.post<T>(rotaFindAllFilter(this.routeName, page), JSON.stringify(objeto), this.CONFIG)
+            .then(response => Promise.resolve((response.data)))
+            .catch((response: IHttpResponse<T>) => this.catchCustom(response));
+    }
+
+    save(entity: T, tipo?: string): IPromise<T> {
+        return this.$http.post<T>(rotaSaveTipo(this.routeName, tipo), JSON.stringify(entity), this.CONFIG)
+            .then(response => Promise.resolve((response.data)))
+            .catch((response: IHttpResponse<T>) => this.catchCustomSave(response, entity));
+    }
+
+    update(entity: T, tipo?: string): IPromise<T> {
+        return this.$http.put<T>(rotaUpdateTipo(this.routeName, tipo), JSON.stringify(entity), this.CONFIG)
+            .then(response => Promise.resolve((response.data)))
+            .catch((response: IHttpResponse<T>) => this.catchCustomSave(response, entity));
     }
 
 }

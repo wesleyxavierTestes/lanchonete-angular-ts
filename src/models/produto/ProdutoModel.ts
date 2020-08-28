@@ -1,10 +1,8 @@
+import { EntityBase } from './../BaseModel';
 import { CategoriaModel } from '../categoria/CategoriaModel';
 
-export class ProdutoModel {
+export class ProdutoModel extends EntityBase {
 
-    id: number;
-    dataCadastro: string;
-    ativo: boolean;
     codigo: string;
     categoria: CategoriaModel;
     pedido?: any;

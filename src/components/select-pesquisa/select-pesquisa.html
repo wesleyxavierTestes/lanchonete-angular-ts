@@ -1,15 +1,13 @@
 <div class="input-group">
-    <input ng-if="$ctrl.value" ng-required="$ctrl.required"
-    ng-disabled="true"
-        ng-keydown="viewPesquisarItem($event)" type="text" class="form-control"
-        ng-value="$ctrl.value">
-    <input ng-if="!$ctrl.value" ng-required="$ctrl.required" type="text" class="{{ !$ctrl.required ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
+    <input ng-if="$ctrl.value" ng-required="$ctrl.required" ng-disabled="true" ng-keydown="viewPesquisarItem($event)"
+        type="text" class="form-control" ng-value="$ctrl.value">
+    <input ng-if="!$ctrl.value" ng-required="$ctrl.required" type="text"
+        class="{{ !$ctrl.required ? 'form-control' : 'form-control ng-invalid ng-invalid-required'}}"
         placeholder="Nome..." ng-keydown="viewPesquisarItem($event)" ng-focus="$ctrl.itemFocus = true"
         ng-blur="$ctrl.itemFocus = false" ng-model="$ctrl.itemName">
-    <div ng-if="$ctrl.list && $ctrl.itemFocus" style="
-    position: absolute; width: 100%; background-color: #fff; 
-    border: 1px solid #aaa;top: 38px; z-index: 999;padding: 5px;">
-        <div ng-repeat="item in $ctrl.list track by $index" ng-click="viewSetItem(item)">{{item.nome}}</div>
+    <div ng-if="$ctrl.list && $ctrl.itemFocus" class="select-list">
+        <div ng-repeat="item in $ctrl.list track by $index" class="selectr-list-item" ng-click="viewSetItem(item)">
+            {{item.nome}}</div>
     </div>
     <div ng-if="!$ctrl.value" class="input-group-append">
         <button type="button" ng-click="viewPesquisarItem()" ng-maxlength="100" style="border: none;"
@@ -20,3 +18,20 @@
             class="input-group-text"><i class="fa fa-times"></i></button>
     </div>
 </div>
+<style scoped>
+    .select-list {
+        position: absolute;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: -2px 5px 10px #000;
+        top: 38px;
+        z-index: 999;
+        padding: 5px;
+    }
+
+    .selectr-list-item:hover {
+        background-color: #3b3b3b;
+        color: white;
+        ;
+    }
+</style>

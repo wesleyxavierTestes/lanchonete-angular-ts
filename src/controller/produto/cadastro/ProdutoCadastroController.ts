@@ -29,7 +29,7 @@ export class ProdutoCadastroController extends BaseCadastroController<ProdutoMod
         this.updateLoading(true);
         this.categoriaService.findAll(1)
             .then(resultado => {
-                this.Categorias = resultado.data.content;
+                this.Categorias = resultado.content;
             })
             .catch(error => this.$rootScope.$emit('erroMessage', error.message))
             .finally(() => this.updateLoading(false))
