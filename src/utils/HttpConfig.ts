@@ -1,6 +1,6 @@
 
 const rotaBase = (() => {
-    const ehSg = true;
+    const ehSg = false;
 
     const ip = ehSg ? "192.168.1.31" : "192.168.1.11";
     const port = ehSg ? "8080" : "7071";

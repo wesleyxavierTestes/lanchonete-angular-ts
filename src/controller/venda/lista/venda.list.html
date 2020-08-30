@@ -2,7 +2,7 @@
     <cadastro nome="view.nome"></cadastro>
     <div ng-if="!!view.list && view.list.length > 0" class="row lanc-list-table">
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="item in view.list track by $index">
+            <li class="list-group-item" ng-repeat="item in view.list.values() track by $index">
                 <div class="row">
                     <div class="col">
                         <div class="row">

@@ -8,7 +8,7 @@ export abstract class BaseListController<T extends EntityBase, Y extends BaseSer
     public usarAtivar = true;
     public pesquisaModel = '';
     public nome: string = "teste";
-    public list: T[];
+    public list: Set<T>;
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
     
     constructor(protected service: Y, protected $rootScope) {  
@@ -33,7 +33,7 @@ export abstract class BaseListController<T extends EntityBase, Y extends BaseSer
     }
 
     protected findAllTry(resultado: IResponse<T>) {
-        this.list = resultado.content;
+        this.list = new Set(resultado.content);
         this.paginacaoConfig = Paginacao.configure(resultado, this.paginacaoConfig.pageAtual);
         this.$rootScope.$emit('loading', false);
     }
