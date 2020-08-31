@@ -1,56 +1,64 @@
 
-const rotaBase = (() => {
+const rotaBaseApi = `${base()}/api`;
+
+const rotaBase = `${base()}`;
+
+function base() {
     const ehSg = false;
 
     const ip = ehSg ? "192.168.1.31" : "192.168.1.11";
     const port = ehSg ? "8080" : "7071";
 
-    return `http://${ip}:${port}/api`;
-})();
+    return `http://${ip}:${port}`;
+}
+
+export function rotaLogin() {
+    return rotaBase + '/login';
+}
 
 export function rotaFindAll(rota: string, page: number) {
-    return rotaBase + '/' + rota + '/list?page=' + page;
+    return rotaBaseApi + '/' + rota + '/list?page=' + page;
 }
 
 export function rotaFindAllNome(rota: string, page: number, nome: string) {
-    return rotaBase + '/' + rota + '/list/nome?page=' + page +'&nome='+nome;
+    return rotaBaseApi + '/' + rota + '/list/nome?page=' + page + '&nome=' + nome;
 }
 
 
 export function rotaFindAllFilter(rota: string, page: number) {
-    return rotaBase + '/' + rota + '/list/filter?page=' + page;
+    return rotaBaseApi + '/' + rota + '/list/filter?page=' + page;
 }
 
 export function rotaActive(rota: string, id: number) {
-    return rotaBase + '/' + rota + '/active?id=' + id;
+    return rotaBaseApi + '/' + rota + '/active?id=' + id;
 }
 
 export function rotaDesactive(rota: string, id: number) {
-    return rotaBase + '/' + rota + '/desactive?id=' + id;
+    return rotaBaseApi + '/' + rota + '/desactive?id=' + id;
 }
 
 export function rotaFind(rota: string, id: string) {
-    return rotaBase + '/' + rota + '/find?id=' + id;
+    return rotaBaseApi + '/' + rota + '/find?id=' + id;
 }
 
 export function rotaNovo(rota: string) {
-    return rotaBase + '/' + rota + '/novo';
+    return rotaBaseApi + '/' + rota + '/novo';
 }
 
 export function rotaSave(rota: string) {
-    return rotaBase + '/' + rota + '/save';
+    return rotaBaseApi + '/' + rota + '/save';
 }
 
 export function rotaUpdate(rota: string) {
-    return rotaBase + '/' + rota + '/update';
+    return rotaBaseApi + '/' + rota + '/update';
 }
 
-export function rotaSaveTipo(rota: string, tipo?:string) {
+export function rotaSaveTipo(rota: string, tipo?: string) {
     if (!tipo) tipo = "";
-    return rotaBase + '/' + rota + '/save/'+tipo;
+    return rotaBaseApi + '/' + rota + '/save/' + tipo;
 }
 
-export function rotaUpdateTipo(rota: string, tipo?:string) {
+export function rotaUpdateTipo(rota: string, tipo?: string) {
     if (!tipo) tipo = "";
-    return rotaBase + '/' + rota + '/update/'+tipo;
+    return rotaBaseApi + '/' + rota + '/update/' + tipo;
 }

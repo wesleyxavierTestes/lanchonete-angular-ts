@@ -12,7 +12,7 @@ export class ProdutoService extends BaseService<ProdutoModel> {
     }
 
     findAllNome(page: number, nome: string): IPromise<IResponse<ProdutoModel>> {
-        return this.$http.get<ProdutoModel>(rotaFindAllNome(this.routeName, page, nome), this.CONFIG)
+        return this.$http.get<ProdutoModel>(rotaFindAllNome(this.routeName, page, nome), this.CONFIG_TOKEN)
         .then(response => Promise.resolve((<any>response.data) as IResponse<ProdutoModel>))
         .catch((response: IHttpResponse<ProdutoModel>) => this.catchCustom<IResponse<ProdutoModel>>(response as any));
     }
