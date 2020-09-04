@@ -4,7 +4,7 @@ const rotaBaseApi = `${base()}/api`;
 const rotaBase = `${base()}`;
 
 function base() {
-    const ehSg = false;
+    const ehSg = true;
 
     const ip = ehSg ? "192.168.1.31" : "192.168.1.11";
     const port = ehSg ? "8080" : "7071";
