@@ -4,10 +4,10 @@ import { BaseListController } from '../../BaseListController';
 import { EstoqueModel } from '../../../models/estoque/EstoqueModel';
 
 export class EstoqueListController extends BaseListController<EstoqueModel, EstoqueService> {
-    static $inject = ['EstoqueService', '$rootScope'];
+    static $inject = ['EstoqueService', '$rootScope', '$scope'];
 
-    constructor(protected estoqueService, protected $rootScope) {
-        super(estoqueService, $rootScope);
+    constructor(protected estoqueService, protected $rootScope, protected $scope) {
+        super(estoqueService, $rootScope, $scope);
         this.nome = 'Estoque';
     }
 

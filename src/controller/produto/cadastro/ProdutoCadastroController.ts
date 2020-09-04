@@ -7,7 +7,7 @@ import { ProdutoModel } from '../../../models/produto/ProdutoModel';
 import { CategoriaModel } from '../../../models/categoria/CategoriaModel';
 
 export class ProdutoCadastroController extends BaseCadastroController<ProdutoModel, ProdutoService> {
-    static $inject = ['ProdutoService', '$rootScope', '$state', '$location', 'CategoriaService'];
+    static $inject = ['ProdutoService', '$rootScope', '$scope', '$state', '$location', 'CategoriaService'];
 
     public tiposProduto = [
         { key: 'Produto', value: 'Produto' },
@@ -20,8 +20,8 @@ export class ProdutoCadastroController extends BaseCadastroController<ProdutoMod
     public Categorias: CategoriaModel[];
     class: string;
 
-    constructor(protected podutoService: ProdutoService, protected $rootScope, protected state, protected $location, protected categoriaService: CategoriaService) {
-        super(podutoService, $rootScope, state, $location);
+    constructor(protected podutoService: ProdutoService, protected $rootScope, protected $scope, protected state, protected $location, protected categoriaService: CategoriaService) {
+        super(podutoService, $rootScope, $scope, state, $location);
         this.nome = 'Produto';
     }
 

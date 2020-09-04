@@ -4,10 +4,10 @@ import { BaseListController } from '../../BaseListController';
 import { CardapioModel } from '../../../models/cardapio/CardapioModel';
 
 export class CardapioListController extends BaseListController<CardapioModel, CardapioService> {
-    static $inject = ['CardapioService', '$rootScope'];
+    static $inject = ['CardapioService', '$rootScope', '$scope'];
     
-    constructor(protected cardapioService, protected $rootScope) {
-        super(cardapioService, $rootScope);
+    constructor(protected cardapioService, protected $rootScope, protected $scope) {
+        super(cardapioService, $rootScope, $scope);
         this.nome = 'Cardapio';
     }
 

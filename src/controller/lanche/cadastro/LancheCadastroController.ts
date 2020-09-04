@@ -11,15 +11,15 @@ import { LancheModel } from '../../../models/lanche/LancheModel';
 import { ProdutoModel } from '../../../models/produto/ProdutoModel';
 
 export class LancheCadastroController extends BaseCadastroController<LancheModel, LancheService> {
-    static $inject = ['LancheService', '$rootScope', '$state', '$location', 'ProdutoService', 'CategoriaService'];
+    static $inject = ['LancheService', '$rootScope', '$scope', '$state', '$location', 'ProdutoService', 'CategoriaService'];
     public produtos: ProdutoModel[];
 
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
     public categorias: CategoriaModel[] = [];
 
-    constructor(protected lancheService: LancheService, protected $rootScope, protected state, 
+    constructor(protected lancheService: LancheService, protected $rootScope, protected $scope, protected state, 
         protected $location, private podutoService: ProdutoService, private categoriaService: CategoriaService) {
-        super(lancheService, $rootScope, state, $location);
+        super(lancheService, $rootScope, $scope, state, $location);
         this.nome = 'Lanche';
         this.produtoFindAll();
         this.categoriaFindAll();

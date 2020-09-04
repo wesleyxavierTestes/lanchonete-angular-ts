@@ -8,7 +8,7 @@ import { EnderecoModel } from '../../../models/cliente/EnderecoModel';
 
 export class ClienteCadastroController extends BaseCadastroController<ClienteModel, ClienteService> {
 
-    static $inject = ['ClienteService', '$rootScope', '$state', '$location'];
+    static $inject = ['ClienteService', '$rootScope', '$scope', '$state', '$location'];
 
     rota = 'Cliente';
     public tiposPessoa = [{ key: 'Pessoa Física', value: 'Fisica' }, { key: 'Pessoa Jurídica', value: 'Juridica' }];
@@ -16,8 +16,8 @@ export class ClienteCadastroController extends BaseCadastroController<ClienteMod
     enderecoA: EnderecoModel;
 
     constructor(protected clienteService: ClienteService,
-        protected $rootScope, protected state, protected $location) {
-        super(clienteService, $rootScope, state, $location);
+        protected $rootScope, protected $scope, protected state, protected $location) {
+        super(clienteService, $rootScope, $scope, state, $location);
         this.nome = 'Cliente';
     }
 

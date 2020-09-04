@@ -4,10 +4,10 @@ import { BaseListController } from '../../BaseListController';
 import { LancheModel } from '../../../models/lanche/LancheModel';
 
 export class LancheListController extends BaseListController<LancheModel, LancheService> {
-    static $inject = ['LancheService', '$rootScope'];
+    static $inject = ['LancheService', '$rootScope', '$scope'];
     
-    constructor(protected lancheService, protected $rootScope) {
-        super(lancheService, $rootScope);
+    constructor(protected lancheService, protected $rootScope, protected $scope) {
+        super(lancheService, $rootScope, $scope);
         this.nome = 'Lanche';
     }
 

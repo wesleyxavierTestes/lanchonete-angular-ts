@@ -10,16 +10,16 @@ import { LancheModel } from '../../../models/lanche/LancheModel';
 import { LancheService } from '../../../services/lanche/LancheService';
 
 export class ComboCadastroController extends BaseCadastroController<ComboModel, ComboService> {
-    static $inject = ['ComboService', '$rootScope', '$state', '$location', 'BebidaService', 'LancheService'];
+    static $inject = ['ComboService', '$rootScope', '$scope', '$state', '$location', 'BebidaService', 'LancheService'];
     public lanches: LancheModel[] = [];
     public bebidas: BebidaModel[] = [];
 
     public paginacaoLancheConfig: IpaginateConfigure = Paginacao.default;
     public paginacaoBebidaConfig: IpaginateConfigure = Paginacao.default;
 
-    constructor(protected comboService: ComboService, protected $rootScope, protected state, 
+    constructor(protected comboService: ComboService, protected $rootScope, protected $scope, protected state, 
         protected $location, private bebidaService: BebidaService, private lancheService: LancheService ) {
-        super(comboService, $rootScope, state, $location);
+        super(comboService, $rootScope, $scope, state, $location);
         this.nome = 'Combo';
         this.viewLancheFindAll();
     }

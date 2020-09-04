@@ -2,13 +2,18 @@ import { ClienteService } from './../../../services/cliente/ClienteService';
 import sglanchoneteApp from "../../../app";
 import { BaseListController } from '../../BaseListController';
 import { ClienteModel } from '../../../models/cliente/ClienteModel';
+import { IOnInit } from 'angular';
+import angular from 'angular';
 
-export class ClienteListController extends BaseListController<ClienteModel, ClienteService> {
-    static $inject = ['ClienteService', '$rootScope'];
+export class ClienteListController extends BaseListController<ClienteModel, ClienteService> implements IOnInit {
+    static $inject = ['ClienteService', '$rootScope', '$scope', '$compile'];
 
-    constructor(protected clienteService, protected $rootScope) {
-        super(clienteService, $rootScope);
+    constructor(protected clienteService, protected $rootScope, protected $scope, $compile) {
+        super(clienteService, $rootScope, $scope);
         this.nome = 'Cliente';
+    }
+    $onInit(): void {
+
     }
 }
 sglanchoneteApp.component('clientelist', 

@@ -4,10 +4,10 @@ import { BaseListController } from '../../BaseListController';
 import { VendaModel } from '../../../models/venda/VendaModel';
 
 export class VendaListController extends BaseListController<VendaModel, VendaService> {
-    static $inject = ['VendaService', '$rootScope'];
+    static $inject = ['VendaService', '$rootScope', '$scope'];
 
-    constructor(protected vendaService, protected $rootScope) {
-        super(vendaService, $rootScope);
+    constructor(protected vendaService, protected $rootScope, protected $scope) {
+        super(vendaService, $rootScope, $scope);
         this.nome = 'Venda';
     }
 

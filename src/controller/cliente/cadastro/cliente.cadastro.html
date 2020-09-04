@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col-2">
                         <div class="form-group">
-                            <label for="id_tipoPessoa">Tipo Pessoa</label>
+                            <label for="id_tipoPessoa">Tipo Pessoa  {{nome }} </label>
                             <select type="text" class="form-control" id="id_tipoPessoa"
                                 ng-options="item.value as item.key for item in view.tiposPessoa track by item.value"
                                 ng-required="false" ng-value="view.entity.tipoPessoa" ng-model="view.entity.tipoPessoa"

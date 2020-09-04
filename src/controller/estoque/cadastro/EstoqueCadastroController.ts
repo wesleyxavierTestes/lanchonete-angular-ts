@@ -12,7 +12,7 @@ enum EnumTipoEstoque {
 }
 
 export class EstoqueCadastroController extends BaseCadastroController<EstoqueModel, EstoqueService> {
-    static $inject = ['EstoqueService', '$rootScope', '$state', '$location', 'ProdutoService'];
+    static $inject = ['EstoqueService', '$rootScope', '$scope', '$state', '$location', 'ProdutoService'];
 
     public produtos: ProdutoModel[];
 
@@ -26,8 +26,8 @@ export class EstoqueCadastroController extends BaseCadastroController<EstoqueMod
     open = false;
 
     constructor(protected estoqueService: EstoqueService, 
-        protected $rootScope, protected state, protected $location, private produtoService: ProdutoService) {
-        super(estoqueService, $rootScope, state, $location);
+        protected $rootScope, protected $scope, protected state, protected $location, private produtoService: ProdutoService) {
+        super(estoqueService, $rootScope, $scope, state, $location);
         this.nome = 'Estoque';
     }
 

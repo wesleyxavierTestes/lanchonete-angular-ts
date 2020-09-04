@@ -2,16 +2,17 @@ import { EntityBase } from './../models/BaseModel';
 import { IResponse } from "./../models/IResponse";
 import { IpaginateConfigure, Paginacao } from '../components/paginacao/paginacao';
 import { BaseService } from '../services/BaseService';
+import angular from 'angular';
 
-export abstract class BaseListController<T extends EntityBase, Y extends BaseService<T>> {
+export class BaseListController<T extends EntityBase, Y extends BaseService<T>>  {
 
     public usarAtivar = true;
     public pesquisaModel = '';
     public nome: string = "teste";
-    public list: Set<T>;
+    public list: T[];
     public paginacaoConfig: IpaginateConfigure = Paginacao.default;
-    
-    constructor(protected service: Y, protected $rootScope) {  
+
+    constructor(protected service: Y, protected $rootScope, protected $scope) {
         this.paginacaoFindAll();
     }
 
@@ -33,7 +34,7 @@ export abstract class BaseListController<T extends EntityBase, Y extends BaseSer
     }
 
     protected findAllTry(resultado: IResponse<T>) {
-        this.list = new Set(resultado.content);
+        this.list = resultado.content;
         this.paginacaoConfig = Paginacao.configure(resultado, this.paginacaoConfig.pageAtual);
         this.$rootScope.$emit('loading', false);
     }
@@ -45,20 +46,20 @@ export abstract class BaseListController<T extends EntityBase, Y extends BaseSer
 
     viewExcluir(id: number) {
         this.service.delete(id)
-        .then((resultado: any) => this.findAllTry(resultado))
-        .catch(error => this.$rootScope.$emit('loading', false));
+            .then((resultado: any) => this.findAllTry(resultado))
+            .catch(error => this.$rootScope.$emit('loading', false));
     }
 
     public viewAtivacao(event: boolean, id: number) {
         this.$rootScope.$emit('loading', true);
         if (event) {
             this.service.active(id)
-            .then((resultado: any) => this.viewFindAll())
+                .then((resultado: any) => this.viewFindAll())
                 .finally(() => this.$rootScope.$emit('loading', false));
-        } else { 
+        } else {
             this.service.desactive(id)
-            .then((resultado: any) => this.viewFindAll())
-            .finally(() => this.$rootScope.$emit('loading', false));
+                .then((resultado: any) => this.viewFindAll())
+                .finally(() => this.$rootScope.$emit('loading', false));
         }
     }
 

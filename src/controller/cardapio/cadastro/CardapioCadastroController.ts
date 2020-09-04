@@ -5,10 +5,10 @@ import { CardapioModel } from '../../../models/cardapio/CardapioModel';
 
 export class CardapioCadastroController extends BaseCadastroController<CardapioModel, CardapioService> {
 
-    static $inject = ['CardapioService', '$rootScope', '$state', '$location'];
+    static $inject = ['CardapioService', '$rootScope', '$scope', '$state', '$location'];
 
-    constructor(protected cardapioService: CardapioService, protected $rootScope, protected state, protected $location) {
-        super(cardapioService, $rootScope, state, $location);
+    constructor(protected cardapioService: CardapioService, protected $rootScope, protected $scope, protected state, protected $location) {
+        super(cardapioService, $rootScope, $scope, state, $location);
         this.nome = 'Cardapio';
     }
 

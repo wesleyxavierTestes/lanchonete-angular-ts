@@ -4,10 +4,10 @@ import { BaseCadastroController } from '../../BaseCadastroController';
 import { PedidoModel } from '../../../models/pedido/PedidoModel';
 
 export class PedidoCadastroController extends BaseCadastroController<PedidoModel, PedidoService> {
-    static $inject = ['PedidoService', '$rootScope', '$state', '$location'];
+    static $inject = ['PedidoService', '$rootScope', '$scope', '$state', '$location'];
 
-    constructor(protected pedidoService: PedidoService, protected $rootScope, protected state, protected $location) {
-        super(pedidoService, $rootScope, state, $location);
+    constructor(protected pedidoService: PedidoService, protected $rootScope, protected $scope, protected state, protected $location) {
+        super(pedidoService, $rootScope, $scope, state, $location);
         this.nome = 'Pedido';
     }
     protected updateComponent() { }

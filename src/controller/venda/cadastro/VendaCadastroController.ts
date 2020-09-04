@@ -4,10 +4,10 @@ import { BaseCadastroController } from '../../BaseCadastroController';
 import { VendaModel } from '../../../models/venda/VendaModel';
 
 export class VendaCadastroController extends BaseCadastroController<VendaModel, VendaService> {
-    static $inject = ['VendaService', '$rootScope', '$state', '$location'];
+    static $inject = ['VendaService', '$rootScope', '$scope', '$state', '$location'];
 
-    constructor(protected vendaService: VendaService, protected $rootScope, protected state, protected $location) {
-        super(vendaService, $rootScope, state, $location);
+    constructor(protected vendaService: VendaService, protected $rootScope, protected $scope, protected state, protected $location) {
+        super(vendaService, $rootScope, $scope, state, $location);
         this.nome = 'Venda';
     }
     protected updateComponent() { }

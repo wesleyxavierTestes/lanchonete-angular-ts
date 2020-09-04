@@ -4,10 +4,10 @@ import { BaseListController } from '../../BaseListController';
 import { ProdutoModel } from '../../../models/produto/ProdutoModel';
 
 export class ProdutoListController extends BaseListController<ProdutoModel, ProdutoService> {
-    static $inject = ['ProdutoService', '$rootScope'];
+    static $inject = ['ProdutoService', '$rootScope', '$scope'];
 
-    constructor(protected podutoService: ProdutoService, protected $rootScope) {
-        super(podutoService, $rootScope);
+    constructor(protected podutoService: ProdutoService, protected $rootScope, protected $scope) {
+        super(podutoService, $rootScope, $scope);
         this.nome = 'Produto';
     }
 }

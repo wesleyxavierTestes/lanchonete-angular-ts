@@ -10,7 +10,7 @@ export abstract class BaseCadastroController<T extends EntityBase, Y extends Bas
   protected navegaEditar = true;
   public erros = {};
 
-  constructor(protected service: Y, protected $rootScope, protected $state, protected $location) {
+  constructor(protected service: Y, protected $rootScope, protected $scope, protected $state, protected $location) {
     $rootScope.$watch('form', function (v) {
       if (!v) { return }
       this.updateView();
